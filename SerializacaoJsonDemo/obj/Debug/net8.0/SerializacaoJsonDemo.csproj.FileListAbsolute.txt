@@ -1,0 +1,15 @@
+C:\Users\Belshoff\Projects\project-poo2\serializacaojsondemo\bin\Debug\net8.0\SerializacaoJsonDemo.exe
+C:\Users\Belshoff\Projects\project-poo2\serializacaojsondemo\bin\Debug\net8.0\SerializacaoJsonDemo.deps.json
+C:\Users\Belshoff\Projects\project-poo2\serializacaojsondemo\bin\Debug\net8.0\SerializacaoJsonDemo.runtimeconfig.json
+C:\Users\Belshoff\Projects\project-poo2\serializacaojsondemo\bin\Debug\net8.0\SerializacaoJsonDemo.dll
+C:\Users\Belshoff\Projects\project-poo2\serializacaojsondemo\bin\Debug\net8.0\SerializacaoJsonDemo.pdb
+C:\Users\Belshoff\Projects\project-poo2\serializacaojsondemo\obj\Debug\net8.0\SerializacaoJsonDemo.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\Belshoff\Projects\project-poo2\serializacaojsondemo\obj\Debug\net8.0\SerializacaoJsonDemo.AssemblyInfoInputs.cache
+C:\Users\Belshoff\Projects\project-poo2\serializacaojsondemo\obj\Debug\net8.0\SerializacaoJsonDemo.AssemblyInfo.cs
+C:\Users\Belshoff\Projects\project-poo2\serializacaojsondemo\obj\Debug\net8.0\SerializacaoJsonDemo.csproj.CoreCompileInputs.cache
+C:\Users\Belshoff\Projects\project-poo2\serializacaojsondemo\obj\Debug\net8.0\SerializacaoJsonDemo.sourcelink.json
+C:\Users\Belshoff\Projects\project-poo2\serializacaojsondemo\obj\Debug\net8.0\SerializacaoJsonDemo.dll
+C:\Users\Belshoff\Projects\project-poo2\serializacaojsondemo\obj\Debug\net8.0\refint\SerializacaoJsonDemo.dll
+C:\Users\Belshoff\Projects\project-poo2\serializacaojsondemo\obj\Debug\net8.0\SerializacaoJsonDemo.pdb
+C:\Users\Belshoff\Projects\project-poo2\serializacaojsondemo\obj\Debug\net8.0\SerializacaoJsonDemo.genruntimeconfig.cache
+C:\Users\Belshoff\Projects\project-poo2\serializacaojsondemo\obj\Debug\net8.0\ref\SerializacaoJsonDemo.dll
