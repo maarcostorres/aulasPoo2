@@ -3,6 +3,7 @@ using System;
 using MVConsultoria.Web.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -10,9 +11,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace MVConsultoria.Web.Migrations
 {
     [DbContext(typeof(MVConsultoriaContext))]
-    partial class MVConsultoriaContextModelSnapshot : ModelSnapshot
+    [Migration("20240904192506_AddCompraParcelaPagamento")]
+    partial class AddCompraParcelaPagamento
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
