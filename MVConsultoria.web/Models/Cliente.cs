@@ -10,7 +10,7 @@ namespace MVConsultoria.Web.Models
         public DateTime DiaDePagamento { get; set; }
         public decimal LimiteDeCredito { get; set; }
 
-        // Adicionando relacionamentos
+        // Relacionamento com Compras e Pagamentos
         public ICollection<Compra> Compras { get; set; } = new List<Compra>();
         public ICollection<Pagamento> Pagamentos { get; set; } = new List<Pagamento>();
     }

@@ -16,19 +16,24 @@ namespace MVConsultoria.Web.Data
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+            // Configurando relacionamentos
+
+            // Cliente <-> Compra
             modelBuilder.Entity<Cliente>()
-                .HasMany(c => c.Compras)
-                .WithOne(c => c.Cliente)
-                .HasForeignKey(c => c.ClienteId);
+                .HasMany(c => c.Compras);
+            //.WithOne(c => c.Cliente)
+            //.HasForeignKey(c => c.ClienteId);
 
+            // Compra <-> Parcela
             modelBuilder.Entity<Compra>()
-                .HasMany(c => c.Parcelas)
-                .WithOne(p => p.Compra)
-                .HasForeignKey(p => p.CompraId);
+                .HasMany(c => c.Parcelas);
+            //.WithOne(p => p.Compra)
+            //.HasForeignKey(p => p.CompraId);
 
-            modelBuilder.Entity<Pagamento>()
-                .HasOne(p => p.Cliente)
-                .WithMany(c => c.Pagamentos)
+            // Cliente <-> Pagamento
+            modelBuilder.Entity<Cliente>()
+                .HasMany(c => c.Pagamentos)
+                .WithOne(p => p.Cliente)
                 .HasForeignKey(p => p.ClienteId);
         }
     }
