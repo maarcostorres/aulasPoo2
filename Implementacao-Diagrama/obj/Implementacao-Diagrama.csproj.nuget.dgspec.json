@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\Belshoff\\Projects\\aulaspoo2\\Implementacao-Diagrama\\Implementacao-Diagrama.csproj": {}
+    "C:\\Users\\Belshoff\\Projects\\aulasPoo2\\Implementacao-Diagrama\\Implementacao-Diagrama.csproj": {}
   },
   "projects": {
-    "C:\\Users\\Belshoff\\Projects\\aulaspoo2\\Implementacao-Diagrama\\Implementacao-Diagrama.csproj": {
+    "C:\\Users\\Belshoff\\Projects\\aulasPoo2\\Implementacao-Diagrama\\Implementacao-Diagrama.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Belshoff\\Projects\\aulaspoo2\\Implementacao-Diagrama\\Implementacao-Diagrama.csproj",
+        "projectUniqueName": "C:\\Users\\Belshoff\\Projects\\aulasPoo2\\Implementacao-Diagrama\\Implementacao-Diagrama.csproj",
         "projectName": "Implementacao-Diagrama",
-        "projectPath": "C:\\Users\\Belshoff\\Projects\\aulaspoo2\\Implementacao-Diagrama\\Implementacao-Diagrama.csproj",
+        "projectPath": "C:\\Users\\Belshoff\\Projects\\aulasPoo2\\Implementacao-Diagrama\\Implementacao-Diagrama.csproj",
         "packagesPath": "C:\\Users\\Belshoff\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Belshoff\\Projects\\aulaspoo2\\Implementacao-Diagrama\\obj\\",
+        "outputPath": "C:\\Users\\Belshoff\\Projects\\aulasPoo2\\Implementacao-Diagrama\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\Belshoff\\AppData\\Roaming\\NuGet\\NuGet.Config",

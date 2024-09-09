@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\Belshoff\\Projects\\Project-poo2\\SerializacaoJsonDemo\\SerializacaoJsonDemo.csproj": {}
+    "C:\\Users\\Belshoff\\Projects\\aulasPoo2\\SerializacaoJsonDemo\\SerializacaoJsonDemo.csproj": {}
   },
   "projects": {
-    "C:\\Users\\Belshoff\\Projects\\Project-poo2\\SerializacaoJsonDemo\\SerializacaoJsonDemo.csproj": {
+    "C:\\Users\\Belshoff\\Projects\\aulasPoo2\\SerializacaoJsonDemo\\SerializacaoJsonDemo.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Belshoff\\Projects\\Project-poo2\\SerializacaoJsonDemo\\SerializacaoJsonDemo.csproj",
+        "projectUniqueName": "C:\\Users\\Belshoff\\Projects\\aulasPoo2\\SerializacaoJsonDemo\\SerializacaoJsonDemo.csproj",
         "projectName": "SerializacaoJsonDemo",
-        "projectPath": "C:\\Users\\Belshoff\\Projects\\Project-poo2\\SerializacaoJsonDemo\\SerializacaoJsonDemo.csproj",
+        "projectPath": "C:\\Users\\Belshoff\\Projects\\aulasPoo2\\SerializacaoJsonDemo\\SerializacaoJsonDemo.csproj",
         "packagesPath": "C:\\Users\\Belshoff\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Belshoff\\Projects\\Project-poo2\\SerializacaoJsonDemo\\obj\\",
+        "outputPath": "C:\\Users\\Belshoff\\Projects\\aulasPoo2\\SerializacaoJsonDemo\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\Belshoff\\AppData\\Roaming\\NuGet\\NuGet.Config",
