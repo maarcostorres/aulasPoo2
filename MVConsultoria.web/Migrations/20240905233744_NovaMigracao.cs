@@ -7,7 +7,7 @@ using MySql.EntityFrameworkCore.Metadata;
 namespace MVConsultoria.Web.Migrations
 {
     /// <inheritdoc />
-    public partial class AddCompraParcelaPagamento : Migration
+    public partial class NovaMigracao : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -27,28 +27,6 @@ namespace MVConsultoria.Web.Migrations
                     table.PrimaryKey("PK_Compras", x => x.Id);
                     table.ForeignKey(
                         name: "FK_Compras_Clientes_ClienteId",
-                        column: x => x.ClienteId,
-                        principalTable: "Clientes",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
-                })
-                .Annotation("MySQL:Charset", "utf8mb4");
-
-            migrationBuilder.CreateTable(
-                name: "Pagamentos",
-                columns: table => new
-                {
-                    Id = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("MySQL:ValueGenerationStrategy", MySQLValueGenerationStrategy.IdentityColumn),
-                    ClienteId = table.Column<int>(type: "int", nullable: false),
-                    DataPagamento = table.Column<DateTime>(type: "datetime(6)", nullable: false),
-                    ValorPago = table.Column<decimal>(type: "decimal(18,2)", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Pagamentos", x => x.Id);
-                    table.ForeignKey(
-                        name: "FK_Pagamentos_Clientes_ClienteId",
                         column: x => x.ClienteId,
                         principalTable: "Clientes",
                         principalColumn: "Id",
@@ -79,15 +57,37 @@ namespace MVConsultoria.Web.Migrations
                 })
                 .Annotation("MySQL:Charset", "utf8mb4");
 
+            migrationBuilder.CreateTable(
+                name: "Pagamentos",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("MySQL:ValueGenerationStrategy", MySQLValueGenerationStrategy.IdentityColumn),
+                    ParcelaID = table.Column<int>(type: "int", nullable: false),
+                    DataPagamento = table.Column<DateTime>(type: "datetime(6)", nullable: false),
+                    ValorPago = table.Column<decimal>(type: "decimal(18,2)", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Pagamentos", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Pagamentos_Parcelas_ParcelaID",
+                        column: x => x.ParcelaID,
+                        principalTable: "Parcelas",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                })
+                .Annotation("MySQL:Charset", "utf8mb4");
+
             migrationBuilder.CreateIndex(
                 name: "IX_Compras_ClienteId",
                 table: "Compras",
                 column: "ClienteId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Pagamentos_ClienteId",
+                name: "IX_Pagamentos_ParcelaID",
                 table: "Pagamentos",
-                column: "ClienteId");
+                column: "ParcelaID");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Parcelas_CompraId",

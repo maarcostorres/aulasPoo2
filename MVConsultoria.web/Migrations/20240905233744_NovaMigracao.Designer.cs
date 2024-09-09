@@ -3,6 +3,7 @@ using System;
 using MVConsultoria.Web.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -10,9 +11,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace MVConsultoria.Web.Migrations
 {
     [DbContext(typeof(MVConsultoriaContext))]
-    partial class MVConsultoriaContextModelSnapshot : ModelSnapshot
+    [Migration("20240905233744_NovaMigracao")]
+    partial class NovaMigracao
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -24,9 +27,6 @@ namespace MVConsultoria.Web.Migrations
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
-
-                    b.Property<bool>("Bloqueado")
-                        .HasColumnType("tinyint(1)");
 
                     b.Property<string>("CPF")
                         .IsRequired()
@@ -40,9 +40,6 @@ namespace MVConsultoria.Web.Migrations
                         .HasColumnType("longtext");
 
                     b.Property<decimal>("LimiteDeCredito")
-                        .HasColumnType("decimal(18,2)");
-
-                    b.Property<decimal>("LimiteDisponivel")
                         .HasColumnType("decimal(18,2)");
 
                     b.Property<string>("Nome")
@@ -80,6 +77,28 @@ namespace MVConsultoria.Web.Migrations
                     b.ToTable("Compras");
                 });
 
+            modelBuilder.Entity("MVConsultoria.Web.Models.Pagamento", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    b.Property<DateTime>("DataPagamento")
+                        .HasColumnType("datetime(6)");
+
+                    b.Property<int>("ParcelaID")
+                        .HasColumnType("int");
+
+                    b.Property<decimal>("ValorPago")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("ParcelaID");
+
+                    b.ToTable("Pagamentos");
+                });
+
             modelBuilder.Entity("MVConsultoria.Web.Models.Parcela", b =>
                 {
                     b.Property<int>("Id")
@@ -89,9 +108,6 @@ namespace MVConsultoria.Web.Migrations
                     b.Property<int>("CompraId")
                         .HasColumnType("int");
 
-                    b.Property<DateTime?>("DataPagamento")
-                        .HasColumnType("datetime(6)");
-
                     b.Property<DateTime>("DataVencimento")
                         .HasColumnType("datetime(6)");
 
@@ -99,9 +115,6 @@ namespace MVConsultoria.Web.Migrations
                         .HasColumnType("tinyint(1)");
 
                     b.Property<decimal>("Valor")
-                        .HasColumnType("decimal(18,2)");
-
-                    b.Property<decimal>("ValorPago")
                         .HasColumnType("decimal(18,2)");
 
                     b.HasKey("Id");
@@ -113,29 +126,44 @@ namespace MVConsultoria.Web.Migrations
 
             modelBuilder.Entity("MVConsultoria.Web.Models.Compra", b =>
                 {
-                    b.HasOne("MVConsultoria.Web.Models.Cliente", "Cliente")
-                        .WithMany()
+                    b.HasOne("MVConsultoria.Web.Models.Cliente", null)
+                        .WithMany("Compras")
                         .HasForeignKey("ClienteId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+                });
 
-                    b.Navigation("Cliente");
+            modelBuilder.Entity("MVConsultoria.Web.Models.Pagamento", b =>
+                {
+                    b.HasOne("MVConsultoria.Web.Models.Parcela", null)
+                        .WithMany("Pagamentos")
+                        .HasForeignKey("ParcelaID")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
                 });
 
             modelBuilder.Entity("MVConsultoria.Web.Models.Parcela", b =>
                 {
-                    b.HasOne("MVConsultoria.Web.Models.Compra", "Compra")
+                    b.HasOne("MVConsultoria.Web.Models.Compra", null)
                         .WithMany("Parcelas")
                         .HasForeignKey("CompraId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+                });
 
-                    b.Navigation("Compra");
+            modelBuilder.Entity("MVConsultoria.Web.Models.Cliente", b =>
+                {
+                    b.Navigation("Compras");
                 });
 
             modelBuilder.Entity("MVConsultoria.Web.Models.Compra", b =>
                 {
                     b.Navigation("Parcelas");
+                });
+
+            modelBuilder.Entity("MVConsultoria.Web.Models.Parcela", b =>
+                {
+                    b.Navigation("Pagamentos");
                 });
 #pragma warning restore 612, 618
         }

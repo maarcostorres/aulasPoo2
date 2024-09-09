@@ -11,8 +11,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace MVConsultoria.Web.Migrations
 {
     [DbContext(typeof(MVConsultoriaContext))]
-    [Migration("20240904192506_AddCompraParcelaPagamento")]
-    partial class AddCompraParcelaPagamento
+    [Migration("20240907173628_AddBloqueadoToCliente")]
+    partial class AddBloqueadoToCliente
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -28,6 +28,9 @@ namespace MVConsultoria.Web.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
+                    b.Property<bool>("Bloqueado")
+                        .HasColumnType("tinyint(1)");
+
                     b.Property<string>("CPF")
                         .IsRequired()
                         .HasColumnType("longtext");
@@ -40,6 +43,9 @@ namespace MVConsultoria.Web.Migrations
                         .HasColumnType("longtext");
 
                     b.Property<decimal>("LimiteDeCredito")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.Property<decimal>("LimiteDisponivel")
                         .HasColumnType("decimal(18,2)");
 
                     b.Property<string>("Nome")
@@ -77,28 +83,6 @@ namespace MVConsultoria.Web.Migrations
                     b.ToTable("Compras");
                 });
 
-            modelBuilder.Entity("MVConsultoria.Web.Models.Pagamento", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    b.Property<int>("ClienteId")
-                        .HasColumnType("int");
-
-                    b.Property<DateTime>("DataPagamento")
-                        .HasColumnType("datetime(6)");
-
-                    b.Property<decimal>("ValorPago")
-                        .HasColumnType("decimal(18,2)");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("ClienteId");
-
-                    b.ToTable("Pagamentos");
-                });
-
             modelBuilder.Entity("MVConsultoria.Web.Models.Parcela", b =>
                 {
                     b.Property<int>("Id")
@@ -108,6 +92,9 @@ namespace MVConsultoria.Web.Migrations
                     b.Property<int>("CompraId")
                         .HasColumnType("int");
 
+                    b.Property<DateTime?>("DataPagamento")
+                        .HasColumnType("datetime(6)");
+
                     b.Property<DateTime>("DataVencimento")
                         .HasColumnType("datetime(6)");
 
@@ -115,6 +102,9 @@ namespace MVConsultoria.Web.Migrations
                         .HasColumnType("tinyint(1)");
 
                     b.Property<decimal>("Valor")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.Property<decimal>("ValorPago")
                         .HasColumnType("decimal(18,2)");
 
                     b.HasKey("Id");
@@ -127,18 +117,7 @@ namespace MVConsultoria.Web.Migrations
             modelBuilder.Entity("MVConsultoria.Web.Models.Compra", b =>
                 {
                     b.HasOne("MVConsultoria.Web.Models.Cliente", "Cliente")
-                        .WithMany("Compras")
-                        .HasForeignKey("ClienteId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Cliente");
-                });
-
-            modelBuilder.Entity("MVConsultoria.Web.Models.Pagamento", b =>
-                {
-                    b.HasOne("MVConsultoria.Web.Models.Cliente", "Cliente")
-                        .WithMany("Pagamentos")
+                        .WithMany()
                         .HasForeignKey("ClienteId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -155,13 +134,6 @@ namespace MVConsultoria.Web.Migrations
                         .IsRequired();
 
                     b.Navigation("Compra");
-                });
-
-            modelBuilder.Entity("MVConsultoria.Web.Models.Cliente", b =>
-                {
-                    b.Navigation("Compras");
-
-                    b.Navigation("Pagamentos");
                 });
 
             modelBuilder.Entity("MVConsultoria.Web.Models.Compra", b =>

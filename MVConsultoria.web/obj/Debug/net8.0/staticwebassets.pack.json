@@ -1,0 +1,25 @@
+{
+  "Files": [
+    {
+      "Id": "C:\\Users\\Belshoff\\Projects\\aulaspoo2\\mvconsultoria.web\\wwwroot\\pages\\parcelas.html",
+      "PackagePath": "staticwebassets\\pages\\parcelas.html"
+    },
+    {
+      "Id": "obj\\Debug\\net8.0\\staticwebassets\\msbuild.MVConsultoria.Web.Microsoft.AspNetCore.StaticWebAssets.props",
+      "PackagePath": "build\\Microsoft.AspNetCore.StaticWebAssets.props"
+    },
+    {
+      "Id": "obj\\Debug\\net8.0\\staticwebassets\\msbuild.build.MVConsultoria.Web.props",
+      "PackagePath": "build\\MVConsultoria.Web.props"
+    },
+    {
+      "Id": "obj\\Debug\\net8.0\\staticwebassets\\msbuild.buildMultiTargeting.MVConsultoria.Web.props",
+      "PackagePath": "buildMultiTargeting\\MVConsultoria.Web.props"
+    },
+    {
+      "Id": "obj\\Debug\\net8.0\\staticwebassets\\msbuild.buildTransitive.MVConsultoria.Web.props",
+      "PackagePath": "buildTransitive\\MVConsultoria.Web.props"
+    }
+  ],
+  "ElementsToRemove": []
+}

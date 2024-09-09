@@ -3,6 +3,7 @@ using System;
 using MVConsultoria.Web.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -10,9 +11,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace MVConsultoria.Web.Migrations
 {
     [DbContext(typeof(MVConsultoriaContext))]
-    partial class MVConsultoriaContextModelSnapshot : ModelSnapshot
+    [Migration("20240907154132_AddLimiteDisponivelToCliente")]
+    partial class AddLimiteDisponivelToCliente
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -24,9 +27,6 @@ namespace MVConsultoria.Web.Migrations
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
-
-                    b.Property<bool>("Bloqueado")
-                        .HasColumnType("tinyint(1)");
 
                     b.Property<string>("CPF")
                         .IsRequired()
@@ -89,7 +89,7 @@ namespace MVConsultoria.Web.Migrations
                     b.Property<int>("CompraId")
                         .HasColumnType("int");
 
-                    b.Property<DateTime?>("DataPagamento")
+                    b.Property<DateTime>("DataPagamento")
                         .HasColumnType("datetime(6)");
 
                     b.Property<DateTime>("DataVencimento")

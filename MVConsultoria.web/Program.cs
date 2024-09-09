@@ -1,5 +1,6 @@
 using Microsoft.EntityFrameworkCore;
 using MVConsultoria.Web.Data;
+using System.Text.Json.Serialization;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -7,8 +8,13 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddDbContext<MVConsultoriaContext>(options =>
     options.UseMySQL(builder.Configuration.GetConnectionString("DefaultConnection")));
 
-// Adiciona os serviços de controle
-builder.Services.AddControllers();
+// Adiciona os serviços de controle e configura JSON para lidar com ciclos de referência
+builder.Services.AddControllers()
+    .AddJsonOptions(options =>
+    {
+        options.JsonSerializerOptions.ReferenceHandler = ReferenceHandler.Preserve; // Lida com ciclos de referência
+        options.JsonSerializerOptions.WriteIndented = true; // Formata o JSON com indentação para leitura mais fácil
+    });
 
 // Adiciona o Swagger, se necessário
 builder.Services.AddEndpointsApiExplorer();
@@ -23,7 +29,7 @@ if (app.Environment.IsDevelopment())
     app.UseSwaggerUI();
 }
 
-//app.UseHttpsRedirection();
+// app.UseHttpsRedirection();
 
 app.UseAuthorization();
 
