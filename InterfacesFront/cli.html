@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Consulta Cliente</title>
+    <link rel="stylesheet" href="cli.css">
+</head>
+<body>
+    <div id="app" class="container">
+        <header>
+            <h2>Área do Cliente</h2>
+            <div class="login-area">
+                <input type="text" placeholder="Usuário">
+                <button onclick="login()">Entrar</button>
+            </div>
+        </header>
+
+        <section class="content hidden" id="client-info">
+            <h3>Olá, <span id="client-name">Matheus Martinelli</span></h3>
+
+            <!-- Informações Pessoais -->
+            <div class="section" id="informacoes-pessoais-container">
+                <div class="section-header">
+                    <h4>Informações Pessoais</h4>
+                    <button class="toggle-section" onclick="toggleSection('informacoes-pessoais-container')">⬇</button>
+                </div>
+                <div class="section-content">
+                    <p>Nome: <span id="info-nome">Matheus Martinelli</span></p>
+                    <p>CPF: <span id="info-cpf">123.456.789-01</span></p>
+                    <p>Endereço: <span id="info-endereco">Rua Quinze de Novembro, 012</span></p>
+                    <p>Telefone: <span id="info-endereco">(27) 99759-5482</span></p>
+                </div>
+            </div>
+
+            <!-- Saldo Devedor -->
+            <div class="section" id="saldo-container">
+                <div class="section-header">
+                    <h4>Saldo Devedor</h4>
+                    <button class="toggle-section" onclick="toggleSection('saldo-container')">⬇</button>
+                </div>
+                <div class="section-content">
+                    <canvas id="saldoChart" width="200" height="200"></canvas>
+                </div>
+            </div>
+
+            <!-- Histórico de Compras -->
+            <div class="section" id="historico-compras-container">
+                <div class="section-header">
+                    <h4>Histórico de Compras</h4>
+                    <button class="toggle-section" onclick="toggleSection('historico-compras-container')">⬇</button>
+                </div>
+                <div class="section-content">
+                    <ul id="historico-compras">
+                        <!-- Histórico de compras será preenchido dinamicamente -->
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Próximas Parcelas -->
+            <div class="section" id="proximas-parcelas-container">
+                <div class="section-header">
+                    <h4>Próximas Parcelas</h4>
+                    <button class="toggle-section" onclick="toggleSection('proximas-parcelas-container')">⬇</button>
+                </div>
+                <div class="section-content">
+                    <ul id="proximas-parcelas">
+                        <!-- Próximas parcelas serão preenchidas dinamicamente -->
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Limite de Crédito -->
+            <div class="section" id="limite-container">
+                <div class="section-header">
+                    <h4>Limite de Crédito Disponível</h4>
+                    <button class="toggle-section" onclick="toggleSection('limite-container')">⬇</button>
+                </div>
+                <div class="section-content">
+                    <canvas id="limiteChart" width="200" height="200"></canvas>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="cli.js"></script>
+</body>
+</html>
