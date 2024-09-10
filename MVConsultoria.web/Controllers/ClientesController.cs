@@ -54,7 +54,8 @@ namespace MVConsultoria.Web.Controllers
             // Define um limite de crédito padrão para novos clientes, se não definido
             if (cliente.LimiteDeCredito == 0)
             {
-                cliente.LimiteDeCredito = 300.00m;  // Exemplo de limite de crédito padrão
+                var limitePadrao = 300.00m;
+                cliente.LimiteDeCredito = limitePadrao;
             }
 
             // Define o limite disponível igual ao limite de crédito
@@ -291,6 +292,87 @@ namespace MVConsultoria.Web.Controllers
 
             return NoContent();
         }
+
+        /*// GET: api/Clientes/5/parcela-minima
+        [HttpGet("{id}/parcela-minima")]
+        public async Task<ActionResult<decimal>> GetParcelaMinima(int id)
+        {
+            // Busca o cliente pelo ID
+            var cliente = await _context.Clientes
+                .Include(c => c.Compras)
+                .ThenInclude(compra => compra.Parcelas)
+                .FirstOrDefaultAsync(c => c.Id == id);
+
+            if (cliente == null)
+            {
+                return NotFound("Cliente não encontrado.");
+            }
+
+            // Define a data atual
+            DateTime dataAtual = DateTime.Now;
+            int mesAtual = dataAtual.Month + 1;
+            int anoAtual = dataAtual.Year;
+
+            // Filtra as parcelas a vencer neste mês
+            var parcelasAVencerEsteMes = cliente.Compras
+                .SelectMany(c => c.Parcelas)
+                .Where(p => !p.Pago && p.DataVencimento.Month == mesAtual && p.DataVencimento.Year == anoAtual)
+                .ToList();
+
+            // Filtra as parcelas em atraso
+            var parcelasEmAtraso = cliente.Compras
+                .SelectMany(c => c.Parcelas)
+                .Where(p => !p.Pago && p.DataVencimento < dataAtual)
+                .ToList();
+
+            // Soma o valor das parcelas a vencer neste mês e das parcelas em atraso
+            decimal valorParcelaMinima = parcelasAVencerEsteMes.Sum(p => p.Valor) + parcelasEmAtraso.Sum(p => p.Valor);
+
+            return Ok(valorParcelaMinima);
+        }*/
+
+        // GET: api/Clientes/5/parcela-minima
+        [HttpGet("{id}/parcela-minima")]
+        public async Task<ActionResult<decimal>> GetParcelaMinima(int id)
+        {
+            // Busca o cliente pelo ID
+            var cliente = await _context.Clientes
+                .Include(c => c.Compras)
+                .ThenInclude(compra => compra.Parcelas)
+                .FirstOrDefaultAsync(c => c.Id == id);
+
+            if (cliente == null)
+            {
+                return NotFound("Cliente não encontrado.");
+            }
+
+            // Define a data atual
+            DateTime dataAtual = DateTime.Now;
+            DateTime proximoDiaDePagamento;
+
+            // Calcula o próximo dia de pagamento
+            if (dataAtual.Day >= cliente.DiaDePagamento.Day) // Se o dia de pagamento já passou no mês corrente
+            {
+                proximoDiaDePagamento = new DateTime(dataAtual.Year, dataAtual.Month, cliente.DiaDePagamento.Day).AddMonths(1);
+            }
+            else
+            {
+                proximoDiaDePagamento = new DateTime(dataAtual.Year, dataAtual.Month, cliente.DiaDePagamento.Day);
+            }
+
+            // Filtra as parcelas com vencimento até o próximo dia de pagamento
+            var parcelasAteProximoPagamento = cliente.Compras
+                .SelectMany(c => c.Parcelas)
+                .Where(p => !p.Pago && p.DataVencimento <= proximoDiaDePagamento)
+                .ToList();
+
+            // Soma o valor das parcelas a vencer até o próximo dia de pagamento
+            decimal valorParcelaMinima = parcelasAteProximoPagamento.Sum(p => p.Valor);
+
+            return Ok(valorParcelaMinima);
+        }
+
+
 
     }
 }

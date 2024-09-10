@@ -24,6 +24,12 @@ namespace MVConsultoria.Web.Data
                 .HasForeignKey(p => p.CompraId);
 
             // Outras configurações de relacionamento podem ser adicionadas aqui
+
+            // Definindo relacionamento entre Cliente e Compra
+            modelBuilder.Entity<Cliente>()
+                .HasMany(c => c.Compras)
+                .WithOne(compra => compra.Cliente)
+                .HasForeignKey(compra => compra.ClienteId);
         }
     }
 }

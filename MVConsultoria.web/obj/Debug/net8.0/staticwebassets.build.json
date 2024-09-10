@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "8sB3syQ7GHlhsS/WsKdwhMzBUyANNwpnG/YZDpzWUWc=",
+  "Hash": "coOanmXc9H4sV6ckEzo8n05DQUTYXqpgdYqhC8HN+6c=",
   "Source": "MVConsultoria.Web",
   "BasePath": "_content/MVConsultoria.Web",
   "Mode": "Default",
@@ -10,7 +10,7 @@
     {
       "Name": "MVConsultoria.Web\\wwwroot",
       "Source": "MVConsultoria.Web",
-      "ContentRoot": "C:\\Users\\Belshoff\\Projects\\aulaspoo2\\mvconsultoria.web\\wwwroot\\",
+      "ContentRoot": "C:\\Users\\Belshoff\\projects\\aulaspoo2\\mvconsultoria.web\\wwwroot\\",
       "BasePath": "_content/MVConsultoria.Web",
       "Pattern": "**"
     }

@@ -122,7 +122,7 @@ namespace MVConsultoria.Web.Controllers
             return NoContent();
         }
 
-        // PUT: api/Parcelas/5/pagar
+        /*// PUT: api/Parcelas/5/pagar
         [HttpPut("{id}/pagar")]
         public async Task<IActionResult> RegistrarPagamento(int id, decimal valorPago)
         {
@@ -188,7 +188,102 @@ namespace MVConsultoria.Web.Controllers
         private bool ParcelaExists(int id)
         {
             return _context.Parcelas.Any(e => e.Id == id);
+        }*/
+        // PUT: api/Parcelas/5/pagar
+        [HttpPut("{id}/pagar")]
+        public async Task<IActionResult> RegistrarPagamento(int id, decimal valorPago)
+        {
+            // Busca a parcela pelo ID
+            var parcela = await _context.Parcelas.FindAsync(id);
+            if (parcela == null)
+            {
+                return NotFound("Parcela não encontrada.");
+            }
+
+            // Verifica se a parcela já foi paga
+            if (parcela.Pago)
+            {
+                return BadRequest("Esta parcela já foi paga.");
+            }
+
+            // Valida o valor pago
+            if (valorPago <= 0)
+            {
+                return BadRequest("O valor pago deve ser positivo.");
+            }
+
+            // Busca a compra associada para acessar o cliente
+            var compra = await _context.Compras.Include(c => c.Cliente)
+                                               .FirstOrDefaultAsync(c => c.Id == parcela.CompraId);
+            if (compra == null)
+            {
+                return NotFound("Compra não encontrada.");
+            }
+
+            // Verifica se o valor pago é menor que o valor da parcela
+            if (valorPago < parcela.Valor)
+            {
+                // Calcula o valor restante
+                decimal valorRestante = parcela.Valor - valorPago;
+
+                // Atualiza a parcela original como paga parcialmente
+                parcela.Pago = true; // Considera que essa parte foi paga
+                parcela.ValorPago = valorPago;
+                parcela.DataPagamento = DateTime.Now;
+
+                // Cria uma nova parcela com o valor restante e a mesma data de vencimento
+                var novaParcela = new Parcela
+                {
+                    CompraId = parcela.CompraId,
+                    DataVencimento = parcela.DataVencimento, // Mantém a mesma data de vencimento
+                    Valor = valorRestante,
+                    Pago = false
+                };
+
+                // Adiciona a nova parcela ao banco de dados
+                _context.Parcelas.Add(novaParcela);
+            }
+            else if (valorPago == parcela.Valor)
+            {
+                // Se o valor pago for igual ao valor da parcela, marca a parcela como totalmente paga
+                parcela.Pago = true;
+                parcela.ValorPago = valorPago;
+                parcela.DataPagamento = DateTime.Now;
+            }
+
+            // Incrementa o limite disponível do cliente
+            var cliente = compra.Cliente;
+            cliente.LimiteDisponivel += valorPago;
+
+            // Atualiza o estado da parcela e do cliente
+            _context.Entry(parcela).State = EntityState.Modified;
+            _context.Entry(cliente).State = EntityState.Modified;
+
+            try
+            {
+                await _context.SaveChangesAsync();
+            }
+            catch (DbUpdateConcurrencyException)
+            {
+                if (!ParcelaExists(id))
+                {
+                    return NotFound();
+                }
+                else
+                {
+                    throw;
+                }
+            }
+
+            return NoContent();
         }
+
+        private bool ParcelaExists(int id)
+        {
+            return _context.Parcelas.Any(e => e.Id == id);
+        }
+
+
 
     }
 }
