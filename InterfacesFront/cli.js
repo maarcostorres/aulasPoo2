@@ -3,8 +3,8 @@ const clientes = {
     matheus: {
         nome: "Matheus Martinelli",
         cpf: "123.456.789-01",
-        endereco: "Rua Henrique Laranja, 44",
-        telefone: "(27) 99668-9530",
+        endereco: "Rua Quinze de Novembro, 012",
+        telefone: "(27) 99759-5482",
         saldoDevedor: 0,
         limiteDisponivel: 600,
         historicoCompras: [
@@ -19,8 +19,8 @@ const clientes = {
     helena: {
         nome: "Helena Silveira",
         cpf: "109.876.543-21",
-        endereco: "Rua Quinze de Novembro, 012",
-        telefone: "(27) 99759-5482",
+        endereco: "Rua Henrique Laranja, 44",
+        telefone: "(27) 99148-6239",
         saldoDevedor: 1200,
         limiteDisponivel: 0,
         historicoCompras: [
@@ -41,7 +41,6 @@ function login() {
         document.getElementById('info-nome').textContent = cliente.nome;
         document.getElementById('info-cpf').textContent = cliente.cpf;
         document.getElementById('info-endereco').textContent = cliente.endereco;
-        document.getElementById('info-telefone').textContent = cliente.telefone;
 
         // Atualiza os gráficos com os dados do cliente
         updateSaldoChart(cliente.saldoDevedor, cliente.limiteDisponivel);
