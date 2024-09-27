@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Lista de Clientes</title>
+    <link rel="stylesheet" href="clientes.css" />
+  </head>
+  <body>
+    <header class="header-container">
+      <!-- Campo de busca centralizado e maior -->
+      <div class="search-container">
+        <input
+          type="text"
+          id="searchField"
+          placeholder="Buscar cliente por nome, CPF ou e-mail"
+        />
+      </div>
+
+      <!-- Menu hambúrguer -->
+      <div id="hamburgerMenu" class="hamburger">
+        <span>☰</span>
+        <div class="menu-content">
+          <a href="novo_cliente.html">Novo</a>
+          <a href="#" id="alterarCliente">Alterar</a>
+          <a href="admin.html">Voltar</a>
+        </div>
+      </div>
+    </header>
+
+    <main>
+      <table id="clientes-table">
+        <thead>
+          <tr>
+            <th>ID</th>
+            <th>Nome</th>
+            <th>CPF</th>
+            <th>Email</th>
+            <th>Endereço</th>
+            <th>Telefone</th>
+            <th>Limite de Crédito</th>
+            <th>Limite Disponível</th>
+            <th>Ações</th>
+          </tr>
+        </thead>
+        <tbody>
+          <!-- Os clientes serão inseridos aqui -->
+        </tbody>
+      </table>
+    </main>
+
+    <footer>
+      <p>&copy; 2024 MV Consultoria</p>
+    </footer>
+
+    <script src="clientes.js"></script>
+  </body>
+</html>
