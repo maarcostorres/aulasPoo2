@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("Implementacao-Diagrama")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+1dbb9c77cf827f3351c21cd6fa54ed9f19cd8c80")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+6add82989f8004e51710216b8f433a182e858ca0")]
 [assembly: System.Reflection.AssemblyProductAttribute("Implementacao-Diagrama")]
 [assembly: System.Reflection.AssemblyTitleAttribute("Implementacao-Diagrama")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
