@@ -1,8 +1,56 @@
 {
   "Files": [
     {
-      "Id": "C:\\Users\\Belshoff\\Projects\\aulaspoo2\\mvconsultoria.web\\wwwroot\\pages\\parcelas.html",
-      "PackagePath": "staticwebassets\\pages\\parcelas.html"
+      "Id": "C:\\Users\\Belshoff\\projects\\aulaspoo2\\mvconsultoria.web\\wwwroot\\admin.css",
+      "PackagePath": "staticwebassets\\admin.css"
+    },
+    {
+      "Id": "C:\\Users\\Belshoff\\projects\\aulaspoo2\\mvconsultoria.web\\wwwroot\\admin.html",
+      "PackagePath": "staticwebassets\\admin.html"
+    },
+    {
+      "Id": "C:\\Users\\Belshoff\\projects\\aulaspoo2\\mvconsultoria.web\\wwwroot\\admin.js",
+      "PackagePath": "staticwebassets\\admin.js"
+    },
+    {
+      "Id": "C:\\Users\\Belshoff\\projects\\aulaspoo2\\mvconsultoria.web\\wwwroot\\clientes.css",
+      "PackagePath": "staticwebassets\\clientes.css"
+    },
+    {
+      "Id": "C:\\Users\\Belshoff\\projects\\aulaspoo2\\mvconsultoria.web\\wwwroot\\clientes.html",
+      "PackagePath": "staticwebassets\\clientes.html"
+    },
+    {
+      "Id": "C:\\Users\\Belshoff\\projects\\aulaspoo2\\mvconsultoria.web\\wwwroot\\clientes.js",
+      "PackagePath": "staticwebassets\\clientes.js"
+    },
+    {
+      "Id": "C:\\Users\\Belshoff\\projects\\aulaspoo2\\mvconsultoria.web\\wwwroot\\index.html",
+      "PackagePath": "staticwebassets\\index.html"
+    },
+    {
+      "Id": "C:\\Users\\Belshoff\\projects\\aulaspoo2\\mvconsultoria.web\\wwwroot\\login.css",
+      "PackagePath": "staticwebassets\\login.css"
+    },
+    {
+      "Id": "C:\\Users\\Belshoff\\projects\\aulaspoo2\\mvconsultoria.web\\wwwroot\\login.js",
+      "PackagePath": "staticwebassets\\login.js"
+    },
+    {
+      "Id": "C:\\Users\\Belshoff\\projects\\aulaspoo2\\mvconsultoria.web\\wwwroot\\novo_cliente.html",
+      "PackagePath": "staticwebassets\\novo_cliente.html"
+    },
+    {
+      "Id": "C:\\Users\\Belshoff\\projects\\aulaspoo2\\mvconsultoria.web\\wwwroot\\spa.css",
+      "PackagePath": "staticwebassets\\spa.css"
+    },
+    {
+      "Id": "C:\\Users\\Belshoff\\projects\\aulaspoo2\\mvconsultoria.web\\wwwroot\\spa.html",
+      "PackagePath": "staticwebassets\\spa.html"
+    },
+    {
+      "Id": "C:\\Users\\Belshoff\\projects\\aulaspoo2\\mvconsultoria.web\\wwwroot\\spa.js",
+      "PackagePath": "staticwebassets\\spa.js"
     },
     {
       "Id": "obj\\Debug\\net8.0\\staticwebassets\\msbuild.MVConsultoria.Web.Microsoft.AspNetCore.StaticWebAssets.props",

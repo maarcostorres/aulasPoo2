@@ -6,10 +6,11 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Authorization;
-
+using BCrypt.Net;
 
 namespace MVConsultoria.Web.Controllers
 {
+
     [Authorize]
     [Route("api/[controller]")]
     [ApiController]
@@ -47,6 +48,9 @@ namespace MVConsultoria.Web.Controllers
         [HttpPost]
         public async Task<ActionResult<Administrador>> PostAdministrador(Administrador administrador)
         {
+            // Hash da senha antes de salvar no banco de dados
+            administrador.Senha = BCrypt.Net.BCrypt.HashPassword(administrador.Senha);
+
             _context.Administradores.Add(administrador);
             await _context.SaveChangesAsync();
 
@@ -60,6 +64,12 @@ namespace MVConsultoria.Web.Controllers
             if (id != administrador.Id)
             {
                 return BadRequest();
+            }
+
+            // Hash da nova senha, caso tenha sido alterada
+            if (!string.IsNullOrEmpty(administrador.Senha))
+            {
+                administrador.Senha = BCrypt.Net.BCrypt.HashPassword(administrador.Senha);
             }
 
             _context.Entry(administrador).State = EntityState.Modified;

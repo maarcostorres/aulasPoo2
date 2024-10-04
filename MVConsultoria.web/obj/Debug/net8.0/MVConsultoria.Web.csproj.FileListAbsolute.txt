@@ -145,3 +145,4 @@ C:\Users\Belshoff\Projects\aulaspoo2\mvconsultoria.web\bin\Debug\net8.0\runtimes
 C:\Users\Belshoff\Projects\aulaspoo2\mvconsultoria.web\bin\Debug\net8.0\runtimes\win-x64\native\krbcc64.dll
 C:\Users\Belshoff\Projects\aulaspoo2\mvconsultoria.web\bin\Debug\net8.0\runtimes\win\lib\net8.0\System.Windows.Extensions.dll
 C:\Users\Belshoff\Projects\aulaspoo2\mvconsultoria.web\bin\Debug\net8.0\MVConsultoria.Web.staticwebassets.runtime.json
+C:\Users\Belshoff\projects\aulaspoo2\mvconsultoria.web\bin\Debug\net8.0\BCrypt.Net-Next.dll

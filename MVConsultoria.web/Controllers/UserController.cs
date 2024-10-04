@@ -1,12 +1,13 @@
 using Microsoft.AspNetCore.Mvc;
 using MVConsultoria.Web.Data;
 using MVConsultoria.Web.Models;
+using MVConsultoria.Web.Dtos;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Authorization;
-
+using BCrypt.Net;
 
 namespace MVConsultoria.Web.Controllers
 {
@@ -61,11 +62,33 @@ namespace MVConsultoria.Web.Controllers
                 return BadRequest("Usuário com este CPF já está cadastrado.");
             }
 
+            // Hash da senha antes de salvar no banco de dados
+            user.Senha = BCrypt.Net.BCrypt.HashPassword(user.Senha);
+
             // Adiciona o novo usuário ao banco de dados
             _context.Users.Add(user);
             await _context.SaveChangesAsync();
 
             return CreatedAtAction("GetUser", new { id = user.Id }, user);
+        }
+
+
+
+
+
+        // POST: api/Users/login
+        [AllowAnonymous]
+        [HttpPost("login")]
+        public async Task<IActionResult> Login([FromBody] LoginDto loginDto)
+        {
+            var user = await _context.Users.FirstOrDefaultAsync(u => u.CPF == loginDto.Login);
+            if (user == null || !BCrypt.Net.BCrypt.Verify(loginDto.Senha, user.Senha))
+            {
+                return Unauthorized(new { message = "Login ou senha incorretos" });
+            }
+
+            // Sucesso no login (aqui você pode gerar um token JWT)
+            return Ok(new { message = "Login bem-sucedido!" });
         }
 
         // PUT: api/Users/5
@@ -137,24 +160,20 @@ namespace MVConsultoria.Web.Controllers
         [HttpPut("{id}/bloquear")]
         public async Task<IActionResult> BloquearUsuario(int id, [FromHeader] int adminId)
         {
-            // Verifica se o adminId corresponde a um administrador
             var administrador = await _context.Administradores.FindAsync(adminId);
             if (administrador == null)
             {
                 return Unauthorized("Apenas administradores podem bloquear usuários.");
             }
 
-            // Busca o usuário pelo ID
             var user = await _context.Users.FindAsync(id);
             if (user == null)
             {
                 return NotFound("Usuário não encontrado.");
             }
 
-            // Bloqueia o usuário
-            user.Bloqueado = true;
+            user.UserBloqueado = true;
 
-            // Atualiza o estado do usuário no banco de dados
             _context.Entry(user).State = EntityState.Modified;
             await _context.SaveChangesAsync();
 
@@ -165,31 +184,24 @@ namespace MVConsultoria.Web.Controllers
         [HttpPut("{id}/desbloquear")]
         public async Task<IActionResult> DesbloquearUsuario(int id, [FromHeader] int adminId)
         {
-            // Verifica se o adminId corresponde a um administrador
             var administrador = await _context.Administradores.FindAsync(adminId);
             if (administrador == null)
             {
                 return Unauthorized("Apenas administradores podem desbloquear usuários.");
             }
 
-            // Busca o usuário pelo ID
             var user = await _context.Users.FindAsync(id);
             if (user == null)
             {
                 return NotFound("Usuário não encontrado.");
             }
 
-            // Desbloqueia o usuário
-            user.Bloqueado = false;
+            user.UserBloqueado = false;
 
-            // Atualiza o estado do usuário no banco de dados
             _context.Entry(user).State = EntityState.Modified;
             await _context.SaveChangesAsync();
 
             return NoContent();
         }
-
-
-
     }
 }

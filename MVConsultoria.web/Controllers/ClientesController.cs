@@ -5,9 +5,12 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.AspNetCore.Authorization;
+
 
 namespace MVConsultoria.Web.Controllers
 {
+    [Authorize]
     [Route("api/[controller]")]
     [ApiController]
     public class ClientesController : ControllerBase
@@ -21,41 +24,93 @@ namespace MVConsultoria.Web.Controllers
 
         // GET: api/Clientes/listarClientes
         [HttpGet("listarClientes")]
-        public async Task<ActionResult<IEnumerable<Cliente>>> GetClientes()
+        public async Task<ActionResult<IEnumerable<ClienteDto>>> GetClientes()
         {
-            return await _context.Clientes.ToListAsync();
+            try
+            {
+                // Seleciona os dados relevantes e mapeia para o DTO
+                var clientes = await _context.Clientes
+                    .Select(c => new ClienteDto
+                    {
+                        Id = c.Id,
+                        Nome = c.Nome,
+                        CPF = c.CPF,
+                        Email = c.Email,
+                        Endereco = c.Endereco,
+                        Telefone = c.Telefone,
+                        DiaDePagamento = c.DiaDePagamento,
+                        LimiteDeCredito = c.LimiteDeCredito,
+                        LimiteDisponivel = c.LimiteDisponivel,
+                        Bloqueado = c.Bloqueado
+                    })
+                    .ToListAsync();
+
+                // Se não houver clientes, retorna uma mensagem apropriada
+                if (clientes == null || !clientes.Any())
+                {
+                    return NotFound(new { message = "Nenhum cliente encontrado." });
+                }
+
+                return Ok(clientes);
+            }
+            catch (Exception ex)
+            {
+                // Logar o erro (recomendado) e retornar uma mensagem genérica de erro
+                return StatusCode(500, new { message = "Ocorreu um erro ao buscar os clientes.", error = ex.Message });
+            }
         }
 
-        // GET: api/Clientes/localizarCliente/{id}
+
+
         [HttpGet("localizarCliente/{id}")]
-        public async Task<ActionResult<Cliente>> GetCliente(int id)
+        public async Task<ActionResult<ClienteDto>> GetCliente(int id)
         {
-            var cliente = await _context.Clientes.FindAsync(id);
+            var cliente = await _context.Clientes.FirstOrDefaultAsync(c => c.Id == id);
 
             if (cliente == null)
             {
                 return NotFound();
             }
 
-            return cliente;
+            // Mapeia os dados do cliente para o DTO
+            var clienteDto = new ClienteDto
+            {
+                Id = cliente.Id,
+                Nome = cliente.Nome,
+                CPF = cliente.CPF,
+                Email = cliente.Email,
+                Endereco = cliente.Endereco,
+                Telefone = cliente.Telefone,
+                DiaDePagamento = cliente.DiaDePagamento,
+                LimiteDeCredito = cliente.LimiteDeCredito,
+                LimiteDisponivel = cliente.LimiteDisponivel,
+                Bloqueado = cliente.Bloqueado
+            };
+
+            return clienteDto;
         }
+
+
+
 
         // POST: api/Clientes/cadastrarCliente
         [HttpPost("cadastrarCliente")]
         public async Task<ActionResult<Cliente>> PostCliente(Cliente cliente)
         {
             // Verifica se o CPF já existe
-            var clienteExistente = await _context.Clientes.FirstOrDefaultAsync(c => c.CPF == cliente.CPF);
+            var clienteExistente = await _context.Users.FirstOrDefaultAsync(c => c.CPF == cliente.CPF);
             if (clienteExistente != null)
             {
                 return BadRequest("CPF já cadastrado.");
             }
 
+            // Criptografa a senha antes de salvar no banco de dados
+            cliente.Senha = BCrypt.Net.BCrypt.HashPassword(cliente.Senha);
+
             // Define um limite de crédito padrão para novos clientes, se não definido
             if (cliente.LimiteDeCredito == 0)
             {
-                var limitePadrao = 300.00m;
-                cliente.LimiteDeCredito = limitePadrao;
+                cliente.LimiteDeCredito = 300.00m;
             }
 
             // Define o limite disponível igual ao limite de crédito
@@ -68,6 +123,7 @@ namespace MVConsultoria.Web.Controllers
             return CreatedAtAction("GetCliente", new { id = cliente.Id }, cliente);
         }
 
+
         // PUT: api/Clientes/atualizarCliente/{id}
         [HttpPut("atualizarCliente/{id}")]
         public async Task<IActionResult> AtualizarCliente(int id, Cliente cliente)
@@ -76,6 +132,10 @@ namespace MVConsultoria.Web.Controllers
             {
                 return BadRequest();
             }
+
+            // Criptografa a senha antes de salvar no banco de dados
+            cliente.Senha = BCrypt.Net.BCrypt.HashPassword(cliente.Senha);
+
 
             _context.Entry(cliente).State = EntityState.Modified;
 
@@ -114,24 +174,41 @@ namespace MVConsultoria.Web.Controllers
             return NoContent();
         }
 
+
+
         // PUT: api/Clientes/alterarLimite/{id}
         [HttpPut("alterarLimite/{id}")]
-        public async Task<IActionResult> AjustarLimiteDeCredito(int id, decimal novoLimite)
+        public async Task<IActionResult> AjustarLimiteDeCredito(int id, [FromBody] LimiteDto limiteDto)
         {
             // Busca o cliente pelo ID
-            var cliente = await _context.Clientes.FindAsync(id);
+            var cliente = await _context.Clientes
+                .Include(c => c.Compras)  // Inclui as compras associadas ao cliente
+                .ThenInclude(compra => compra.Parcelas)  // Inclui as parcelas associadas às compras
+                .FirstOrDefaultAsync(c => c.Id == id);
+
             if (cliente == null)
             {
                 return NotFound("Cliente não encontrado.");
             }
 
             // Ajusta o limite de crédito do cliente
-            if (novoLimite < 0)
+            if (limiteDto.NovoLimite < 0)
             {
                 return BadRequest("O limite de crédito não pode ser negativo.");
             }
 
-            cliente.LimiteDeCredito = novoLimite;
+            // Atualiza o limite de crédito
+            cliente.LimiteDeCredito = limiteDto.NovoLimite;
+
+            // Calcula o total das parcelas em aberto (não pagas)
+            decimal totalParcelasEmAberto = cliente.Compras
+                .SelectMany(c => c.Parcelas)
+                .Where(p => !p.Pago)
+                .Sum(p => p.Valor);
+
+            // Atualiza o limite disponível (Limite de crédito - Total de parcelas em aberto)
+            cliente.LimiteDisponivel = cliente.LimiteDeCredito - totalParcelasEmAberto;
+
             _context.Entry(cliente).State = EntityState.Modified;
 
             try
@@ -153,80 +230,14 @@ namespace MVConsultoria.Web.Controllers
             return NoContent();
         }
 
+
+
         private bool ClienteExists(int id)
         {
             return _context.Clientes.Any(e => e.Id == id);
         }
 
-        // NOVOS ENDPOINTS QUE FALTAVAM
 
-        // GET: api/Clientes/{clienteId}/compras
-        [HttpGet("{clienteId}/compras")]
-        public async Task<ActionResult<IEnumerable<Compra>>> GetComprasPorCliente(int clienteId)
-        {
-            var cliente = await _context.Clientes.FindAsync(clienteId);
-            if (cliente == null)
-            {
-                return NotFound("Cliente não encontrado.");
-            }
-
-            var compras = await _context.Compras
-                .Where(c => c.ClienteId == clienteId)
-                .ToListAsync();
-
-            if (!compras.Any())
-            {
-                return NotFound("Nenhuma compra encontrada para o cliente.");
-            }
-
-            return Ok(compras);
-        }
-
-        // GET: api/Clientes/{clienteId}/parcelasPagas
-        [HttpGet("{clienteId}/parcelasPagas")]
-        public async Task<ActionResult<IEnumerable<Parcela>>> GetParcelasPagasPorCliente(int clienteId)
-        {
-            var cliente = await _context.Clientes.FindAsync(clienteId);
-            if (cliente == null)
-            {
-                return NotFound("Cliente não encontrado.");
-            }
-
-            var parcelasPagas = await _context.Parcelas
-                .Include(p => p.Compra)
-                .Where(p => p.Compra.ClienteId == clienteId && p.Pago == true)
-                .ToListAsync();
-
-            if (!parcelasPagas.Any())
-            {
-                return NotFound("Nenhuma parcela paga encontrada para o cliente.");
-            }
-
-            return Ok(parcelasPagas);
-        }
-
-        // GET: api/Clientes/{clienteId}/parcelasAbertas
-        [HttpGet("{clienteId}/parcelasAbertas")]
-        public async Task<ActionResult<IEnumerable<Parcela>>> GetParcelasAbertasPorCliente(int clienteId)
-        {
-            var cliente = await _context.Clientes.FindAsync(clienteId);
-            if (cliente == null)
-            {
-                return NotFound("Cliente não encontrado.");
-            }
-
-            var parcelasAbertas = await _context.Parcelas
-                .Include(p => p.Compra)
-                .Where(p => p.Compra.ClienteId == clienteId && p.Pago == false)
-                .ToListAsync();
-
-            if (!parcelasAbertas.Any())
-            {
-                return NotFound("Nenhuma parcela em aberto encontrada para o cliente.");
-            }
-
-            return Ok(parcelasAbertas);
-        }
         // PUT: api/Clientes/bloquearCliente/5
         [HttpPut("bloquearCliente/{id}")]
         public async Task<IActionResult> BloquearCliente(int id)
@@ -293,84 +304,7 @@ namespace MVConsultoria.Web.Controllers
             return NoContent();
         }
 
-        /*// GET: api/Clientes/5/parcela-minima
-        [HttpGet("{id}/parcela-minima")]
-        public async Task<ActionResult<decimal>> GetParcelaMinima(int id)
-        {
-            // Busca o cliente pelo ID
-            var cliente = await _context.Clientes
-                .Include(c => c.Compras)
-                .ThenInclude(compra => compra.Parcelas)
-                .FirstOrDefaultAsync(c => c.Id == id);
 
-            if (cliente == null)
-            {
-                return NotFound("Cliente não encontrado.");
-            }
-
-            // Define a data atual
-            DateTime dataAtual = DateTime.Now;
-            int mesAtual = dataAtual.Month + 1;
-            int anoAtual = dataAtual.Year;
-
-            // Filtra as parcelas a vencer neste mês
-            var parcelasAVencerEsteMes = cliente.Compras
-                .SelectMany(c => c.Parcelas)
-                .Where(p => !p.Pago && p.DataVencimento.Month == mesAtual && p.DataVencimento.Year == anoAtual)
-                .ToList();
-
-            // Filtra as parcelas em atraso
-            var parcelasEmAtraso = cliente.Compras
-                .SelectMany(c => c.Parcelas)
-                .Where(p => !p.Pago && p.DataVencimento < dataAtual)
-                .ToList();
-
-            // Soma o valor das parcelas a vencer neste mês e das parcelas em atraso
-            decimal valorParcelaMinima = parcelasAVencerEsteMes.Sum(p => p.Valor) + parcelasEmAtraso.Sum(p => p.Valor);
-
-            return Ok(valorParcelaMinima);
-        }*/
-
-        // GET: api/Clientes/5/parcela-minima
-        [HttpGet("{id}/parcela-minima")]
-        public async Task<ActionResult<decimal>> GetParcelaMinima(int id)
-        {
-            // Busca o cliente pelo ID
-            var cliente = await _context.Clientes
-                .Include(c => c.Compras)
-                .ThenInclude(compra => compra.Parcelas)
-                .FirstOrDefaultAsync(c => c.Id == id);
-
-            if (cliente == null)
-            {
-                return NotFound("Cliente não encontrado.");
-            }
-
-            // Define a data atual
-            DateTime dataAtual = DateTime.Now;
-            DateTime proximoDiaDePagamento;
-
-            // Calcula o próximo dia de pagamento
-            if (dataAtual.Day >= cliente.DiaDePagamento.Day) // Se o dia de pagamento já passou no mês corrente
-            {
-                proximoDiaDePagamento = new DateTime(dataAtual.Year, dataAtual.Month, cliente.DiaDePagamento.Day).AddMonths(1);
-            }
-            else
-            {
-                proximoDiaDePagamento = new DateTime(dataAtual.Year, dataAtual.Month, cliente.DiaDePagamento.Day);
-            }
-
-            // Filtra as parcelas com vencimento até o próximo dia de pagamento
-            var parcelasAteProximoPagamento = cliente.Compras
-                .SelectMany(c => c.Parcelas)
-                .Where(p => !p.Pago && p.DataVencimento <= proximoDiaDePagamento)
-                .ToList();
-
-            // Soma o valor das parcelas a vencer até o próximo dia de pagamento
-            decimal valorParcelaMinima = parcelasAteProximoPagamento.Sum(p => p.Valor);
-
-            return Ok(valorParcelaMinima);
-        }
 
 
 

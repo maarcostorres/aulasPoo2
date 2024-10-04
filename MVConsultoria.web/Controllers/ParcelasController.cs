@@ -1,10 +1,14 @@
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using MVConsultoria.Web.Data;
 using MVConsultoria.Web.Models;
 
+
+
 namespace MVConsultoria.Web.Controllers
 {
+    [Authorize]
     [Route("api/[controller]")]
     [ApiController]
     public class ParcelasController : ControllerBase
@@ -23,19 +27,43 @@ namespace MVConsultoria.Web.Controllers
             return await _context.Parcelas.ToListAsync();
         }
 
-        // GET: api/Parcelas/5
-        [HttpGet("{id}")]
-        public async Task<ActionResult<Parcela>> GetParcela(int id)
-        {
-            var parcela = await _context.Parcelas.FindAsync(id);
 
-            if (parcela == null)
+        [HttpGet("cliente/{clienteId}/todas-parcelas")]
+        public async Task<ActionResult<IEnumerable<ParcelaDto>>> GetTodasParcelasPorCliente(int clienteId)
+        {
+            var cliente = await _context.Clientes
+                .Include(c => c.Compras)
+                .ThenInclude(compra => compra.Parcelas)
+                .FirstOrDefaultAsync(c => c.Id == clienteId);
+
+            if (cliente == null)
             {
-                return NotFound();
+                return NotFound("Cliente não encontrado.");
             }
 
-            return parcela;
+            // Selecionar apenas as propriedades relevantes para o DTO de Parcela
+            var todasParcelas = cliente.Compras
+                .SelectMany(c => c.Parcelas)
+                .Select(p => new ParcelaDto
+                {
+                    Id = p.Id,
+                    DataVencimento = p.DataVencimento,
+                    Valor = p.Valor,
+                    Pago = p.Pago,
+                    DataPagamento = p.DataPagamento,
+                    ValorPago = p.ValorPago
+                })
+                .ToList();
+
+            if (!todasParcelas.Any())
+            {
+                return NotFound("Nenhuma parcela encontrada para o cliente.");
+            }
+
+            return Ok(todasParcelas);
         }
+
+
 
         // POST: api/Parcelas
         [HttpPost]
@@ -122,73 +150,7 @@ namespace MVConsultoria.Web.Controllers
             return NoContent();
         }
 
-        /*// PUT: api/Parcelas/5/pagar
-        [HttpPut("{id}/pagar")]
-        public async Task<IActionResult> RegistrarPagamento(int id, decimal valorPago)
-        {
-            // Busca a parcela pelo ID
-            var parcela = await _context.Parcelas.FindAsync(id);
-            if (parcela == null)
-            {
-                return NotFound("Parcela não encontrada.");
-            }
 
-            // Verifica se a parcela já foi paga
-            if (parcela.Pago)
-            {
-                return BadRequest("Esta parcela já foi paga.");
-            }
-
-            // Valida o valor pago
-            if (valorPago <= 0)
-            {
-                return BadRequest("O valor pago deve ser positivo.");
-            }
-
-            // Busca a compra associada para acessar o cliente
-            var compra = await _context.Compras.Include(c => c.Cliente)
-                                               .FirstOrDefaultAsync(c => c.Id == parcela.CompraId);
-            if (compra == null)
-            {
-                return NotFound("Compra não encontrada.");
-            }
-
-            // Atualiza o estado da parcela
-            parcela.Pago = true;
-            parcela.ValorPago = valorPago;
-            parcela.DataPagamento = DateTime.Now;
-
-            // Incrementa o limite disponível do cliente
-            var cliente = compra.Cliente;
-            cliente.LimiteDisponivel += valorPago;
-
-            // Atualiza o estado do cliente e salva as alterações
-            _context.Entry(parcela).State = EntityState.Modified;
-            _context.Entry(cliente).State = EntityState.Modified;
-
-            try
-            {
-                await _context.SaveChangesAsync();
-            }
-            catch (DbUpdateConcurrencyException)
-            {
-                if (!ParcelaExists(id))
-                {
-                    return NotFound();
-                }
-                else
-                {
-                    throw;
-                }
-            }
-
-            return NoContent();
-        }
-
-        private bool ParcelaExists(int id)
-        {
-            return _context.Parcelas.Any(e => e.Id == id);
-        }*/
         // PUT: api/Parcelas/5/pagar
         [HttpPut("{id}/pagar")]
         public async Task<IActionResult> RegistrarPagamento(int id, decimal valorPago)
@@ -281,6 +243,49 @@ namespace MVConsultoria.Web.Controllers
         private bool ParcelaExists(int id)
         {
             return _context.Parcelas.Any(e => e.Id == id);
+        }
+
+
+
+        // GET: api/Parcelas/cliente/{clienteId}/parcela-minima
+        [HttpGet("cliente/{clienteId}/parcela-minima")]
+        public async Task<ActionResult<decimal>> GetParcelaMinima(int clienteId)
+        {
+            // Busca o cliente pelo ID
+            var cliente = await _context.Clientes
+                .Include(c => c.Compras)
+                .ThenInclude(compra => compra.Parcelas)
+                .FirstOrDefaultAsync(c => c.Id == clienteId);
+
+            if (cliente == null)
+            {
+                return NotFound("Cliente não encontrado.");
+            }
+
+            // Define a data atual
+            DateTime dataAtual = DateTime.Now;
+            DateTime proximoDiaDePagamento;
+
+            // Calcula o próximo dia de pagamento
+            if (dataAtual.Day >= cliente.DiaDePagamento.Day) // Se o dia de pagamento já passou no mês corrente
+            {
+                proximoDiaDePagamento = new DateTime(dataAtual.Year, dataAtual.Month, cliente.DiaDePagamento.Day).AddMonths(1);
+            }
+            else
+            {
+                proximoDiaDePagamento = new DateTime(dataAtual.Year, dataAtual.Month, cliente.DiaDePagamento.Day);
+            }
+
+            // Filtra as parcelas com vencimento até o próximo dia de pagamento
+            var parcelasAteProximoPagamento = cliente.Compras
+                .SelectMany(c => c.Parcelas)
+                .Where(p => !p.Pago && p.DataVencimento <= proximoDiaDePagamento)
+                .ToList();
+
+            // Soma o valor das parcelas a vencer até o próximo dia de pagamento
+            decimal valorParcelaMinima = parcelasAteProximoPagamento.Sum(p => p.Valor);
+
+            return Ok(valorParcelaMinima);
         }
 
 

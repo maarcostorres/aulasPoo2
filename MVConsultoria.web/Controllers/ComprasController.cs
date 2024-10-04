@@ -2,9 +2,12 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using MVConsultoria.Web.Data;
 using MVConsultoria.Web.Models;
+using Microsoft.AspNetCore.Authorization;
+
 
 namespace MVConsultoria.Web.Controllers
 {
+    [Authorize]
     [Route("api/[controller]")]
     [ApiController]
     public class ComprasController : ControllerBase
@@ -71,16 +74,29 @@ namespace MVConsultoria.Web.Controllers
             _context.Compras.Add(compra);
             await _context.SaveChangesAsync();
 
-            // Associa cada parcela à compra e define a data de vencimento baseada no DiaDePagamento do cliente
-            foreach (var parcela in compra.Parcelas)
-            {
-                parcela.CompraId = compra.Id;
-                parcela.DataVencimento = CalcularDataVencimento(cliente.DiaDePagamento, compra.DataCompra);
-            }
+
+            // Gera as parcelas com base na quantidade informada
+            GerarParcelasParaCompra(compra);
 
             await _context.SaveChangesAsync();
 
             return CreatedAtAction(nameof(GetCompras), new { id = compra.Id }, compra);
+        }
+        // Método para gerar as parcelas de acordo com a quantidade informada
+        private void GerarParcelasParaCompra(Compra compra)
+        {
+            decimal valorParcela = compra.ValorTotal / compra.QuantidadeParcelas;
+
+            for (int i = 0; i < compra.QuantidadeParcelas; i++)
+            {
+                var parcela = new Parcela
+                {
+                    CompraId = compra.Id,
+                    DataVencimento = compra.DataCompra.AddMonths(i + 1), // A cada mês
+                    Valor = valorParcela,
+                    Pago = false
+                };
+            }
         }
 
         //Método para calcular o vencimento das parcelas
@@ -98,24 +114,29 @@ namespace MVConsultoria.Web.Controllers
         }
 
 
-        // Método para gerar parcelas
-        private void GerarParcelasParaCompra(Compra compra)
+
+        [HttpGet("cliente/{clienteId}/compras")]
+        public async Task<ActionResult<IEnumerable<CompraDto>>> GetComprasPorCliente(int clienteId)
         {
-            int numeroParcelas = 4;  // Exemplo de número de parcelas
-            decimal valorParcela = compra.ValorTotal / numeroParcelas;
-
-            for (int i = 0; i < numeroParcelas; i++)
-            {
-                var parcela = new Parcela
+            var compras = await _context.Compras
+                .Where(c => c.ClienteId == clienteId)
+                .Select(c => new CompraDto
                 {
-                    CompraId = compra.Id,
-                    DataVencimento = compra.DataCompra.AddMonths(i + 1), // As parcelas vencem a cada mês
-                    Valor = valorParcela,
-                    Pago = false
-                };
+                    Id = c.Id,
+                    DataCompra = c.DataCompra,
+                    ValorTotal = c.ValorTotal,
+                    QuantidadeParcelas = c.QuantidadeParcelas
+                })
+                .ToListAsync();
 
-                _context.Parcelas.Add(parcela);
+            if (compras == null || compras.Count == 0)
+            {
+                return NotFound("Nenhuma compra encontrada para o cliente.");
             }
+
+            return Ok(compras);
         }
+
+
     }
 }
