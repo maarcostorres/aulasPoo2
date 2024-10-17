@@ -104,6 +104,8 @@ namespace MVConsultoria.Web.Controllers
                 return BadRequest("CPF já cadastrado.");
             }
 
+
+
             // Criptografa a senha antes de salvar no banco de dados
             cliente.Senha = BCrypt.Net.BCrypt.HashPassword(cliente.Senha);
 
@@ -115,6 +117,7 @@ namespace MVConsultoria.Web.Controllers
 
             // Define o limite disponível igual ao limite de crédito
             cliente.LimiteDisponivel = cliente.LimiteDeCredito;
+
 
             // Adiciona o cliente ao banco de dados
             _context.Clientes.Add(cliente);

@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("MVConsultoria.Web")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+6add82989f8004e51710216b8f433a182e858ca0")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+38eabd6ba0320562fa3d5345d6ed5458d0adc7d0")]
 [assembly: System.Reflection.AssemblyProductAttribute("MVConsultoria.Web")]
 [assembly: System.Reflection.AssemblyTitleAttribute("MVConsultoria.Web")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

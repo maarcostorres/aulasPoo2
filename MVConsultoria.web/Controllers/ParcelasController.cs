@@ -20,12 +20,59 @@ namespace MVConsultoria.Web.Controllers
             _context = context;
         }
 
-        // GET: api/Parcelas
+        /*// GET: api/Parcelas
         [HttpGet]
         public async Task<ActionResult<IEnumerable<Parcela>>> GetParcelas()
         {
             return await _context.Parcelas.ToListAsync();
+        }*/
+
+        // GET: api/Parcelas
+        /*[HttpGet]
+        public async Task<ActionResult<IEnumerable<ParcelaDto>>> GetParcelas()
+        {
+            var parcelas = await _context.Parcelas
+                .Include(p => p.Compra)
+                .ThenInclude(c => c.Cliente) // Inclui o Cliente relacionado à Compra
+                .Select(p => new ParcelaDto // Converte para DTO para incluir o nome do cliente
+                {
+                    Id = p.Id,
+                    DataVencimento = p.DataVencimento,
+                    Valor = p.Valor,
+                    Pago = p.Pago,
+                    DataPagamento = p.DataPagamento,
+                    ValorPago = p.ValorPago,
+                    NomeCliente = p.Compra.Cliente.Nome // Inclui o nome do cliente
+                })
+                .ToListAsync();
+
+            return Ok(parcelas);
+        }*/
+
+        // GET: api/Parcelas
+        [HttpGet]
+        public async Task<ActionResult<IEnumerable<ParcelaDto>>> GetParcelas()
+        {
+            var parcelas = await _context.Parcelas
+                .Include(p => p.Compra)
+                .ThenInclude(c => c.Cliente) // Inclui o Cliente relacionado à Compra
+                .Select(p => new ParcelaDto // Converte para DTO para incluir o nome do cliente e o ID da compra
+                {
+                    Id = p.Id,
+                    DataVencimento = p.DataVencimento,
+                    Valor = p.Valor,
+                    Pago = p.Pago,
+                    DataPagamento = p.DataPagamento,
+                    ValorPago = p.ValorPago,
+                    NomeCliente = p.Compra.Cliente.Nome, // Nome do cliente
+                    CompraId = p.Compra.Id  // ID da compra
+                })
+                .ToListAsync();
+
+            return Ok(parcelas);
         }
+
+
 
 
         [HttpGet("cliente/{clienteId}/todas-parcelas")]
@@ -35,6 +82,8 @@ namespace MVConsultoria.Web.Controllers
                 .Include(c => c.Compras)
                 .ThenInclude(compra => compra.Parcelas)
                 .FirstOrDefaultAsync(c => c.Id == clienteId);
+
+
 
             if (cliente == null)
             {
@@ -93,31 +142,31 @@ namespace MVConsultoria.Web.Controllers
             return CreatedAtAction(nameof(GetParcelas), new { id = parcela.Id }, parcela);
         }
 
-        // PUT: api/Parcelas/5
+
+
+
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutParcela(int id, Parcela parcela)
+        public async Task<IActionResult> PutParcela(int id, AtualizarParcelaDto parcelaDto)
         {
-            if (id != parcela.Id)
+            var parcela = await _context.Parcelas.FindAsync(id);
+            if (parcela == null)
             {
-                return BadRequest();
+                return NotFound("Parcela não encontrada.");
             }
+
+            // Atualiza apenas a data de vencimento
+            parcela.DataVencimento = parcelaDto.DataVencimento;
 
             // Validações adicionais
-            if (parcela.Valor <= 0)
-            {
-                return BadRequest("O valor da parcela deve ser positivo.");
-            }
-
             if (parcela.DataVencimento < DateTime.Now)
             {
                 return BadRequest("A data de vencimento não pode ser no passado.");
             }
 
-            _context.Entry(parcela).State = EntityState.Modified;
-
             try
             {
                 await _context.SaveChangesAsync();
+                return NoContent();
             }
             catch (DbUpdateConcurrencyException)
             {
@@ -130,9 +179,9 @@ namespace MVConsultoria.Web.Controllers
                     throw;
                 }
             }
-
-            return NoContent();
         }
+
+
 
         // DELETE: api/Parcelas/5
         [HttpDelete("{id}")]
@@ -288,6 +337,29 @@ namespace MVConsultoria.Web.Controllers
             return Ok(valorParcelaMinima);
         }
 
+        [HttpGet("compras/{compraId}/parcelas")]
+        public async Task<ActionResult<IEnumerable<ParcelaDto>>> GetParcelasPorCompra(int compraId)
+        {
+            var parcelas = await _context.Parcelas
+                .Where(p => p.CompraId == compraId)
+                .Select(p => new ParcelaDto
+                {
+                    Id = p.Id,
+                    DataVencimento = p.DataVencimento,
+                    Valor = p.Valor,
+                    Pago = p.Pago,
+                    DataPagamento = p.DataPagamento,
+                    ValorPago = p.ValorPago
+                })
+                .ToListAsync();
+
+            if (parcelas == null || parcelas.Count == 0)
+            {
+                return NotFound("Nenhuma parcela encontrada para esta compra.");
+            }
+
+            return Ok(parcelas);
+        }
 
 
     }

@@ -25,6 +25,18 @@
       "PackagePath": "staticwebassets\\clientes.js"
     },
     {
+      "Id": "C:\\Users\\Belshoff\\projects\\aulaspoo2\\mvconsultoria.web\\wwwroot\\compras.css",
+      "PackagePath": "staticwebassets\\compras.css"
+    },
+    {
+      "Id": "C:\\Users\\Belshoff\\projects\\aulaspoo2\\mvconsultoria.web\\wwwroot\\compras.html",
+      "PackagePath": "staticwebassets\\compras.html"
+    },
+    {
+      "Id": "C:\\Users\\Belshoff\\projects\\aulaspoo2\\mvconsultoria.web\\wwwroot\\compras.js",
+      "PackagePath": "staticwebassets\\compras.js"
+    },
+    {
       "Id": "C:\\Users\\Belshoff\\projects\\aulaspoo2\\mvconsultoria.web\\wwwroot\\index.html",
       "PackagePath": "staticwebassets\\index.html"
     },
@@ -37,8 +49,16 @@
       "PackagePath": "staticwebassets\\login.js"
     },
     {
-      "Id": "C:\\Users\\Belshoff\\projects\\aulaspoo2\\mvconsultoria.web\\wwwroot\\novo_cliente.html",
-      "PackagePath": "staticwebassets\\novo_cliente.html"
+      "Id": "C:\\Users\\Belshoff\\projects\\aulaspoo2\\mvconsultoria.web\\wwwroot\\parcelas.css",
+      "PackagePath": "staticwebassets\\parcelas.css"
+    },
+    {
+      "Id": "C:\\Users\\Belshoff\\projects\\aulaspoo2\\mvconsultoria.web\\wwwroot\\parcelas.html",
+      "PackagePath": "staticwebassets\\parcelas.html"
+    },
+    {
+      "Id": "C:\\Users\\Belshoff\\projects\\aulaspoo2\\mvconsultoria.web\\wwwroot\\parcelas.js",
+      "PackagePath": "staticwebassets\\parcelas.js"
     },
     {
       "Id": "C:\\Users\\Belshoff\\projects\\aulaspoo2\\mvconsultoria.web\\wwwroot\\spa.css",
