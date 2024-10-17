@@ -409,8 +409,6 @@ function filtrarClientes() {
 // Adicionar evento de pesquisa ao campo de busca
 document.getElementById('searchField').addEventListener('input', filtrarClientes);
 
-
-
 // Função para alternar bloqueio do cliente
 async function toggleBloqueioCliente(clienteId, bloqueado) {
     const token = localStorage.getItem('token');
@@ -581,7 +579,6 @@ document.getElementById('saveNewClientBtn').addEventListener('click', async func
     const senha = document.getElementById('createSenha').value;
     const endereco = document.getElementById('createEndereco').value;
     const telefone = document.getElementById('createTelefone').value;
-    const diaDePagamento = document.getElementById('createDiapagamento').value;
     const limiteDeCredito = parseFloat(document.getElementById('createLimiteDeCredito').value) || 0;
 
     const token = localStorage.getItem('token');
@@ -600,7 +597,6 @@ document.getElementById('saveNewClientBtn').addEventListener('click', async func
                 senha,
                 endereco,
                 telefone,
-                diaDePagamento,
                 limiteDeCredito
             })
         });

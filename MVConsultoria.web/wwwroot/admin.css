@@ -1,6 +1,9 @@
+/* Importando a fonte Ubuntu */
+@import url('https://fonts.googleapis.com/css2?family=Ubuntu:ital,wght@0,300;0,400;0,500;0,700;1,300;1,400;1,500;1,700&display=swap');
+
 /* Estilo da página Admin */
 body {
-    font-family: Arial, sans-serif;
+    font-family: 'Ubuntu', sans-serif; /* Alterado para usar Ubuntu */
     margin: 0;
     padding: 0;
     display: flex;
@@ -17,7 +20,7 @@ body {
 /* Estilo da barra lateral */
 .sidebar {
     width: 250px;
-    background-color: #2c3e50;
+    background-color: #2B2B2B;
     color: white;
     padding: 20px;
     display: flex;
@@ -28,6 +31,7 @@ body {
 .sidebar h2 {
     text-align: center;
     margin-bottom: 30px;
+    font-weight: bold; /* Deixa o título em negrito */
 }
 
 .sidebar ul {
@@ -37,17 +41,19 @@ body {
 
 .sidebar ul li {
     padding: 10px;
-    border-bottom: 1px solid #34495e;
+    border-bottom: 1px solid #2B2B2B;
+    font-weight: bold; /* Deixa os itens da lista em negrito */
 }
 
 .sidebar ul li a {
     color: white;
     text-decoration: none;
     display: block;
+    font-weight: bold; /* Deixa os links em negrito */
 }
 
 .sidebar ul li:hover {
-    background-color: #34495e;
+    background-color: #2B2B2B;
 }
 
 /* Estilo do conteúdo principal */
@@ -74,6 +80,14 @@ body {
 footer {
     text-align: center;
     padding: 10px;
-    background-color: #2c3e50;
+    background-color: #2B2B2B;
     color: white;
+}
+
+/* Estilo para a imagem na barra lateral */
+.sidebar-image {
+    margin-top: 150px;
+    width: 100%; /* Ajuste a largura conforme necessário */
+    height: auto; /* Mantém a proporção da imagem */
+    border-radius: 5px; /* Deixa as bordas arredondadas, se desejado */
 }
