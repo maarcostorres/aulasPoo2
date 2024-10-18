@@ -36,7 +36,7 @@
             <th>Nome</th>
             <th>CPF</th>
             <th>Email</th>
-            <th>Endereço</th>
+            <!--<th>Endereço</th>-->
             <th>Telefone</th>
             <th>Limite de Crédito</th>
             <th>Limite Disponível</th>
@@ -93,6 +93,14 @@
             required
           /><br />
 
+          <label for="createDiaDePagamento">Data de Vencimento:</label>
+          <input
+            type="date"
+            id="createDiaDePagamento"
+            name="createDiaDePagamento"
+            required
+          /><br />
+
           <label for="createLimiteDeCredito">Limite de Crédito:</label>
           <input
             type="number"
@@ -135,6 +143,14 @@
             type="text"
             id="editTelefone"
             name="editTelefone"
+            required
+          /><br />
+
+          <label for="editDiaDePagamento">Data de Vencimento:</label>
+          <input
+            type="date"
+            id="editDiaDePagamento"
+            name="editDiaDePagamento"
             required
           /><br />
 
