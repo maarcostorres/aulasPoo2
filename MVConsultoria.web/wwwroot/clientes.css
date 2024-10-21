@@ -115,12 +115,14 @@ footer {
 }
 
 .modal-content {
-    background-color: #2B2B2B;
+    background-color: #343434;
+    color:#f8f8f8;
     margin: 5% auto;
     padding: 20px;
     border: 1px solid #888;
     width: 50%;
     border-radius: 10px;
+    
 }
 
 .close, .close-create {

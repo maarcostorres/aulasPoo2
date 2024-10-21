@@ -299,7 +299,7 @@ document.getElementById('saveNewClientBtn').addEventListener('click', async func
         }
     } catch (error) {
         console.error('Erro ao cadastrar cliente:', error);
-        alert('Ocorreu um erro ao cadastrar o cliente. Tente novamente mais tarde.');
+        alert(`Erro: ${errorData.message || 'Ocorreu um erro ao cadastrar o cliente. Tente novamente mais tarde.'}`);
     }
 });
 

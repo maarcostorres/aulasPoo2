@@ -101,7 +101,7 @@ namespace MVConsultoria.Web.Controllers
             var clienteExistente = await _context.Users.FirstOrDefaultAsync(c => c.CPF == cliente.CPF);
             if (clienteExistente != null)
             {
-                return BadRequest("CPF já cadastrado.");
+                return BadRequest(new { message = "CPF já cadastrado." });
             }
 
 
