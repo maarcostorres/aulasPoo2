@@ -9,10 +9,10 @@ async function carregarClientes() {
     const token = localStorage.getItem('token');
 
     if (!token) {
-        alert("Você precisa estar logado para ver os clientes.");
-        window.location.href = "admin.html";
-        return;
-    }
+       alert("Você precisa estar logado para ver os clientes.");
+       window.location.href = "admin.html";
+       return;
+    } 
 
     try {
         const response = await fetch('/api/Clientes/listarClientes', {

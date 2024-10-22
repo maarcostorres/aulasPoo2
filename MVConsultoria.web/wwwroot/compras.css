@@ -1,5 +1,7 @@
+@import url('https://fonts.googleapis.com/css2?family=Ubuntu:ital,wght@0,300;0,400;0,500;0,700;1,300;1,400;1,500;1,700&display=swap');
+
 body {
-    font-family: Arial, sans-serif;
+    font-family: 'Ubuntu', sans-serif;
     margin: 0;
     padding: 0;
 }
@@ -16,7 +18,7 @@ body {
 #searchDataField {
     padding: 10px;
     font-size: 16px;
-    margin-right: 20px; /* Espaço entre os campos de busca */
+    margin-right: 20px;
     flex-grow: 1;
 }
 
@@ -82,7 +84,7 @@ td {
 footer {
     text-align: center;
     padding: 10px;
-    background-color: #f8f8f8;
+    background-color: #2B2B2B;
     position: fixed;
     width: 100%;
     bottom: 0;
@@ -102,7 +104,7 @@ footer {
 }
 
 .modal-content {
-    background-color: #fefefe;
+    background-color: #343434;
     margin: 5% auto;
     padding: 20px;
     border: 1px solid #888;
@@ -140,7 +142,7 @@ footer {
 button {
     padding: 10px 20px;
     font-size: 14px;
-    background-color: #4caf50;
+    background-color: #567EF5;
     color: white;
     border: none;
     cursor: pointer;
@@ -148,7 +150,7 @@ button {
 }
 
 button:hover {
-    background-color: #45a049;
+    background-color: #567EF5;
 }
 
 button.cancel {
