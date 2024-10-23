@@ -23,7 +23,7 @@ namespace MVConsultoria.Web.Data
                 .HasOne(c => c.Cliente)
                 .WithMany(cliente => cliente.Compras)
                 .HasForeignKey(c => c.ClienteId)
-                .OnDelete(DeleteBehavior.Cascade); // Define o comportamento de exclusão
+                .OnDelete(DeleteBehavior.Cascade);
 
             // Compra -> Parcela (relacionamento um para muitos)
             modelBuilder.Entity<Compra>()

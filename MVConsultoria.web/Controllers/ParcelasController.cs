@@ -20,34 +20,6 @@ namespace MVConsultoria.Web.Controllers
             _context = context;
         }
 
-        /*// GET: api/Parcelas
-        [HttpGet]
-        public async Task<ActionResult<IEnumerable<Parcela>>> GetParcelas()
-        {
-            return await _context.Parcelas.ToListAsync();
-        }*/
-
-        // GET: api/Parcelas
-        /*[HttpGet]
-        public async Task<ActionResult<IEnumerable<ParcelaDto>>> GetParcelas()
-        {
-            var parcelas = await _context.Parcelas
-                .Include(p => p.Compra)
-                .ThenInclude(c => c.Cliente) // Inclui o Cliente relacionado à Compra
-                .Select(p => new ParcelaDto // Converte para DTO para incluir o nome do cliente
-                {
-                    Id = p.Id,
-                    DataVencimento = p.DataVencimento,
-                    Valor = p.Valor,
-                    Pago = p.Pago,
-                    DataPagamento = p.DataPagamento,
-                    ValorPago = p.ValorPago,
-                    NomeCliente = p.Compra.Cliente.Nome // Inclui o nome do cliente
-                })
-                .ToListAsync();
-
-            return Ok(parcelas);
-        }*/
 
         // GET: api/Parcelas
         [HttpGet]

@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\Belshoff\\projects\\aulaspoo2\\mvconsultoria.web\\MVConsultoria.Web.csproj": {}
+    "C:\\Users\\Belshoff\\Projects\\aulasPoo2\\MVConsultoria.Web\\MVConsultoria.Web.csproj": {}
   },
   "projects": {
-    "C:\\Users\\Belshoff\\projects\\aulaspoo2\\mvconsultoria.web\\MVConsultoria.Web.csproj": {
+    "C:\\Users\\Belshoff\\Projects\\aulasPoo2\\MVConsultoria.Web\\MVConsultoria.Web.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Belshoff\\projects\\aulaspoo2\\mvconsultoria.web\\MVConsultoria.Web.csproj",
+        "projectUniqueName": "C:\\Users\\Belshoff\\Projects\\aulasPoo2\\MVConsultoria.Web\\MVConsultoria.Web.csproj",
         "projectName": "MVConsultoria.Web",
-        "projectPath": "C:\\Users\\Belshoff\\projects\\aulaspoo2\\mvconsultoria.web\\MVConsultoria.Web.csproj",
+        "projectPath": "C:\\Users\\Belshoff\\Projects\\aulasPoo2\\MVConsultoria.Web\\MVConsultoria.Web.csproj",
         "packagesPath": "C:\\Users\\Belshoff\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Belshoff\\projects\\aulaspoo2\\mvconsultoria.web\\obj\\",
+        "outputPath": "C:\\Users\\Belshoff\\Projects\\aulasPoo2\\MVConsultoria.Web\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\Belshoff\\AppData\\Roaming\\NuGet\\NuGet.Config",

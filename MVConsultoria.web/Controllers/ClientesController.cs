@@ -1,9 +1,6 @@
 using Microsoft.AspNetCore.Mvc;
 using MVConsultoria.Web.Data;
 using MVConsultoria.Web.Models;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Authorization;
 
@@ -55,7 +52,6 @@ namespace MVConsultoria.Web.Controllers
             }
             catch (Exception ex)
             {
-                // Logar o erro (recomendado) e retornar uma mensagem genérica de erro
                 return StatusCode(500, new { message = "Ocorreu um erro ao buscar os clientes.", error = ex.Message });
             }
         }
@@ -103,8 +99,6 @@ namespace MVConsultoria.Web.Controllers
             {
                 return BadRequest(new { message = "CPF já cadastrado." });
             }
-
-
 
             // Criptografa a senha antes de salvar no banco de dados
             cliente.Senha = BCrypt.Net.BCrypt.HashPassword(cliente.Senha);

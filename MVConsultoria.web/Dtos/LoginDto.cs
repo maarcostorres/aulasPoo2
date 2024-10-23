@@ -6,7 +6,7 @@ namespace MVConsultoria.Web.Dtos
     public class LoginDto
     {
         [Required]
-        public string Login { get; set; } // CPF usado como login
+        public string Login { get; set; }
 
         [Required]
         public string Senha { get; set; }

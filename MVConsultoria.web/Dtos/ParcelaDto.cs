@@ -7,8 +7,8 @@ public class ParcelaDto
     public DateTime? DataPagamento { get; set; }
     public decimal ValorPago { get; set; }
 
-    // Adicionar nome do cliente
-    public string NomeCliente { get; set; }  // Propriedade para o nome do cliente
 
-    public int CompraId { get; set; }  // ID da compra
+    public string NomeCliente { get; set; }
+
+    public int CompraId { get; set; }
 }

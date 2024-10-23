@@ -41,65 +41,6 @@ namespace MVConsultoria.Web.Controllers
         }
 
 
-
-        /*// POST: api/Compras
-        [HttpPost]
-        public async Task<ActionResult<Compra>> PostCompra(Compra compra)
-        {
-            // Verifica se o cliente existe
-            var cliente = await _context.Clientes
-                .Include(c => c.Compras)  // Inclui as compras associadas ao cliente
-                .ThenInclude(compra => compra.Parcelas)  // Inclui as parcelas associadas às compras
-                .FirstOrDefaultAsync(c => c.Id == compra.ClienteId);
-
-            if (cliente == null)
-            {
-                return NotFound("Cliente não encontrado.");
-            }
-
-            // Verifica se o cliente está bloqueado
-            if (cliente.Bloqueado)
-            {
-                return BadRequest("Cliente está bloqueado e não pode realizar compras.");
-            }
-
-            // Verifica se o cliente tem parcelas em atraso
-            var parcelasAtrasadas = cliente.Compras
-                .SelectMany(c => c.Parcelas)
-                .Where(p => !p.Pago && p.DataVencimento < DateTime.Now)
-                .ToList();
-
-            if (parcelasAtrasadas.Any())
-            {
-                return BadRequest("Não é possível realizar a compra. O cliente possui parcelas em atraso.");
-            }
-
-            // Verifica se o cliente tem limite disponível suficiente
-            if (cliente.LimiteDisponivel < compra.ValorTotal)
-            {
-                return BadRequest("Limite de crédito disponível insuficiente.");
-            }
-
-            // Subtrai o valor da compra do limite disponível
-            cliente.LimiteDisponivel -= compra.ValorTotal;
-
-            // Adiciona a compra ao cliente
-            compra.ClienteId = cliente.Id; // Certificando-se de que o ClienteId foi atribuído corretamente
-
-
-            // Adiciona a compra
-            _context.Compras.Add(compra);
-            await _context.SaveChangesAsync();
-
-
-            // Gera as parcelas com base na quantidade informada
-            GerarParcelasParaCompra(compra);
-
-            await _context.SaveChangesAsync();
-
-            return CreatedAtAction(nameof(GetCompras), new { id = compra.Id }, compra);
-        }*/
-
         // POST: api/Compras
         [HttpPost]
         public async Task<ActionResult<Compra>> PostCompra(CompraCreateDto compraDto)

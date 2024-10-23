@@ -33,41 +33,6 @@ function obterUserIdDoToken(token) {
     }
 }
 
-/*async function carregarDadosCliente(userId, token) {
-    try {
-        const clienteResponse = await fetch(`/api/Clientes/localizarCliente/${userId}`, {
-            headers: { 'Authorization': `Bearer ${token}` }
-        });
-
-        if (!clienteResponse.ok) throw new Error('Erro ao buscar informações do cliente.');
-
-        const clienteData = await clienteResponse.json();
-
-        //alterado aqui
-        dataVencimento = new Date(clienteData.diaDePagamento);
-        diaDoVencimento = dataVencimento.getDate(); // Pega apenas o dia
-
-        const parcelasResponse = await fetch(`/api/Parcelas/cliente/${userId}/todas-parcelas`, {
-            headers: { 'Authorization': `Bearer ${token}` }
-        });
-
-        if (!parcelasResponse.ok) throw new Error('Erro ao buscar parcelas do cliente.');
-
-        const parcelas = await parcelasResponse.json();
-
-        if (!parcelas || !Array.isArray(parcelas)) {
-            throw new Error('As parcelas do cliente não foram carregadas corretamente.');
-        }
-
-        exibirInformacoesPessoais(clienteData);
-        exibirHistoricoCompras(clienteData, token); // Adicionando token aqui
-        exibirParcelas(parcelas, clienteData.diaDePagamento);
-        atualizarGraficoLimite(clienteData.limiteDeCredito, clienteData.limiteDisponivel);
-    } catch (error) {
-        console.error('Erro ao carregar dados do cliente:', error);
-        alert('Ocorreu um erro ao carregar suas informações.');
-    }
-}*/
 async function carregarDadosCliente(userId, token) {
     try {
         const clienteResponse = await fetch(`/api/Clientes/localizarCliente/${userId}`, {
@@ -142,233 +107,6 @@ function exibirInformacoesPessoais(cliente) {
     document.getElementById('info-telefone').textContent = cliente.telefone;
     document.getElementById('info-vencimento').textContent = diaDoVencimento;
 }
-/*function exibirHistoricoCompras(cliente, token) {
-    const historicoList = document.getElementById('historico-compras');
-    historicoList.innerHTML = '';
-
-    fetch(`/api/Compras/cliente/${cliente.id}/compras`, {
-        headers: { 'Authorization': `Bearer ${token}` }  // Passando token no cabeçalho
-    })
-        .then(response => {
-            if (!response.ok) throw new Error(`Erro ao buscar compras. Status: ${response.status}`);
-            return response.json();
-        })
-        .then(compras => {
-            if (compras.length > 0) {
-                compras.forEach(compra => {
-                    const li = document.createElement('li');
-                    //const dataCompra = new Date(compra.data); // Cria um objeto Date a partir da data da compra
-                    //const dataFormatada = `${dataCompra.getDate().toString().padStart(2, '0')}/${(dataCompra.getMonth() + 1).toString().padStart(2, '0')}/${dataCompra.getFullYear()}`; // Formata a data como dd/mm/aaaa
-                    //li.textContent = `Data da Compra: ${dataFormatada} - Valor: R$ ${compra.valorTotal} - Parcelas: ${compra.quantidadeParcelas}`;
-
-                    if (compra.dataCompra) {
-                        const dataCompra = new Date(compra.dataCompra);
-                    
-                        if (!isNaN(dataCompra.getTime())) {
-                            const dataFormatada = `${dataCompra.getDate().toString().padStart(2, '0')}/${(dataCompra.getMonth() + 1).toString().padStart(2, '0')}/${dataCompra.getFullYear()}`;
-                            li.textContent = `Data da Compra: ${dataFormatada} - Valor: R$ ${compra.valorTotal.toFixed(2)} - Parcelas: ${compra.quantidadeParcelas}`;
-                        } else {
-                            li.textContent = `Data inválida - Valor: R$ ${compra.valorTotal.toFixed(2)} - Parcelas: ${compra.quantidadeParcelas}`;
-                        }
-                    } else {
-                        li.textContent = `Sem data disponível - Valor: R$ ${compra.valorTotal.toFixed(2)} - Parcelas: ${compra.quantidadeParcelas}`;
-                    }
-                    
-
-                    //li.textContent = `Data da Compra: ${compra.data} - Valor: R$ ${compra.valorTotal} - Parcelas: ${compra.quantidadeParcelas}`;
-                    historicoList.appendChild(li);
-                });
-            } else {
-                historicoList.innerHTML = '<li>Nenhuma compra encontrada.</li>';
-            }
-        })
-        .catch(error => {
-            console.error('Erro ao exibir histórico de compras:', error);
-            alert('Ocorreu um erro ao carregar o histórico de compras.');
-        });
-}*/
-/*function exibirHistoricoCompras(compras) {
-    const historicoList = document.getElementById('historico-compras');
-    historicoList.innerHTML = ''; // Limpa a lista
-
-    if (compras.length === 0) {
-        historicoList.innerHTML = '<li>Nenhuma compra encontrada.</li>';
-        return;
-    }
-
-    compras.forEach(compra => {
-        const li = document.createElement('li');
-        if (compra.dataCompra) {
-            const dataCompra = new Date(compra.dataCompra);
-            const dataFormatada = `${dataCompra.getDate().toString().padStart(2, '0')}/${(dataCompra.getMonth() + 1).toString().padStart(2, '0')}/${dataCompra.getFullYear()}`;
-            li.textContent = `Data da Compra: ${dataFormatada} - Valor: R$ ${compra.valorTotal.toFixed(2)} - Parcelas: ${compra.quantidadeParcelas}`;
-        } else {
-            li.textContent = `Sem data disponível - Valor: R$ ${compra.valorTotal.toFixed(2)} - Parcelas: ${compra.quantidadeParcelas}`;
-        }
-        historicoList.appendChild(li);
-    });
-}*/
-
-
-/*function exibirParcelas(parcelas, diaDoPagamento) {
-    const proximasParcelasList = document.getElementById('proximas-parcelas');
-    const vencidasList = document.getElementById('parcelas-vencidas');
-    const pagasList = document.getElementById('parcelas-pagas');
-    const proximoVencimentoElem = document.getElementById('proximo-vencimento');
-    const valorProximaFaturaElem = document.getElementById('valor-proxima-fatura');
-
-    // Verifica se os elementos estão no DOM antes de tentar manipulá-los
-    if (!proximasParcelasList || !vencidasList || !pagasList || !proximoVencimentoElem || !valorProximaFaturaElem) {
-        console.error('Alguns elementos DOM não estão presentes');
-        return;
-    }
-
-    proximasParcelasList.innerHTML = '';
-    vencidasList.innerHTML = '';
-    pagasList.innerHTML = '';
-
-    const proximasParcelas = [];
-    const vencidasParcelas = [];
-    const pagasParcelas = [];
-    const hoje = new Date(); // Data atual
-
-    parcelas.forEach(parcela => {
-        const dataVencimento = new Date(parcela.dataVencimento);
-        const li = document.createElement('li');
-        li.textContent = `R$ ${parcela.valor} - Vencimento: ${dataVencimento.toLocaleDateString('pt-BR')}`;
-
-        if (parcela.pago) {
-            pagasParcelas.push(li);
-        } else if (dataVencimento < hoje) {
-            vencidasParcelas.push(li);
-        } else {
-            proximasParcelas.push(li);
-        }
-
-        //adicionei aqui
-   // var valorAVencer = 0;
-    //if(parcela.dataVencimento <= proximoVencimento(diaDoVencimento)){
-        //valorAVencer += parcela.valor
-    //}
-
-
-    });
-
-    // Exibe as parcelas nas respectivas listas
-    proximasParcelas.forEach(li => proximasParcelasList.appendChild(li));
-    vencidasParcelas.forEach(li => vencidasList.appendChild(li));
-    pagasParcelas.forEach(li => pagasList.appendChild(li));
-
-    //pega a data de vencimento do cliente
-   // const dataVencimento = new Date(cliente.diaDePagamento);
-    //const diaVenc = dataVencimento.getDate(); // Pega apenas o dia
-    //var vencimentoFatura = proximoVencimento(diaVenc)
-    //var vencimentoCliente = new Date(cliente.diaDePagamento);
-    //var diaVencimento = vencimentoCliente.getDate(); // Pega apenas o dia
-    // Exibição do próximo vencimento
-    if (proximasParcelas.length > 0) {
-        const proximaParcela = proximasParcelas[0];*/
-
-        /*//alert(diaDoVencimento);
-       const proximaFatura = proximoVencimento(diaDoVencimento)
-       proximoVencimentoElem.textContent = `Próxima Fatura: ${proximaFatura}`;
-        
-
-        const valorFatura = calcularValorFatura(parcelas, proximaFatura);
-valorProximaFaturaElem.textContent = `Valor da próxima fatura: R$ ${valorFatura}`;
-
-
-        //valorProximaFaturaElem.textContent = `Valor da próxima fatura: R$ ${calcularValorFatura}`;
-        //alert(valorFatura);
-    } else {
-        proximoVencimentoElem.textContent = 'Nenhum vencimento próximo.';
-        valorProximaFaturaElem.textContent = '';
-    }*
-        const proximaFatura = proximoVencimento(diaDoVencimento);
-        const valorFatura = calcularValorFatura(parcelas, proximaFatura);
-        
-        // Formatação da data para exibição no formato dd/mm/aaaa
-        const dia = String(proximaFatura.getDate()).padStart(2, '0');
-        const mesFormatado = String(proximaFatura.getMonth() + 1).padStart(2, '0');
-        const anoFormatado = proximaFatura.getFullYear();
-        const proximaFaturaFormatada = `${dia}/${mesFormatado}/${anoFormatado}`;
-        
-        proximoVencimentoElem.textContent = `Vencimento: ${proximaFaturaFormatada}`;
-        valorProximaFaturaElem.textContent = `Valor: R$ ${valorFatura}`;
-        
-}
-}*/
-/*function exibirParcelas(parcelas, diaDoPagamento) {
-    const proximasParcelasList = document.getElementById('proximas-parcelas');
-    const vencidasList = document.getElementById('parcelas-vencidas');
-    const pagasList = document.getElementById('parcelas-pagas');
-    const proximoVencimentoElem = document.getElementById('proximo-vencimento');
-    const valorProximaFaturaElem = document.getElementById('valor-proxima-fatura');
-
-    proximasParcelasList.innerHTML = '';
-    vencidasList.innerHTML = '';
-    pagasList.innerHTML = '';
-
-    if (parcelas.length === 0) {
-        proximasParcelasList.innerHTML = '<li>Nenhuma parcela encontrada.</li>';
-        vencidasList.innerHTML = '<li>Nenhuma parcela vencida.</li>';
-        pagasList.innerHTML = '<li>Nenhuma parcela paga.</li>';
-        proximoVencimentoElem.textContent = 'Nenhum vencimento próximo.';
-        valorProximaFaturaElem.textContent = '';
-        return;
-    }
-
-    const proximasParcelas = [];
-    const vencidasParcelas = [];
-    const pagasParcelas = [];
-    const hoje = new Date();
-
-    parcelas.forEach(parcela => {
-        const dataVencimento = new Date(parcela.dataVencimento);
-        const li = document.createElement('li');
-        li.textContent = `R$ ${parcela.valor} - Vencimento: ${dataVencimento.toLocaleDateString('pt-BR')}`;
-
-        if (parcela.pago) {
-            pagasParcelas.push(li);
-        } else if (dataVencimento < hoje) {
-            vencidasParcelas.push(li);
-        } else {
-            proximasParcelas.push(li);
-        }
-    });
-
-    proximasParcelas.forEach(li => proximasParcelasList.appendChild(li));
-    vencidasParcelas.forEach(li => vencidasList.appendChild(li));
-    pagasParcelas.forEach(li => pagasList.appendChild(li));
-
-    if (proximasParcelas.length > 0) {
-        const proximaFatura = proximoVencimento(diaDoVencimento);
-        const valorFatura = calcularValorFatura(parcelas, proximaFatura);
-        const dia = String(proximaFatura.getDate()).padStart(2, '0');
-        const mesFormatado = String(proximaFatura.getMonth() + 1).padStart(2, '0');
-        const anoFormatado = proximaFatura.getFullYear();
-        const proximaFaturaFormatada = `${dia}/${mesFormatado}/${anoFormatado}`;
-
-        proximoVencimentoElem.textContent = `Vencimento: ${proximaFaturaFormatada}`;
-        valorProximaFaturaElem.textContent = `Valor: R$ ${valorFatura}`;
-    } else {
-        proximoVencimentoElem.textContent = 'Nenhum vencimento próximo.';
-        valorProximaFaturaElem.textContent = '';
-    }
-}*/
-
-
-/*function calcularValorFatura() {
-parcelas.forEach(parcela => {
-    const dataVencimento = new Date(parcela.dataVencimento);
-   var valorFatura = 0;
-    if (dataVencimento <= proximoVencimento(diaDoVencimento)) {
-        valorFatura += parcela.valor;
-    }
-});
-return valorFatura
-
-}*/
 
 function exibirHistoricoCompras(compras) {
     const historicoList = document.getElementById('historico-compras');
@@ -486,33 +224,6 @@ function toggleSection(sectionId) {
 }
 
 
-//ate agora tudo funcionando
-//break point
-
-/*function proximoVencimento(diaVencimento) {
-    const hoje = new Date();
-    let ano = hoje.getFullYear();
-    let mes = hoje.getMonth(); // O mês em JavaScript começa em 0 (Janeiro = 0, Fevereiro = 1, etc.)
-
-    // Verifica se o dia de vencimento já passou no mês atual
-    if (hoje.getDate() > diaVencimento) {
-        mes++; // Se já passou, o próximo vencimento será no próximo mês
-        if (mes > 11) { // Se o mês passar de dezembro (11), incrementa o ano e reseta o mês para janeiro
-            mes = 0;
-            ano++;
-        }
-    }
-
-    // Cria a próxima data de vencimento
-    const proximoVencimento = new Date(ano, mes, diaVencimento);
-
-    // Formatação no formato dd/mm/aaaa
-    const dia = String(proximoVencimento.getDate()).padStart(2, '0');
-    const mesFormatado = String(proximoVencimento.getMonth() + 1).padStart(2, '0'); // +1 para ajustar o mês
-    const anoFormatado = proximoVencimento.getFullYear();
-
-    return `${dia}/${mesFormatado}/${anoFormatado}`;
-}*/
 
 function proximoVencimento(diaVencimento) {
     const hoje = new Date();
@@ -533,27 +244,6 @@ function proximoVencimento(diaVencimento) {
 }
 
 
-/*function calcularValorFatura(parcelas, proximaFatura) {
-    let valorFatura = 0;
-
-    // Obtém o próximo vencimento como uma data válida
-    const dataProximoVencimento = proximaFatura;
-    const proximoVenc = new Date(dataProximoVencimento.split('/').reverse().join('-')); // Convertendo para um objeto Date
-
-    parcelas.forEach(parcela => {
-        // Certifique-se de que parcela e seu valor estão definidos
-        if (parcela && parcela.valor) {
-            const dataVencimentoParcela = new Date(parcela.dataVencimento);
-
-            // Verificamos se a data de vencimento da parcela é menor ou igual ao próximo vencimento
-            if (dataVencimentoParcela <= proximoVenc) {
-                valorFatura += parcela.valor; // Somamos o valor da parcela à fatura
-            }
-        }
-    });
-
-    return valorFatura.toFixed(2); // Retorna o valor formatado com duas casas decimais
-}*/
 
 function calcularValorFatura(parcelas, proximaFatura) {
     let valorFatura = 0;
@@ -575,10 +265,6 @@ function calcularValorFatura(parcelas, proximaFatura) {
 
 
 
-// Exemplo de uso:
-//const diaVencimento = 19; // Defina o dia de vencimento desejado
-///const proximaDataVencimento = proximoVencimento(diaVencimento);
-//console.log(`O próximo vencimento será em: ${proximaDataVencimento.toLocaleDateString()}`);
 
 
 function logout() {
@@ -586,5 +272,5 @@ function logout() {
     window.location.href = "index.html";
 }
 
-//criei o vencimento da fatura agora falta consolidar o valor a pagar
+
 

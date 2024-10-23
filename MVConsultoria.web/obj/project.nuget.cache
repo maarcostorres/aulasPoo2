@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "88xay/HDubU=",
+  "dgSpecHash": "c2aXFxLRDos=",
   "success": true,
-  "projectFilePath": "C:\\Users\\Belshoff\\projects\\aulaspoo2\\mvconsultoria.web\\MVConsultoria.Web.csproj",
+  "projectFilePath": "C:\\Users\\Belshoff\\Projects\\aulasPoo2\\MVConsultoria.Web\\MVConsultoria.Web.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\Belshoff\\.nuget\\packages\\azure.core\\1.35.0\\azure.core.1.35.0.nupkg.sha512",
     "C:\\Users\\Belshoff\\.nuget\\packages\\azure.identity\\1.10.3\\azure.identity.1.10.3.nupkg.sha512",
