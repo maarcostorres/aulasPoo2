@@ -194,7 +194,6 @@ namespace MVConsultoria.Web.Controllers
             {
                 return BadRequest("O valor pago deve ser positivo.");
             }
-
             // Busca a compra associada para acessar o cliente
             var compra = await _context.Compras.Include(c => c.Cliente)
                                                .FirstOrDefaultAsync(c => c.Id == parcela.CompraId);

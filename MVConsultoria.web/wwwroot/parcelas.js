@@ -226,21 +226,13 @@ async function alterarParcela(id, valor, dataVencimento) {
 
 //estou editando esta parte agora
 
+// Função para exibir o modal com as parcelas selecionadas
 async function exibirModalBaixaParcelas() {
     const selecionadas = document.querySelectorAll('.select-parcela:checked');
-    const ids = Array.from(selecionadas).map(cb => cb.dataset.id);
+    const ids = Array.from(selecionadas).map(cb => cb.dataset.id); // IDs das parcelas selecionadas
 
     if (ids.length === 0) {
         alert('Nenhuma parcela selecionada.');
-        return;
-    }
-
-    // Verifica se todas as parcelas são do mesmo cliente
-    const primeiroCliente = parcelas.find(p => p.id == ids[0]).nomeCliente;
-    const parcelasInvalidas = parcelas.filter(p => ids.includes(p.id.toString()) && p.nomeCliente !== primeiroCliente);
-
-    if (parcelasInvalidas.length > 0) {
-        alert('Selecione apenas parcelas do mesmo cliente.');
         return;
     }
 
@@ -252,7 +244,7 @@ async function exibirModalBaixaParcelas() {
 
     // Exibe o total no modal
     document.getElementById('totalParcelasSelecionadas').innerText = `Total das Parcelas: R$ ${totalParcelas.toFixed(2)}`;
-    
+
     // Exibe as informações das parcelas selecionadas no modal
     const listaParcelas = document.getElementById('listaParcelasSelecionadas');
     listaParcelas.innerHTML = ''; // Limpa a lista anterior
@@ -261,45 +253,42 @@ async function exibirModalBaixaParcelas() {
         listaParcelas.innerHTML += `<li>Parcela ${parcela.id}: R$ ${parcela.valor.toFixed(2)} - Vencimento: ${new Date(parcela.dataVencimento).toLocaleDateString()}</li>`;
     });
 
+    // Salva os IDs das parcelas selecionadas em uma variável global ou atributo do modal
+    document.getElementById('modalBaixaParcelas').dataset.parcelasSelecionadas = JSON.stringify(ids);
+
     // Exibe o modal
     document.getElementById('modalBaixaParcelas').style.display = 'block';
 }
 
-
-
+// Função para processar a baixa das parcelas
 async function processarBaixaParcelas() {
-    const token = localStorage.getItem('token');
-    const selecionadas = document.querySelectorAll('.select-parcela:checked');
-    const ids = Array.from(selecionadas).map(cb => cb.dataset.id);
     const valorPago = parseFloat(document.getElementById('valorPago').value);
+
+    // Recupera os IDs das parcelas selecionadas do modal
+    const ids = JSON.parse(document.getElementById('modalBaixaParcelas').dataset.parcelasSelecionadas);
 
     if (isNaN(valorPago) || valorPago <= 0) {
         alert("Por favor, insira um valor válido.");
         return;
     }
 
-    // Calcula o valor total das parcelas selecionadas
-    const totalParcelas = ids.reduce((acc, id) => {
-        const parcela = parcelas.find(p => p.id == id);
-        return acc + parcela.valor;
-    }, 0);
-
-    // Validação de pagamento parcial
-    if (valorPago < totalParcelas) {
-        await baixarParcialmente(ids, valorPago);
-    } else {
-        await baixarParcelasCompletamente(ids, valorPago);
+    // Processa o pagamento para cada parcela selecionada
+    for (let id of ids) {
+        await pagarParcela(id, valorPago);
     }
 
     // Recarrega as parcelas após a operação
     carregarParcelas();
+    // Fecha o modal
+    document.getElementById('modalBaixaParcelas').style.display = 'none';
 }
 
-async function baixarParcelasCompletamente(ids, valorPago) {
+// Função para pagar uma parcela individualmente
+async function pagarParcela(idParcela, valorPago) {
     const token = localStorage.getItem('token');
 
-    for (let id of ids) {
-        await fetch(`/api/Parcelas/${id}/pagar`, {
+    try {
+        const response = await fetch(`/api/Parcelas/${idParcela}/pagar`, {
             method: 'PUT',
             headers: {
                 'Authorization': `Bearer ${token}`,
@@ -307,88 +296,24 @@ async function baixarParcelasCompletamente(ids, valorPago) {
             },
             body: JSON.stringify({ valorPago: valorPago })
         });
-    }
-    
-    // Atualiza o limite disponível do cliente após o pagamento
-    const cliente = parcelas.find(p => p.id == ids[0]).nomeCliente;
-    atualizarLimiteCliente(cliente, valorPago);
-}
 
-async function baixarParcialmente(ids, valorPago) {
-    const token = localStorage.getItem('token');
-    let valorRestante = valorPago;
-
-    for (let id of ids) {
-        const parcela = parcelas.find(p => p.id == id);
-
-        if (valorRestante >= parcela.valor) {
-            // Paga a parcela totalmente
-            await fetch(`/api/Parcelas/${id}/pagar`, {
-                method: 'PUT',
-                headers: {
-                    'Authorization': `Bearer ${token}`,
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify({ valorPago: parcela.valor })
-            });
-            valorRestante -= parcela.valor;
+        if (!response.ok) {
+            const errorText = await response.text();
+            console.error(`Erro ao pagar parcela ${idParcela}:`, errorText);
+            alert(`Erro ao pagar parcela ${idParcela}: ${errorText}`);
         } else {
-            // Baixa parcial da parcela, gera nova parcela
-            await fetch(`/api/Parcelas/${id}/pagar`, {
-                method: 'PUT',
-                headers: {
-                    'Authorization': `Bearer ${token}`,
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify({ valorPago: valorRestante })
-            });
-
-            // Gera uma nova parcela com o valor restante
-            const novaParcela = parcela.valor - valorRestante;
-            await fetch('/api/Parcelas', {
-                method: 'POST',
-                headers: {
-                    'Authorization': `Bearer ${token}`,
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify({
-                    compraId: parcela.compraId,
-                    valor: novaParcela,
-                    dataVencimento: parcela.dataVencimento
-                })
-            });
-            break; // Para o loop, pois o valor já foi totalmente utilizado
+            alert(`Parcela ${idParcela} paga com sucesso!`);
         }
+    } catch (error) {
+        console.error('Erro ao pagar parcela:', error);
+        alert('Ocorreu um erro ao pagar a parcela. Tente novamente mais tarde.');
     }
-
-    // Atualiza o limite disponível do cliente após o pagamento
-    //const cliente = parcelas.find(p => p.id == ids[0]).id;
-
-    const clienteId = parcelas.clienteId
-    atualizarLimiteCliente(clienteId, valorPago);
 }
 
-async function atualizarLimiteCliente(cliente, valorPago) {
-    const token = localStorage.getItem('token');
-
-    await fetch(`/api/Clientes/${cliente}/atualizar-limite`, {
-        method: 'PUT',
-        headers: {
-            'Authorization': `Bearer ${token}`,
-            'Content-Type': 'application/json'
-        },
-        body: JSON.stringify({ valorPago: valorPago })
-    });
-}
-
-
+// Evento para exibir o modal ao clicar em "Baixar Parcelas Selecionadas"
 document.getElementById('baixarParcelasSelecionadas').addEventListener('click', function() {
-    exibirModalBaixaParcelas();  // Função que exibe o modal com as parcelas selecionadas
+    exibirModalBaixaParcelas();  // Exibe o modal com as parcelas selecionadas
 });
-
-
-
-
 
 
 //daqui para baixo tudo certo
