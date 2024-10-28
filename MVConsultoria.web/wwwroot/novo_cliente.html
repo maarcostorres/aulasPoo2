@@ -4,81 +4,165 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Cadastrar Cliente</title>
-    <link rel="stylesheet" href="clientes.css" />
+    <style>
+      /* Estilos gerais */
+      * {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+      }
+
+      body {
+        font-family: Arial, sans-serif;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        min-height: 100vh;
+        margin: 0;
+        background-color: #f2f2f2;
+      }
+
+      /* Contêiner principal para centralizar */
+      .container {
+        width: 100%;
+        max-width: 500px;
+        padding: 20px;
+        background-color: #fff;
+        border-radius: 8px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+      }
+
+      /* Estilização do cabeçalho */
+      .header-container {
+        text-align: center;
+        margin-bottom: 20px;
+      }
+
+      /* Estilização do formulário */
+      form#clienteForm div {
+        margin-bottom: 15px;
+      }
+
+      form#clienteForm label {
+        display: block;
+        font-weight: bold;
+        margin-bottom: 5px;
+        color: #333;
+      }
+
+      form#clienteForm input {
+        width: 100%;
+        padding: 8px;
+        border-radius: 4px;
+        border: 1px solid #ddd;
+        box-sizing: border-box;
+        transition: border-color 0.3s;
+      }
+
+      form#clienteForm input:focus {
+        border-color: #4a90e2;
+        outline: none;
+        box-shadow: 0 0 5px rgba(74, 144, 226, 0.5);
+      }
+
+      /* Botão de submissão */
+      button[type="submit"] {
+        width: 100%;
+        padding: 10px;
+        background-color: #4a90e2;
+        color: #fff;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+        font-size: 16px;
+        transition: background-color 0.3s;
+      }
+
+      button[type="submit"]:hover {
+        background-color: #357ab9;
+      }
+
+      /* Estilo do rodapé */
+      footer {
+        text-align: center;
+        margin-top: 20px;
+        color: #777;
+      }
+    </style>
   </head>
   <body>
-    <header class="header-container">
-      <h1>Cadastrar Cliente</h1>
-    </header>
+    <div class="container">
+      <header class="header-container">
+        <h1>Cadastrar Cliente</h1>
+      </header>
 
-    <main>
-      <form id="clienteForm">
-        <div>
-          <label for="nome">Nome:</label>
-          <input type="text" id="nome" name="nome" required />
-        </div>
+      <main>
+        <form id="clienteForm">
+          <div>
+            <label for="nome">Nome:</label>
+            <input type="text" id="nome" name="nome" required />
+          </div>
 
-        <div>
-          <label for="cpf">CPF:</label>
-          <input
-            type="text"
-            id="cpf"
-            name="cpf"
-            required
-            pattern="\d{11}"
-            title="O CPF deve conter 11 dígitos."
-          />
-        </div>
+          <div>
+            <label for="cpf">CPF:</label>
+            <input
+              type="text"
+              id="cpf"
+              name="cpf"
+              required
+              pattern="\d{11}"
+              title="O CPF deve conter 11 dígitos."
+            />
+          </div>
 
-        <div>
-          <label for="email">Email:</label>
-          <input type="email" id="email" name="email" required />
-        </div>
+          <div>
+            <label for="email">Email:</label>
+            <input type="email" id="email" name="email" required />
+          </div>
 
-        <div>
-          <label for="senha">Senha:</label>
-          <input type="password" id="senha" name="senha" required />
-        </div>
+          <div>
+            <label for="senha">Senha:</label>
+            <input type="password" id="senha" name="senha" required />
+          </div>
 
-        <div>
-          <label for="endereco">Endereço:</label>
-          <input type="text" id="endereco" name="endereco" required />
-        </div>
+          <div>
+            <label for="endereco">Endereço:</label>
+            <input type="text" id="endereco" name="endereco" required />
+          </div>
 
-        <div>
-          <label for="telefone">Telefone:</label>
-          <input type="text" id="telefone" name="telefone" required />
-        </div>
+          <div>
+            <label for="telefone">Telefone:</label>
+            <input type="text" id="telefone" name="telefone" required />
+          </div>
 
-        <div>
-          <label for="diaDePagamento">Dia de Pagamento:</label>
-          <input
-            type="date"
-            id="diaDePagamento"
-            name="diaDePagamento"
-            required
-          />
-        </div>
+          <div>
+            <label for="diaDePagamento">Dia de Pagamento:</label>
+            <input type="date" id="diaDePagamento" name="diaDePagamento" required />
+          </div>
 
-        <div>
-          <label for="limiteDeCredito">Limite de Crédito:</label>
-          <input
-            type="number"
-            id="limiteDeCredito"
-            name="limiteDeCredito"
-            min="0"
-            value="0"
-          />
-        </div>
+          <div>
+            <label for="limiteDeCredito">Limite de Crédito:</label>
+            <input
+              type="number"
+              id="limiteDeCredito"
+              name="limiteDeCredito"
+              min="0"
+              value="0"
+            />
+          </div>
 
-        <button type="submit">Cadastrar Cliente</button>
-      </form>
-    </main>
+          <button type="submit">Cadastrar Cliente</button>
+        </form>
+      </main>
 
-    <footer>
-      <p>&copy; 2024 MV Consultoria</p>
-    </footer>
+      <footer>
+        <p>&copy; 2024 MV Consultoria</p>
+      </footer>
+
+    </div>
 
     <script src="clientes.js"></script>
+
   </body>
 </html>
+

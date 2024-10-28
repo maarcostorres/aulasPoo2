@@ -11,12 +11,56 @@ body {
     overflow: hidden;  /* Esconde o scroll no body e move para o main */
 }
 
+.container {
+    display: flex;
+    flex-grow: 1;
+}
+
+.sidebar {
+    width: 250px;
+    background-color: #2B2B2B;
+    color: white;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+}
+
+.sidebar h2 {
+    text-align: center;
+    margin-bottom: 30px;
+    font-weight: bold; 
+}
+
+.sidebar ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+.sidebar ul li {
+    padding: 10px;
+    border-bottom: 1px solid #2B2B2B;
+    font-weight: bold; 
+}
+
+.sidebar ul li a {
+    color: white;
+    text-decoration: none;
+    display: block;
+    font-weight: bold; 
+}
+
+.sidebar ul li:hover {
+    background-color: #2B2B2B;
+}
+
 .header-container {
     display: flex;
     justify-content: space-between;
-    align-items: center;
+    align-items: flex-start;
     padding: 20px;
     background-color: #f8f8f8;
+    flex-direction: row-reverse;
 }
 
 #searchField {
@@ -67,7 +111,7 @@ body {
 }
 
 main {
-    padding: 20px;
+    padding: 10px;
     flex-grow: 1;
     overflow-y: auto; /* Adiciona scroll no conteúdo principal */
     max-height: calc(100vh - 80px); /* Altura máxima com rodapé fixo */
