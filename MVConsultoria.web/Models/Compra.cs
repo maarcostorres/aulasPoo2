@@ -11,7 +11,7 @@ namespace MVConsultoria.Web.Models
         public required Cliente Cliente { get; set; }// Relacionamento com o Cliente
 
         public DateTime DataCompra { get; set; }
-        public decimal ValorTotal { get; set; }
+        public double ValorTotal { get; set; }
 
         public ICollection<Parcela> Parcelas { get; set; } = new List<Parcela>();
 

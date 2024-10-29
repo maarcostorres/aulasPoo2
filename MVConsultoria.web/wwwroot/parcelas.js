@@ -224,8 +224,17 @@ async function alterarParcela(id, valor, dataVencimento) {
     }
 }
 
-//estou editando esta parte agora
 
+// Função para exibir o menu hambúrguer
+function mostrarMenuHamburguer() {
+    const menu = document.getElementById('hamburgerMenu');
+    menu.classList.toggle('show');
+}
+
+
+// começa aqui
+
+// este codigo esta funcionando perfeitamente
 // Função para exibir o modal com as parcelas selecionadas
 async function exibirModalBaixaParcelas() {
     const selecionadas = document.querySelectorAll('.select-parcela:checked');
@@ -262,19 +271,25 @@ async function exibirModalBaixaParcelas() {
 
 // Função para processar a baixa das parcelas
 async function processarBaixaParcelas() {
-    const valorPago = parseFloat(document.getElementById('valorPago').value);
+    const valorPagoTotal = parseFloat(document.getElementById('valorPago').value);
 
     // Recupera os IDs das parcelas selecionadas do modal
     const ids = JSON.parse(document.getElementById('modalBaixaParcelas').dataset.parcelasSelecionadas);
 
-    if (isNaN(valorPago) || valorPago <= 0) {
+    if (isNaN(valorPagoTotal) || valorPagoTotal <= 0) {
         alert("Por favor, insira um valor válido.");
         return;
     }
 
+    // Calcula o valor a ser pago por cada parcela individualmente
+    const totalParcelas = ids.reduce((acc, id) => acc + parcelas.find(p => p.id == id).valor, 0);
+    const valorProporcional = valorPagoTotal / totalParcelas;
+
     // Processa o pagamento para cada parcela selecionada
     for (let id of ids) {
-        await pagarParcela(id, valorPago);
+        const parcela = parcelas.find(p => p.id == id);
+        const valorParcelaPago = (parcela.valor * valorProporcional).toFixed(2); // Calcula o valor proporcional para a parcela
+        await pagarParcela(id, parseFloat(valorParcelaPago));
     }
 
     // Recarrega as parcelas após a operação
@@ -288,13 +303,12 @@ async function pagarParcela(idParcela, valorPago) {
     const token = localStorage.getItem('token');
 
     try {
-        const response = await fetch(`/api/Parcelas/${idParcela}/pagar`, {
+        const response = await fetch(`/api/Parcelas/${idParcela}/pagar?valorPago=${valorPago}`, {
             method: 'PUT',
             headers: {
                 'Authorization': `Bearer ${token}`,
                 'Content-Type': 'application/json'
-            },
-            body: JSON.stringify({ valorPago: valorPago })
+            }
         });
 
         if (!response.ok) {
@@ -302,7 +316,7 @@ async function pagarParcela(idParcela, valorPago) {
             console.error(`Erro ao pagar parcela ${idParcela}:`, errorText);
             alert(`Erro ao pagar parcela ${idParcela}: ${errorText}`);
         } else {
-            alert(`Parcela ${idParcela} paga com sucesso!`);
+            console.log(`Parcela ${idParcela} paga com sucesso!`);
         }
     } catch (error) {
         console.error('Erro ao pagar parcela:', error);
@@ -315,60 +329,10 @@ document.getElementById('baixarParcelasSelecionadas').addEventListener('click', 
     exibirModalBaixaParcelas();  // Exibe o modal com as parcelas selecionadas
 });
 
-
-//daqui para baixo tudo certo
-
-
-// Função para exibir o menu hambúrguer
-function mostrarMenuHamburguer() {
-    const menu = document.getElementById('hamburgerMenu');
-    menu.classList.toggle('show');
-}
-
-// Função para baixar as parcelas selecionadas
-async function baixarParcelasSelecionadas() {
-    const selecionadas = document.querySelectorAll('.select-parcela:checked');
-    const token = localStorage.getItem('token');
-    const ids = Array.from(selecionadas).map(cb => cb.dataset.id);
-
-    if (ids.length === 0) {
-        alert('Nenhuma parcela selecionada.');
-        return;
-    }
-
-    const valorPago = parseFloat(prompt("Digite o valor pago para as parcelas selecionadas:"));
-
-    if (isNaN(valorPago) || valorPago <= 0) {
-        alert("Por favor, insira um valor válido.");
-        return;
-    }
-
-    try {
-        for (let id of ids) {
-            const response = await fetch(`/api/Parcelas/${id}/pagar`, {
-                method: 'PUT',
-                headers: {
-                    'Authorization': `Bearer ${token}`,
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify({ valorPago: valorPago })
-            });
-
-            if (!response.ok) {
-                const errorData = await response.json();
-                alert(errorData.message || `Erro ao baixar a parcela ${id}.`);
-                return; // Sai do loop se der erro em qualquer uma
-            }
-        }
-
-        alert('Parcelas baixadas com sucesso!');
-        carregarParcelas(); // Recarrega as parcelas após a operação
-    } catch (error) {
-        console.error('Erro ao baixar parcelas:', error);
-        alert('Ocorreu um erro ao baixar as parcelas. Tente novamente mais tarde.');
-    }
-}
-
+// Adiciona o evento de clique para o botão "Confirmar Pagamento" no modal
+document.getElementById('confirmarPagamentoBtn').addEventListener('click', function() {
+    processarBaixaParcelas();  // Processa o pagamento das parcelas selecionadas
+});
 
 
 // Chama a função ao carregar a página

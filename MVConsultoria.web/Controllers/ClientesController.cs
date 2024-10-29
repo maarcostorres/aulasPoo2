@@ -106,7 +106,7 @@ namespace MVConsultoria.Web.Controllers
             // Define um limite de crédito padrão para novos clientes, se não definido
             if (cliente.LimiteDeCredito == 0)
             {
-                cliente.LimiteDeCredito = 300.00m;
+                cliente.LimiteDeCredito = 300.00;
             }
 
             // Define o limite disponível igual ao limite de crédito
@@ -198,7 +198,7 @@ namespace MVConsultoria.Web.Controllers
             cliente.LimiteDeCredito = limiteDto.NovoLimite;
 
             // Calcula o total das parcelas em aberto (não pagas)
-            decimal totalParcelasEmAberto = cliente.Compras
+            double totalParcelasEmAberto = cliente.Compras
                 .SelectMany(c => c.Parcelas)
                 .Where(p => !p.Pago)
                 .Sum(p => p.Valor);

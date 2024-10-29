@@ -111,7 +111,7 @@ namespace MVConsultoria.Web.Controllers
 
         private void GerarParcelasParaCompra(Compra compra)
         {
-            decimal valorParcela = compra.ValorTotal / compra.QuantidadeParcelas;
+            double valorParcela = compra.ValorTotal / compra.QuantidadeParcelas;
 
             for (int i = 0; i < compra.QuantidadeParcelas; i++)
             {
@@ -231,7 +231,7 @@ namespace MVConsultoria.Web.Controllers
         // Método para gerar as parcelas de acordo com a quantidade informada
         private void GerarParcelasParaCompraAtualizada(Compra compra)
         {
-            decimal valorParcela = compra.ValorTotal / compra.QuantidadeParcelas;
+            double valorParcela = compra.ValorTotal / compra.QuantidadeParcelas;
 
             for (int i = 0; i < compra.QuantidadeParcelas; i++)
             {
