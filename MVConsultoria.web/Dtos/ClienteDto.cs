@@ -8,7 +8,7 @@ public class ClienteDto
     public string Telefone { get; set; }
 
     public DateTime DiaDePagamento { get; set; }
-    public decimal LimiteDeCredito { get; set; }
-    public decimal LimiteDisponivel { get; set; }
+    public double LimiteDeCredito { get; set; }
+    public double LimiteDisponivel { get; set; }
     public bool Bloqueado { get; set; }
 }

@@ -174,7 +174,7 @@ namespace MVConsultoria.Web.Controllers
 
         // PUT: api/Parcelas/5/pagar
         [HttpPut("{id}/pagar")]
-        public async Task<IActionResult> RegistrarPagamento(int id, decimal valorPago)
+        public async Task<IActionResult> RegistrarPagamento(int id, double valorPago)
         {
             // Busca a parcela pelo ID
             var parcela = await _context.Parcelas.FindAsync(id);
@@ -206,7 +206,7 @@ namespace MVConsultoria.Web.Controllers
             if (valorPago < parcela.Valor)
             {
                 // Calcula o valor restante
-                decimal valorRestante = parcela.Valor - valorPago;
+                double valorRestante = parcela.Valor - valorPago;
 
                 // Atualiza a parcela original como paga parcialmente
                 parcela.Pago = true; // Considera que essa parte foi paga
@@ -269,7 +269,7 @@ namespace MVConsultoria.Web.Controllers
 
         // GET: api/Parcelas/cliente/{clienteId}/parcela-minima
         [HttpGet("cliente/{clienteId}/parcela-minima")]
-        public async Task<ActionResult<decimal>> GetParcelaMinima(int clienteId)
+        public async Task<ActionResult<double>> GetParcelaMinima(int clienteId)
         {
             // Busca o cliente pelo ID
             var cliente = await _context.Clientes
@@ -303,7 +303,7 @@ namespace MVConsultoria.Web.Controllers
                 .ToList();
 
             // Soma o valor das parcelas a vencer até o próximo dia de pagamento
-            decimal valorParcelaMinima = parcelasAteProximoPagamento.Sum(p => p.Valor);
+            double valorParcelaMinima = parcelasAteProximoPagamento.Sum(p => p.Valor);
 
             return Ok(valorParcelaMinima);
         }

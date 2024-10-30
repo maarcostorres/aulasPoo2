@@ -17,9 +17,9 @@ namespace MVConsultoria.Web.Models
         public DateTime DiaDePagamento { get; set; }
 
         [Range(0, double.MaxValue, ErrorMessage = "O limite de crédito deve ser um valor positivo.")]
-        public decimal LimiteDeCredito { get; set; }
+        public double LimiteDeCredito { get; set; }
 
-        public decimal LimiteDisponivel { get; set; }
+        public double LimiteDisponivel { get; set; }
 
         // Novo campo para indicar se o cliente está bloqueado
         public bool Bloqueado { get; set; } = false;
