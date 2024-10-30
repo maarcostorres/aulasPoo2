@@ -1,4 +1,5 @@
 let parcelas = []; // Variável global para armazenar todas as parcelas
+let clienteSelecionado = null; // Variável para armazenar o nome do cliente das parcelas selecionadas
 
 // Função para carregar a lista de parcelas
 async function carregarParcelas() {
@@ -42,7 +43,7 @@ function exibirParcelas(parcelasFiltradas) {
         parcelasFiltradas.forEach(parcela => {
             const row = document.createElement('tr');
             row.innerHTML = `
-                <td><input type="checkbox" class="select-parcela" data-id="${parcela.id}"></td>
+                <td><input type="checkbox" class="select-parcela" data-id="${parcela.id}" data-cliente="${parcela.nomeCliente}"></td>
                 <td>${parcela.id}</td>
                 <td>${parcela.nomeCliente || 'N/A'}</td>
                 <td>${parcela.compraId || 'N/A'}</td>
@@ -53,27 +54,52 @@ function exibirParcelas(parcelasFiltradas) {
                 <td>${parcela.valorPago ? parcela.valorPago.toFixed(2) : '0.00'}</td>
             `;
 
-            // Evento de clique para selecionar a linha (fora do checkbox)
-            row.addEventListener('click', function (event) {
-                if (event.target.tagName !== 'INPUT') {
-                    // Remove a seleção de todas as outras linhas
-                    document.querySelectorAll('#parcelas-table tbody tr').forEach(linha => {
-                        linha.classList.remove('selected-row');
-                    });
-                    // Adiciona a classe 'selected-row' à linha clicada
-                    row.classList.add('selected-row');
-                }
+      
+      // Evento de clique para selecionar a linha (fora do checkbox)
+      row.addEventListener('click', function (event) {
+        if (event.target.tagName !== 'INPUT') {
+            // Remove a seleção de todas as outras linhas
+            document.querySelectorAll('#parcelas-table tbody tr').forEach(linha => {
+                linha.classList.remove('selected-row');
             });
+            // Adiciona a classe 'selected-row' à linha clicada
+            row.classList.add('selected-row');
+        }
+    });
 
+    
+      
+      
             // Evento para manter a seleção ao marcar o checkbox
-            const checkbox = row.querySelector('.select-parcela');
-            checkbox.addEventListener('change', function () {
-               
-                    // Se o checkbox for desmarcado, remove a classe 'selected-row'
-                    row.classList.remove('selected-row');
-                    
-                
-            });
+const checkbox = row.querySelector('.select-parcela');
+checkbox.addEventListener('change', function () {
+    const clienteAtual = checkbox.dataset.cliente; // Obtém o nome do cliente da parcela
+
+    if (checkbox.checked) {
+        // Se a parcela já estiver paga, desmarca o checkbox e exibe um alerta
+        if (parcela.pago === true) {
+            alert("Não é possível selecionar parcelas que já foram pagas.");
+            checkbox.checked = false;
+            return; // Encerra a função para não prosseguir com seleção
+        }
+
+        // Se não houver clienteSelecionado, armazena o primeiro cliente
+        if (!clienteSelecionado) {
+            clienteSelecionado = clienteAtual;
+        } else if (clienteSelecionado !== clienteAtual) {
+            // Se o cliente for diferente, desmarca o checkbox e exibe um alerta
+            alert("Não é possível selecionar parcelas de clientes diferentes.");
+            checkbox.checked = false;
+        }
+    } else {
+        // Se desmarcar todos os checkboxes, reseta o clienteSelecionado se não houver mais selecionados
+        const algumMarcado = Array.from(document.querySelectorAll('.select-parcela:checked')).length > 0;
+        if (!algumMarcado) {
+            clienteSelecionado = null;
+        }
+    }
+});
+
 
             tableBody.appendChild(row);
         });
@@ -107,6 +133,7 @@ function filtrarParcelas() {
 
 // Função para limpar os filtros e restaurar todas as parcelas
 function limparFiltros() {
+    clienteSelecionado = null;
     document.getElementById('searchClienteField').value = ''; // Limpa o campo de nome
     document.getElementById('searchDataField').value = ''; // Limpa o campo de data
     exibirParcelas(parcelas); // Exibe todas as parcelas novamente
@@ -116,10 +143,6 @@ function limparFiltros() {
 document.getElementById('searchClienteField').addEventListener('input', filtrarParcelas);
 document.getElementById('searchDataField').addEventListener('input', filtrarParcelas);
 document.getElementById('limparFiltrosBtn').addEventListener('click', limparFiltros);
-
-
- 
-
 
 document.getElementById('alterarParcela').addEventListener('click', function() {
     // Verificar se há uma linha selecionada
@@ -157,7 +180,6 @@ document.getElementById('alterarParcela').addEventListener('click', function() {
         // Se o valor for uma data válida, formata para o campo de data do modal
         document.getElementById('dataVencimentoParcela').value = new Date(dataFormatada).toISOString().split('T')[0];
     } else {
-        // Se o valor não for uma data válida, exibe uma mensagem de erro ou deixa o campo vazio
         console.error("Data inválida:", dataVencimento);
         document.getElementById('dataVencimentoParcela').value = '';  // Limpa o campo ou define um valor padrão
     }
@@ -182,6 +204,10 @@ document.getElementById('saveParcelaBtn').onclick = function(event) {
 
     alterarParcela(parcelaId, valor, dataVencimento, status);
 };
+
+// Chama a função ao carregar a página
+window.onload = carregarParcelas;
+
 
 
 
@@ -231,14 +257,16 @@ function mostrarMenuHamburguer() {
     menu.classList.toggle('show');
 }
 
-
-// começa aqui
+//começa aqui
 
 // este codigo esta funcionando perfeitamente
 // Função para exibir o modal com as parcelas selecionadas
 async function exibirModalBaixaParcelas() {
     const selecionadas = document.querySelectorAll('.select-parcela:checked');
     const ids = Array.from(selecionadas).map(cb => cb.dataset.id); // IDs das parcelas selecionadas
+
+
+
 
     if (ids.length === 0) {
         alert('Nenhuma parcela selecionada.');
@@ -333,6 +361,10 @@ document.getElementById('baixarParcelasSelecionadas').addEventListener('click', 
 document.getElementById('confirmarPagamentoBtn').addEventListener('click', function() {
     processarBaixaParcelas();  // Processa o pagamento das parcelas selecionadas
 });
+
+
+
+
 
 
 // Chama a função ao carregar a página

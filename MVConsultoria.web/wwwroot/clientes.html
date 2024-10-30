@@ -4,29 +4,36 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Lista de Clientes</title>
-    <link rel="stylesheet" href="clientes.css" />
+    <link rel="stylesheet" href="styles.css" />
   </head>
   <body>
-    <header class="header-container">
-      <!-- Campo de busca centralizado e maior -->
-      <div class="search-container">
-        <input
-          type="text"
-          id="searchField"
-          placeholder="Buscar cliente por nome, CPF ou e-mail"
-        />
+    <!-- Botão do menu hamburger para abrir a sidebar -->
+    <div class="hamburger" id="hamburgerMenu">
+      <span>&#9776;</span> <!-- ícone de três linhas -->
+    </div>
+
+    <div class="container">
+      <!-- Sidebar fixa ou oculta -->
+      <div class="sidebar hidden"> <!-- Adicionada a classe 'hidden' para ocultar inicialmente -->
+        <h2>Menu</h2>
+        <ul id="menu">
+          <li><a href="#" id="novoCliente">Novo</a></li>
+          <li><a href="#" id="alterarCliente">Alterar</a></li>
+          <li><a href="admin.html">Voltar</a></li>
+        </ul>
       </div>
 
-      <!-- Menu hambúrguer -->
-      <div id="hamburgerMenu" class="hamburger">
-        <span>☰</span>
-        <div class="menu-content">
-          <a href="#" id="novoCliente">Novo</a>
-          <a href="#" id="alterarCliente">Alterar</a>
-          <a href="admin.html">Voltar</a>
-        </div>
-      </div>
-    </header>
+      <div class="content">
+        <header class="header-container">
+          <!-- Campo de busca -->
+          <div class="search-container">
+            <input
+              type="text"
+              id="searchField"
+              placeholder="Buscar cliente por nome, CPF ou e-mail"
+            />
+          </div>
+        </header>
 
     <main>
       <table id="clientes-table">
@@ -176,9 +183,9 @@
       </div>
     </div>
 
-    <footer>
+    <!--<footer>
       <p>&copy; 2024 MV Consultoria</p>
-    </footer>
+    </footer>-->
 
     <script src="clientes.js"></script>
   </body>

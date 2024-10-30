@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "xiqkPGF917uM6qwOKXqFZXXJFjjJFxV+D/nWtuFjSLU=",
+  "Hash": "MWyzL8Dscis7zNoe6pQ6JnZGgLAXWsjixdcZc2EQgjU=",
   "Source": "MVConsultoria.Web",
   "BasePath": "_content/MVConsultoria.Web",
   "Mode": "Default",
@@ -10,17 +10,17 @@
     {
       "Name": "MVConsultoria.Web\\wwwroot",
       "Source": "MVConsultoria.Web",
-      "ContentRoot": "C:\\Users\\Belshoff\\PROJECTS\\AULASPOO2\\mvconsultoria.web\\wwwroot\\",
+      "ContentRoot": "C:\\Users\\Belshoff\\projects\\aulaspoo2\\mvconsultoria.web\\wwwroot\\",
       "BasePath": "_content/MVConsultoria.Web",
       "Pattern": "**"
     }
   ],
   "Assets": [
     {
-      "Identity": "C:\\Users\\Belshoff\\PROJECTS\\AULASPOO2\\mvconsultoria.web\\wwwroot\\admin.css",
+      "Identity": "C:\\Users\\Belshoff\\projects\\aulaspoo2\\mvconsultoria.web\\wwwroot\\admin.css",
       "SourceId": "MVConsultoria.Web",
       "SourceType": "Discovered",
-      "ContentRoot": "C:\\Users\\Belshoff\\PROJECTS\\AULASPOO2\\mvconsultoria.web\\wwwroot\\",
+      "ContentRoot": "C:\\Users\\Belshoff\\projects\\aulaspoo2\\mvconsultoria.web\\wwwroot\\",
       "BasePath": "_content/MVConsultoria.Web",
       "RelativePath": "admin.css",
       "AssetKind": "All",
@@ -36,10 +36,10 @@
       "OriginalItemSpec": "wwwroot\\admin.css"
     },
     {
-      "Identity": "C:\\Users\\Belshoff\\PROJECTS\\AULASPOO2\\mvconsultoria.web\\wwwroot\\admin.html",
+      "Identity": "C:\\Users\\Belshoff\\projects\\aulaspoo2\\mvconsultoria.web\\wwwroot\\admin.html",
       "SourceId": "MVConsultoria.Web",
       "SourceType": "Discovered",
-      "ContentRoot": "C:\\Users\\Belshoff\\PROJECTS\\AULASPOO2\\mvconsultoria.web\\wwwroot\\",
+      "ContentRoot": "C:\\Users\\Belshoff\\projects\\aulaspoo2\\mvconsultoria.web\\wwwroot\\",
       "BasePath": "_content/MVConsultoria.Web",
       "RelativePath": "admin.html",
       "AssetKind": "All",
@@ -55,10 +55,10 @@
       "OriginalItemSpec": "wwwroot\\admin.html"
     },
     {
-      "Identity": "C:\\Users\\Belshoff\\PROJECTS\\AULASPOO2\\mvconsultoria.web\\wwwroot\\admin.js",
+      "Identity": "C:\\Users\\Belshoff\\projects\\aulaspoo2\\mvconsultoria.web\\wwwroot\\admin.js",
       "SourceId": "MVConsultoria.Web",
       "SourceType": "Discovered",
-      "ContentRoot": "C:\\Users\\Belshoff\\PROJECTS\\AULASPOO2\\mvconsultoria.web\\wwwroot\\",
+      "ContentRoot": "C:\\Users\\Belshoff\\projects\\aulaspoo2\\mvconsultoria.web\\wwwroot\\",
       "BasePath": "_content/MVConsultoria.Web",
       "RelativePath": "admin.js",
       "AssetKind": "All",
@@ -74,10 +74,10 @@
       "OriginalItemSpec": "wwwroot\\admin.js"
     },
     {
-      "Identity": "C:\\Users\\Belshoff\\PROJECTS\\AULASPOO2\\mvconsultoria.web\\wwwroot\\clientes.css",
+      "Identity": "C:\\Users\\Belshoff\\projects\\aulaspoo2\\mvconsultoria.web\\wwwroot\\clientes.css",
       "SourceId": "MVConsultoria.Web",
       "SourceType": "Discovered",
-      "ContentRoot": "C:\\Users\\Belshoff\\PROJECTS\\AULASPOO2\\mvconsultoria.web\\wwwroot\\",
+      "ContentRoot": "C:\\Users\\Belshoff\\projects\\aulaspoo2\\mvconsultoria.web\\wwwroot\\",
       "BasePath": "_content/MVConsultoria.Web",
       "RelativePath": "clientes.css",
       "AssetKind": "All",
@@ -93,10 +93,10 @@
       "OriginalItemSpec": "wwwroot\\clientes.css"
     },
     {
-      "Identity": "C:\\Users\\Belshoff\\PROJECTS\\AULASPOO2\\mvconsultoria.web\\wwwroot\\clientes.html",
+      "Identity": "C:\\Users\\Belshoff\\projects\\aulaspoo2\\mvconsultoria.web\\wwwroot\\clientes.html",
       "SourceId": "MVConsultoria.Web",
       "SourceType": "Discovered",
-      "ContentRoot": "C:\\Users\\Belshoff\\PROJECTS\\AULASPOO2\\mvconsultoria.web\\wwwroot\\",
+      "ContentRoot": "C:\\Users\\Belshoff\\projects\\aulaspoo2\\mvconsultoria.web\\wwwroot\\",
       "BasePath": "_content/MVConsultoria.Web",
       "RelativePath": "clientes.html",
       "AssetKind": "All",
@@ -112,10 +112,10 @@
       "OriginalItemSpec": "wwwroot\\clientes.html"
     },
     {
-      "Identity": "C:\\Users\\Belshoff\\PROJECTS\\AULASPOO2\\mvconsultoria.web\\wwwroot\\clientes.js",
+      "Identity": "C:\\Users\\Belshoff\\projects\\aulaspoo2\\mvconsultoria.web\\wwwroot\\clientes.js",
       "SourceId": "MVConsultoria.Web",
       "SourceType": "Discovered",
-      "ContentRoot": "C:\\Users\\Belshoff\\PROJECTS\\AULASPOO2\\mvconsultoria.web\\wwwroot\\",
+      "ContentRoot": "C:\\Users\\Belshoff\\projects\\aulaspoo2\\mvconsultoria.web\\wwwroot\\",
       "BasePath": "_content/MVConsultoria.Web",
       "RelativePath": "clientes.js",
       "AssetKind": "All",
@@ -131,10 +131,10 @@
       "OriginalItemSpec": "wwwroot\\clientes.js"
     },
     {
-      "Identity": "C:\\Users\\Belshoff\\PROJECTS\\AULASPOO2\\mvconsultoria.web\\wwwroot\\compras.css",
+      "Identity": "C:\\Users\\Belshoff\\projects\\aulaspoo2\\mvconsultoria.web\\wwwroot\\compras.css",
       "SourceId": "MVConsultoria.Web",
       "SourceType": "Discovered",
-      "ContentRoot": "C:\\Users\\Belshoff\\PROJECTS\\AULASPOO2\\mvconsultoria.web\\wwwroot\\",
+      "ContentRoot": "C:\\Users\\Belshoff\\projects\\aulaspoo2\\mvconsultoria.web\\wwwroot\\",
       "BasePath": "_content/MVConsultoria.Web",
       "RelativePath": "compras.css",
       "AssetKind": "All",
@@ -150,10 +150,10 @@
       "OriginalItemSpec": "wwwroot\\compras.css"
     },
     {
-      "Identity": "C:\\Users\\Belshoff\\PROJECTS\\AULASPOO2\\mvconsultoria.web\\wwwroot\\compras.html",
+      "Identity": "C:\\Users\\Belshoff\\projects\\aulaspoo2\\mvconsultoria.web\\wwwroot\\compras.html",
       "SourceId": "MVConsultoria.Web",
       "SourceType": "Discovered",
-      "ContentRoot": "C:\\Users\\Belshoff\\PROJECTS\\AULASPOO2\\mvconsultoria.web\\wwwroot\\",
+      "ContentRoot": "C:\\Users\\Belshoff\\projects\\aulaspoo2\\mvconsultoria.web\\wwwroot\\",
       "BasePath": "_content/MVConsultoria.Web",
       "RelativePath": "compras.html",
       "AssetKind": "All",
@@ -169,10 +169,10 @@
       "OriginalItemSpec": "wwwroot\\compras.html"
     },
     {
-      "Identity": "C:\\Users\\Belshoff\\PROJECTS\\AULASPOO2\\mvconsultoria.web\\wwwroot\\compras.js",
+      "Identity": "C:\\Users\\Belshoff\\projects\\aulaspoo2\\mvconsultoria.web\\wwwroot\\compras.js",
       "SourceId": "MVConsultoria.Web",
       "SourceType": "Discovered",
-      "ContentRoot": "C:\\Users\\Belshoff\\PROJECTS\\AULASPOO2\\mvconsultoria.web\\wwwroot\\",
+      "ContentRoot": "C:\\Users\\Belshoff\\projects\\aulaspoo2\\mvconsultoria.web\\wwwroot\\",
       "BasePath": "_content/MVConsultoria.Web",
       "RelativePath": "compras.js",
       "AssetKind": "All",
@@ -188,10 +188,10 @@
       "OriginalItemSpec": "wwwroot\\compras.js"
     },
     {
-      "Identity": "C:\\Users\\Belshoff\\PROJECTS\\AULASPOO2\\mvconsultoria.web\\wwwroot\\imgs\\MV CONSULT IMAGE.jpg",
+      "Identity": "C:\\Users\\Belshoff\\projects\\aulaspoo2\\mvconsultoria.web\\wwwroot\\imgs\\MV CONSULT IMAGE.jpg",
       "SourceId": "MVConsultoria.Web",
       "SourceType": "Discovered",
-      "ContentRoot": "C:\\Users\\Belshoff\\PROJECTS\\AULASPOO2\\mvconsultoria.web\\wwwroot\\",
+      "ContentRoot": "C:\\Users\\Belshoff\\projects\\aulaspoo2\\mvconsultoria.web\\wwwroot\\",
       "BasePath": "_content/MVConsultoria.Web",
       "RelativePath": "imgs/MV CONSULT IMAGE.jpg",
       "AssetKind": "All",
@@ -207,10 +207,10 @@
       "OriginalItemSpec": "wwwroot\\imgs\\MV CONSULT IMAGE.jpg"
     },
     {
-      "Identity": "C:\\Users\\Belshoff\\PROJECTS\\AULASPOO2\\mvconsultoria.web\\wwwroot\\index.html",
+      "Identity": "C:\\Users\\Belshoff\\projects\\aulaspoo2\\mvconsultoria.web\\wwwroot\\index.html",
       "SourceId": "MVConsultoria.Web",
       "SourceType": "Discovered",
-      "ContentRoot": "C:\\Users\\Belshoff\\PROJECTS\\AULASPOO2\\mvconsultoria.web\\wwwroot\\",
+      "ContentRoot": "C:\\Users\\Belshoff\\projects\\aulaspoo2\\mvconsultoria.web\\wwwroot\\",
       "BasePath": "_content/MVConsultoria.Web",
       "RelativePath": "index.html",
       "AssetKind": "All",
@@ -226,10 +226,10 @@
       "OriginalItemSpec": "wwwroot\\index.html"
     },
     {
-      "Identity": "C:\\Users\\Belshoff\\PROJECTS\\AULASPOO2\\mvconsultoria.web\\wwwroot\\login.css",
+      "Identity": "C:\\Users\\Belshoff\\projects\\aulaspoo2\\mvconsultoria.web\\wwwroot\\login.css",
       "SourceId": "MVConsultoria.Web",
       "SourceType": "Discovered",
-      "ContentRoot": "C:\\Users\\Belshoff\\PROJECTS\\AULASPOO2\\mvconsultoria.web\\wwwroot\\",
+      "ContentRoot": "C:\\Users\\Belshoff\\projects\\aulaspoo2\\mvconsultoria.web\\wwwroot\\",
       "BasePath": "_content/MVConsultoria.Web",
       "RelativePath": "login.css",
       "AssetKind": "All",
@@ -245,10 +245,10 @@
       "OriginalItemSpec": "wwwroot\\login.css"
     },
     {
-      "Identity": "C:\\Users\\Belshoff\\PROJECTS\\AULASPOO2\\mvconsultoria.web\\wwwroot\\login.js",
+      "Identity": "C:\\Users\\Belshoff\\projects\\aulaspoo2\\mvconsultoria.web\\wwwroot\\login.js",
       "SourceId": "MVConsultoria.Web",
       "SourceType": "Discovered",
-      "ContentRoot": "C:\\Users\\Belshoff\\PROJECTS\\AULASPOO2\\mvconsultoria.web\\wwwroot\\",
+      "ContentRoot": "C:\\Users\\Belshoff\\projects\\aulaspoo2\\mvconsultoria.web\\wwwroot\\",
       "BasePath": "_content/MVConsultoria.Web",
       "RelativePath": "login.js",
       "AssetKind": "All",
@@ -264,29 +264,10 @@
       "OriginalItemSpec": "wwwroot\\login.js"
     },
     {
-      "Identity": "C:\\Users\\Belshoff\\PROJECTS\\AULASPOO2\\mvconsultoria.web\\wwwroot\\novo_cliente.html",
+      "Identity": "C:\\Users\\Belshoff\\projects\\aulaspoo2\\mvconsultoria.web\\wwwroot\\parcelas.css",
       "SourceId": "MVConsultoria.Web",
       "SourceType": "Discovered",
-      "ContentRoot": "C:\\Users\\Belshoff\\PROJECTS\\AULASPOO2\\mvconsultoria.web\\wwwroot\\",
-      "BasePath": "_content/MVConsultoria.Web",
-      "RelativePath": "novo_cliente.html",
-      "AssetKind": "All",
-      "AssetMode": "All",
-      "AssetRole": "Primary",
-      "AssetMergeBehavior": "PreferTarget",
-      "AssetMergeSource": "",
-      "RelatedAsset": "",
-      "AssetTraitName": "",
-      "AssetTraitValue": "",
-      "CopyToOutputDirectory": "Never",
-      "CopyToPublishDirectory": "PreserveNewest",
-      "OriginalItemSpec": "wwwroot\\novo_cliente.html"
-    },
-    {
-      "Identity": "C:\\Users\\Belshoff\\PROJECTS\\AULASPOO2\\mvconsultoria.web\\wwwroot\\parcelas.css",
-      "SourceId": "MVConsultoria.Web",
-      "SourceType": "Discovered",
-      "ContentRoot": "C:\\Users\\Belshoff\\PROJECTS\\AULASPOO2\\mvconsultoria.web\\wwwroot\\",
+      "ContentRoot": "C:\\Users\\Belshoff\\projects\\aulaspoo2\\mvconsultoria.web\\wwwroot\\",
       "BasePath": "_content/MVConsultoria.Web",
       "RelativePath": "parcelas.css",
       "AssetKind": "All",
@@ -302,10 +283,10 @@
       "OriginalItemSpec": "wwwroot\\parcelas.css"
     },
     {
-      "Identity": "C:\\Users\\Belshoff\\PROJECTS\\AULASPOO2\\mvconsultoria.web\\wwwroot\\parcelas.html",
+      "Identity": "C:\\Users\\Belshoff\\projects\\aulaspoo2\\mvconsultoria.web\\wwwroot\\parcelas.html",
       "SourceId": "MVConsultoria.Web",
       "SourceType": "Discovered",
-      "ContentRoot": "C:\\Users\\Belshoff\\PROJECTS\\AULASPOO2\\mvconsultoria.web\\wwwroot\\",
+      "ContentRoot": "C:\\Users\\Belshoff\\projects\\aulaspoo2\\mvconsultoria.web\\wwwroot\\",
       "BasePath": "_content/MVConsultoria.Web",
       "RelativePath": "parcelas.html",
       "AssetKind": "All",
@@ -321,10 +302,10 @@
       "OriginalItemSpec": "wwwroot\\parcelas.html"
     },
     {
-      "Identity": "C:\\Users\\Belshoff\\PROJECTS\\AULASPOO2\\mvconsultoria.web\\wwwroot\\parcelas.js",
+      "Identity": "C:\\Users\\Belshoff\\projects\\aulaspoo2\\mvconsultoria.web\\wwwroot\\parcelas.js",
       "SourceId": "MVConsultoria.Web",
       "SourceType": "Discovered",
-      "ContentRoot": "C:\\Users\\Belshoff\\PROJECTS\\AULASPOO2\\mvconsultoria.web\\wwwroot\\",
+      "ContentRoot": "C:\\Users\\Belshoff\\projects\\aulaspoo2\\mvconsultoria.web\\wwwroot\\",
       "BasePath": "_content/MVConsultoria.Web",
       "RelativePath": "parcelas.js",
       "AssetKind": "All",
@@ -340,10 +321,10 @@
       "OriginalItemSpec": "wwwroot\\parcelas.js"
     },
     {
-      "Identity": "C:\\Users\\Belshoff\\PROJECTS\\AULASPOO2\\mvconsultoria.web\\wwwroot\\spa.css",
+      "Identity": "C:\\Users\\Belshoff\\projects\\aulaspoo2\\mvconsultoria.web\\wwwroot\\spa.css",
       "SourceId": "MVConsultoria.Web",
       "SourceType": "Discovered",
-      "ContentRoot": "C:\\Users\\Belshoff\\PROJECTS\\AULASPOO2\\mvconsultoria.web\\wwwroot\\",
+      "ContentRoot": "C:\\Users\\Belshoff\\projects\\aulaspoo2\\mvconsultoria.web\\wwwroot\\",
       "BasePath": "_content/MVConsultoria.Web",
       "RelativePath": "spa.css",
       "AssetKind": "All",
@@ -359,10 +340,10 @@
       "OriginalItemSpec": "wwwroot\\spa.css"
     },
     {
-      "Identity": "C:\\Users\\Belshoff\\PROJECTS\\AULASPOO2\\mvconsultoria.web\\wwwroot\\spa.html",
+      "Identity": "C:\\Users\\Belshoff\\projects\\aulaspoo2\\mvconsultoria.web\\wwwroot\\spa.html",
       "SourceId": "MVConsultoria.Web",
       "SourceType": "Discovered",
-      "ContentRoot": "C:\\Users\\Belshoff\\PROJECTS\\AULASPOO2\\mvconsultoria.web\\wwwroot\\",
+      "ContentRoot": "C:\\Users\\Belshoff\\projects\\aulaspoo2\\mvconsultoria.web\\wwwroot\\",
       "BasePath": "_content/MVConsultoria.Web",
       "RelativePath": "spa.html",
       "AssetKind": "All",
@@ -378,10 +359,10 @@
       "OriginalItemSpec": "wwwroot\\spa.html"
     },
     {
-      "Identity": "C:\\Users\\Belshoff\\PROJECTS\\AULASPOO2\\mvconsultoria.web\\wwwroot\\spa.js",
+      "Identity": "C:\\Users\\Belshoff\\projects\\aulaspoo2\\mvconsultoria.web\\wwwroot\\spa.js",
       "SourceId": "MVConsultoria.Web",
       "SourceType": "Discovered",
-      "ContentRoot": "C:\\Users\\Belshoff\\PROJECTS\\AULASPOO2\\mvconsultoria.web\\wwwroot\\",
+      "ContentRoot": "C:\\Users\\Belshoff\\projects\\aulaspoo2\\mvconsultoria.web\\wwwroot\\",
       "BasePath": "_content/MVConsultoria.Web",
       "RelativePath": "spa.js",
       "AssetKind": "All",
@@ -395,6 +376,25 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\spa.js"
+    },
+    {
+      "Identity": "C:\\Users\\Belshoff\\projects\\aulaspoo2\\mvconsultoria.web\\wwwroot\\styles.css",
+      "SourceId": "MVConsultoria.Web",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\Belshoff\\projects\\aulaspoo2\\mvconsultoria.web\\wwwroot\\",
+      "BasePath": "_content/MVConsultoria.Web",
+      "RelativePath": "styles.css",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "PreferTarget",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\styles.css"
     }
   ]
 }

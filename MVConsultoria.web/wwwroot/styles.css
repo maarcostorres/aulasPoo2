@@ -1,0 +1,450 @@
+@import url('https://fonts.googleapis.com/css2?family=Ubuntu:ital,wght@0,300;0,400;0,500;0,700;1,300;1,400;1,500;1,700&display=swap');
+
+/* Global Styles */
+body {
+    font-family: 'Ubuntu', sans-serif;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    /*flex-direction: column;*/
+    height: 100vh;
+    /*overflow: hidden;*/
+}
+
+
+
+/*.container {
+    display: flex;
+    flex-grow: 1;
+}*/
+.container {
+    display: flex;
+    flex-grow: 1;
+    height: 100vh;
+}
+
+/* Sidebar Styles */
+/*.sidebar {
+    width: 150px;
+    background-color: #2B2B2B;
+    color: white;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+    transition: transform 0.3s ease;
+}*/
+
+/* Sidebar fixa e responsiva */
+.sidebar {
+    width: 150px; /* Largura da sidebar expandida */
+    background-color: #2B2B2B;
+    color: white;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    transition: transform 0.3s ease;
+    position: relative;
+    z-index: 1000;
+}
+
+.sidebar h2 {
+    text-align: center;
+    margin-bottom: 30px;
+    font-weight: bold; 
+}
+
+.sidebar ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+.sidebar ul li {
+    padding: 10px;
+    border-bottom: 1px solid #2B2B2B;
+    font-weight: bold; 
+}
+
+.sidebar ul li a {
+    color: white;
+    text-decoration: none;
+    display: block;
+}
+
+.sidebar ul li:hover {
+    background-color: #2B2B2B;
+}
+
+.sidebar-image {
+    margin-top: 150px;
+    width: 100%; 
+    height: auto;
+    border-radius: 5px;
+}
+
+/* Content Styles */
+/*.content {
+    flex-grow: 1;
+    background-color: #ecf0f1;
+    padding: 40px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}*/
+
+/* Conteúdo principal responsivo */
+/*.content {
+    flex-grow: 1;
+    background-color: #ecf0f1;
+    padding: 20px;
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+}*/
+
+.content {
+    flex-grow: 1;
+    background-color: #ecf0f1;
+    padding: 20px;
+    /*overflow-y: auto;*/
+    margin-left: 0px; /* Compensação para quando a sidebar está parcialmente oculta */
+    transition: margin-left 0.3s ease;
+}
+
+.content h1 {
+    margin-bottom: 20px;
+}
+
+.content p {
+    font-size: 18px;
+    color: #7f8c8d;
+}
+
+/* Header Styles */
+/*.header-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px;
+    background-color: #f8f8f8;
+    position: fixed;
+    top: 0;
+    width: 100%;
+  
+}*/
+
+/*.header-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px;
+    background-color: #f8f8f8;
+    width: calc(100% - 150px);
+    position: fixed;
+    top: 0;
+    left: 150px; 
+    z-index: 999;
+    transition: left 0.3s ease, width 0.3s ease; 
+}*/
+
+/* Header ajustado para acompanhar a sidebar */
+.header-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px;
+    background-color: #f8f8f8;
+    position: fixed;
+    top: 0;
+    left: 190px; /* Alinhamento do header com sidebar expandida */
+    width: calc(100% - 150px); /* Largura do header com sidebar expandida */
+    transition: left 0.3s ease, width 0.3s ease; /* Transições para suavizar o movimento */
+    z-index: 999;
+}
+
+
+
+#searchField,
+#searchClienteField,
+#searchDataField {
+    padding: 10px;
+    font-size: 16px;
+    flex-grow: 1;
+    margin-right: 20px;
+}
+
+#searchDataField {
+    max-width: 200px;
+}
+
+/* Hamburger Menu Styles */
+.hamburger {
+    position: relative;
+}
+
+.hamburger span {
+    font-size: 30px;
+    cursor: pointer;
+}
+
+.menu-content {
+    display: none;
+    position: absolute;
+    top: 40px;
+    right: 0;
+    background-color: white;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    border-radius: 4px;
+}
+
+.menu-content a {
+    display: block;
+    padding: 10px 20px;
+    color: black;
+    text-decoration: none;
+}
+
+.menu-content a:hover {
+    background-color: #f0f0f0;
+}
+
+.hamburger:hover .menu-content {
+    display: block;
+}
+
+/* Selected Row Styles */
+.selected-row {
+    background-color: #12229a !important;
+    color: #ffffff;
+}
+
+.select-rowcheck {
+    background-color: #c41e45 !important;
+    color: #ffffff;
+}
+
+/* Main Content Styles */
+/*main {
+    padding: 20px;
+    flex-grow: 1;
+    overflow-y: auto;
+    max-height: calc(100vh - 80px);
+    margin-top: 80px; 
+    height: calc(100vh - 80px); 
+}*/
+
+main {
+    margin-top: 80px; /* Espaço para o header fixo */
+    flex-grow: 1;
+    /*overflow-y: auto;*/
+    height: calc(100vh - 80px);
+}
+
+
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+th, td {
+    padding: 12px;
+    text-align: left;
+    border-bottom: 1px solid #2B2B2B;
+}
+
+
+
+/* Footer Styles */
+footer {
+    text-align: center;
+    padding: 10px;
+    background-color: #2B2B2B;
+    position: fixed;
+    width: 100%;
+    bottom: 0;
+}
+
+/* Modal Styles */
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 1;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.4);
+    padding-top: 60px;
+}
+
+.modal-content {
+    background-color: #343434;
+    color: #f8f8f8;
+    margin: 5% auto;
+    padding: 20px;
+    border: 1px solid #888;
+    width: 50%;
+    border-radius: 10px;
+}
+
+.close, .close-create {
+    color: #aaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.close:hover, .close:focus,
+.close-create:hover, .close-create:focus {
+    color: black;
+}
+
+/* Button Styles */
+button {
+    padding: 10px 20px;
+    font-size: 14px;
+    background-color: #567EF5;
+    color: white;
+    border: none;
+    cursor: pointer;
+    margin-top: 10px;
+}
+
+button:hover {
+    background-color: #567EF5;
+}
+
+button.cancel {
+    background-color: #f44336;
+}
+
+button.cancel:hover {
+    background-color: #d32f2f;
+}
+
+#saveNewCompraBtn, #saveEditCompraBtn {
+    background-color: #4caf50;
+    margin-right: 10px;
+}
+
+#saveNewCompraBtn:hover, #saveEditCompraBtn:hover {
+    background-color: #45a049;
+}
+
+#cancelNewCompraBtn, #cancelEditCompraBtn {
+    background-color: #f44336;
+}
+
+#cancelNewCompraBtn:hover, #cancelEditCompraBtn:hover {
+    background-color: #d32f2f;
+}
+
+/* Dropdown Styles */
+#clienteDropdown {
+    position: absolute;
+    background-color: white;
+    border: 1px solid #ccc;
+    width: 100%;
+    max-height: 150px;
+    overflow-y: auto;
+    z-index: 1000;
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+}
+
+#clienteDropdown li {
+    padding: 10px;
+    cursor: pointer;
+}
+
+#clienteDropdown li:hover {
+    background-color: #f0f0f0;
+}
+
+
+
+/* Estilos do menu hamburger */
+.hamburger {
+    display: block;
+    position: fixed;
+    top: 10px;
+    left: 10px;
+    font-size: 30px;
+    color: white;
+    cursor: pointer;
+    z-index: 1002; /* Para que fique acima da sidebar escondida */
+}
+
+
+
+/* Exibir o menu hamburger quando a sidebar estiver oculta */
+.sidebar.hidden + .hamburger {
+    display: block;
+}
+
+.sidebar.hidden ~ .content .header-container {
+    left: 45px;
+    width: calc(100% - 45px); /* Ajusta a largura do header para acomodar a sidebar */
+}
+
+.sidebar.hidden ~ .content {
+    margin-left: 45px; /* Mantém o conteúdo alinhado quando a sidebar está parcialmente oculta */
+}
+
+/* Ajuste na sidebar para aparecer somente ao clicar */
+.sidebar.hidden {
+    transform: translateX(-70%);
+    transition: transform 0.3s ease;
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 100vh;
+    width: 150px;
+    z-index: 1001;
+}
+
+
+
+
+/*.sidebar.hidden {
+    transform: translateX(-80%);
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 150px; 
+    height: 100vh; 
+    transition: transform 0.3s ease;
+}*/
+
+/*.container:hover .sidebar.hidden {
+    transform: translateX(0);
+}*/
+
+
+/* Estilo do toggle */
+.toggle-menu {
+    margin-bottom: 15px;
+    color: white;
+    cursor: pointer;
+    font-size: 14px;
+}
+
+/* Configuração de imagem */
+.image {
+    width: 40%; /* Define a largura para preencher o elemento pai */
+    height: auto; /* Mantém a proporção da imagem */
+    border-radius: 10px; /* Arredonda os cantos da imagem */
+    border: 2px solid #ccc; /* Adiciona uma borda de cor cinza claro */
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2); /* Adiciona uma sombra sutil */
+    object-fit: cover; /* Garante que a imagem preencha o espaço sem distorcer */
+    transition: transform 0.3s ease; /* Transição para efeito de hover */
+}
+
+/* Efeito ao passar o mouse */
+.image-config:hover {
+    transform: scale(1.05); /* Aumenta a imagem levemente ao passar o mouse */
+}

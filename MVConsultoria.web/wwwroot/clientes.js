@@ -303,6 +303,22 @@ document.getElementById('saveNewClientBtn').addEventListener('click', async func
     }
 });
 
+document.addEventListener("DOMContentLoaded", function () {
+    const sidebar = document.querySelector(".sidebar");
+    const hamburgerMenu = document.getElementById("hamburgerMenu");
+
+    // Clique no menu hamburger para mostrar ou esconder sidebar
+    hamburgerMenu.addEventListener("click", function () {
+        sidebar.classList.toggle("hidden");
+    });
+
+    // Função de logout
+    document.getElementById('logoutLink').addEventListener('click', function(event) {
+        event.preventDefault();
+        logout();
+    });
+});
+
 // Fechar o modal ao clicar no "X" ou no botão "Cancelar"
 document.addEventListener('DOMContentLoaded', function () {
     const closeCreateButton = document.querySelector('.close-create');

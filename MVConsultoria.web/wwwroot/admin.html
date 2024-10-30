@@ -4,35 +4,39 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Painel de Administração</title>
-    <link rel="stylesheet" href="admin.css" />
+    <link rel="stylesheet" href="styles.css" />
   </head>
   <body>
+    <!-- Botão do menu hamburger para abrir a sidebar -->
+    <div class="hamburger" id="hamburgerMenu">
+      <span>&#9776;</span>
+      <!-- ícone de três linhas -->
+    </div>
+
     <div class="container">
-      <div class="sidebar">
-        <h2>Painel de Administração</h2>
-        <ul>
+      <div class="sidebar hidden">
+        <!-- Adicionamos a classe 'hidden' -->
+        <h2>Menu</h2>
+        <ul id="menu">
           <li><a href="clientes.html">Clientes</a></li>
           <li><a href="compras.html">Compras</a></li>
           <li><a href="parcelas.html">Parcelas</a></li>
           <li><a href="#">Usuários</a></li>
           <li><a href="#" id="logoutLink">Sair</a></li>
         </ul>
-        <!-- Adicionando a imagem abaixo do item "Sair" -->
-        <img
-          src="imgs/MV CONSULT IMAGE.jpg"
-          alt="Imagem exemplo"
-          class="sidebar-image"
-        />
       </div>
 
       <div class="content">
         <h1>Bem-vindo ao Painel de Administração</h1>
         <p>Selecione uma opção no menu para gerenciar.</p>
+        <img
+          src="imgs/MV CONSULT IMAGE.jpg"
+          alt="Imagem exemplo"
+          class="image"
+        />
       </div>
     </div>
 
-    <footer>
-      <p>&copy; 2024 MV Consultoria</p>
-    </footer>
+    <script src="admin.js"></script>
   </body>
 </html>

@@ -85,3 +85,28 @@ footer {
     height: auto;
     border-radius: 5px;
 }
+
+/* Sidebar oculta quando o menu não está fixo */
+.sidebar {
+    transition: transform 0.3s ease;
+}
+
+.sidebar.hidden {
+    transform: translateX(-100%);
+    position: fixed;
+    left: 0;
+}
+
+/* Sidebar aparece ao passar o mouse */
+.container:hover .sidebar.hidden {
+    transform: translateX(0);
+}
+
+/* Estilo do toggle */
+.toggle-menu {
+    margin-bottom: 15px;
+    color: white;
+    cursor: pointer;
+    font-size: 14px;
+}
+
