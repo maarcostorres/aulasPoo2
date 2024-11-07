@@ -9,17 +9,30 @@
   <body>
     <!-- Botão do menu hamburger para abrir a sidebar -->
     <div class="hamburger" id="hamburgerMenu">
-      <span>&#9776;</span> <!-- ícone de três linhas -->
+      <span>&#9776;</span>
+      <!-- ícone de três linhas -->
     </div>
 
     <div class="container">
       <!-- Sidebar fixa ou oculta -->
-      <div class="sidebar hidden"> <!-- Adicionada a classe 'hidden' para ocultar inicialmente -->
+
+      <div class="sidebar">
+        <!-- Adicionada a classe 'hidden' para ocultar inicialmente -->
         <h2>Menu</h2>
+
         <ul id="menu">
-          <li><a href="#" id="novoCliente">Novo</a></li>
-          <li><a href="#" id="alterarCliente">Alterar</a></li>
-          <li><a href="admin.html">Voltar</a></li>
+          <li><a href="admin.html">HOME</a></li>
+          <li>
+            <a href="clientes.html">CLIENTES</a>
+            <ul id="submenu">
+              <li><a href="#" id="novoCliente">Novo</a></li>
+              <li><a href="#" id="alterarCliente">Alterar</a></li>
+            </ul>
+          </li>
+          <li><a href="compras.html">COMPRAS</a></li>
+          <li><a href="parcelas.html">PARCELAS</a></li>
+          <li><a href="#">USUÁRIOS</a></li>
+          <li><a href="#" id="logoutLink">SAIR</a></li>
         </ul>
       </div>
 
@@ -32,29 +45,36 @@
               id="searchField"
               placeholder="Buscar cliente por nome, CPF ou e-mail"
             />
+            <!-- Botão para limpar os filtros -->
+            <button id="limparFiltrosBtn">Limpar Filtros</button>
           </div>
         </header>
 
-    <main>
-      <table id="clientes-table">
-        <thead>
-          <tr>
-            <th>ID</th>
-            <th>Nome</th>
-            <th>CPF</th>
-            <th>Email</th>
-            <!--<th>Endereço</th>-->
-            <th>Telefone</th>
-            <th>Limite de Crédito</th>
-            <th>Limite Disponível</th>
-            <th>Ações</th>
-          </tr>
-        </thead>
-        <tbody>
-          <!-- Os clientes serão inseridos aqui -->
-        </tbody>
-      </table>
-    </main>
+        <main>
+          <div class="table-container">
+            <table id="clientes-table">
+              <thead>
+                <tr>
+                  <th>ID</th>
+                  <th>Nome</th>
+                  <th>CPF</th>
+                  <th>Email</th>
+                  <th>Telefone</th>
+                  <th>Limite de Crédito</th>
+                  <th>Limite Disponível</th>
+                  <th>Ações</th>
+                </tr>
+              </thead>
+              <tbody>
+                <!-- Os clientes serão inseridos aqui -->
+              </tbody>
+            </table>
+          </div>
+        </main>
+      </div>
+      <!-- Fechamento da div.content -->
+    </div>
+    <!-- Fechamento da div.container -->
 
     <!-- Modal para cadastrar novo cliente -->
     <div id="createClientModal" class="modal">
@@ -182,10 +202,6 @@
         </form>
       </div>
     </div>
-
-    <!--<footer>
-      <p>&copy; 2024 MV Consultoria</p>
-    </footer>-->
 
     <script src="clientes.js"></script>
   </body>

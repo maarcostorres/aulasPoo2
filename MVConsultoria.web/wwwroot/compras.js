@@ -379,7 +379,21 @@ function fecharModalParcelas() {
     document.getElementById('parcelasModal').style.display = 'none';
 }
 
+document.addEventListener("DOMContentLoaded", function () {
+    const sidebar = document.querySelector(".sidebar");
+    const hamburgerMenu = document.getElementById("hamburgerMenu");
 
+    // Clique no menu hamburger para mostrar ou esconder sidebar
+    hamburgerMenu.addEventListener("click", function () {
+        sidebar.classList.toggle("hidden");
+    });
+
+    // Função de logout
+    document.getElementById('logoutLink').addEventListener('click', function(event) {
+        event.preventDefault();
+        logout();
+    });
+});
 
 
 
@@ -422,6 +436,8 @@ document.addEventListener('DOMContentLoaded', function () {
 
     carregarClientes(); // Carrega a lista de clientes no modal de cadastro de compra
 });
+
+
 
 // Chama a função ao carregar a página
 window.onload = carregarCompras;

@@ -194,6 +194,7 @@ namespace MVConsultoria.Web.Controllers
             {
                 return BadRequest("O valor pago deve ser positivo.");
             }
+
             // Busca a compra associada para acessar o cliente
             var compra = await _context.Compras.Include(c => c.Cliente)
                                                .FirstOrDefaultAsync(c => c.Id == parcela.CompraId);
@@ -208,8 +209,8 @@ namespace MVConsultoria.Web.Controllers
                 // Calcula o valor restante
                 double valorRestante = parcela.Valor - valorPago;
 
-                // Atualiza a parcela original como paga parcialmente
-                parcela.Pago = true; // Considera que essa parte foi paga
+                // Atualiza a parcela original com valor pago parcial
+                parcela.Pago = true; // Marca como não totalmente paga
                 parcela.ValorPago = valorPago;
                 parcela.DataPagamento = DateTime.Now;
 
@@ -222,8 +223,19 @@ namespace MVConsultoria.Web.Controllers
                     Pago = false
                 };
 
-                // Adiciona a nova parcela ao banco de dados
                 _context.Parcelas.Add(novaParcela);
+
+                // Incrementa o limite disponível do cliente
+                var cliente = compra.Cliente;
+                cliente.LimiteDisponivel += valorPago;
+
+                _context.Entry(parcela).State = EntityState.Modified;
+                _context.Entry(cliente).State = EntityState.Modified;
+
+                // Salva todas as alterações no banco de dados
+                await _context.SaveChangesAsync();
+
+                return Ok($"Uma nova parcela de valor {valorRestante} foi gerada com o vencimento {parcela.DataVencimento}.");
             }
             else if (valorPago == parcela.Valor)
             {
@@ -231,39 +243,28 @@ namespace MVConsultoria.Web.Controllers
                 parcela.Pago = true;
                 parcela.ValorPago = valorPago;
                 parcela.DataPagamento = DateTime.Now;
-            }
 
-            // Incrementa o limite disponível do cliente
-            var cliente = compra.Cliente;
-            cliente.LimiteDisponivel += valorPago;
+                // Incrementa o limite disponível do cliente
+                var cliente = compra.Cliente;
+                cliente.LimiteDisponivel += valorPago;
 
-            // Atualiza o estado da parcela e do cliente
-            _context.Entry(parcela).State = EntityState.Modified;
-            _context.Entry(cliente).State = EntityState.Modified;
+                _context.Entry(parcela).State = EntityState.Modified;
+                _context.Entry(cliente).State = EntityState.Modified;
 
-            try
-            {
                 await _context.SaveChangesAsync();
-            }
-            catch (DbUpdateConcurrencyException)
-            {
-                if (!ParcelaExists(id))
-                {
-                    return NotFound();
-                }
-                else
-                {
-                    throw;
-                }
+
+                return Ok("Parcela paga com sucesso!");
             }
 
-            return NoContent();
+            // Em caso de erro desconhecido, retorna erro genérico
+            return BadRequest("Erro ao processar o pagamento da parcela.");
         }
 
         private bool ParcelaExists(int id)
         {
             return _context.Parcelas.Any(e => e.Id == id);
         }
+
 
 
 

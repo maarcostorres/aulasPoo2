@@ -1,43 +1,24 @@
 @import url('https://fonts.googleapis.com/css2?family=Ubuntu:ital,wght@0,300;0,400;0,500;0,700;1,300;1,400;1,500;1,700&display=swap');
 
-/* Global Styles */
 body {
     font-family: 'Ubuntu', sans-serif;
     margin: 0;
     padding: 0;
     display: flex;
-    /*flex-direction: column;*/
     height: 100vh;
-    /*overflow: hidden;*/
+    overflow: hidden; 
 }
 
-
-
-/*.container {
-    display: flex;
-    flex-grow: 1;
-}*/
 .container {
     display: flex;
     flex-grow: 1;
     height: 100vh;
 }
 
-/* Sidebar Styles */
-/*.sidebar {
-    width: 150px;
-    background-color: #2B2B2B;
-    color: white;
-    padding: 20px;
-    display: flex;
-    flex-direction: column;
-    height: 100vh;
-    transition: transform 0.3s ease;
-}*/
 
-/* Sidebar fixa e responsiva */
 .sidebar {
-    width: 150px; /* Largura da sidebar expandida */
+    width: 150px;
+    height: 100%;
     background-color: #2B2B2B;
     color: white;
     padding: 20px;
@@ -73,6 +54,7 @@ body {
 
 .sidebar ul li:hover {
     background-color: #2B2B2B;
+  
 }
 
 .sidebar-image {
@@ -82,35 +64,19 @@ body {
     border-radius: 5px;
 }
 
-/* Content Styles */
-/*.content {
-    flex-grow: 1;
-    background-color: #ecf0f1;
-    padding: 40px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-}*/
 
-/* Conteúdo principal responsivo */
-/*.content {
-    flex-grow: 1;
-    background-color: #ecf0f1;
-    padding: 20px;
-    overflow-y: auto;
-    display: flex;
-    flex-direction: column;
-}*/
 
 .content {
     flex-grow: 1;
     background-color: #ecf0f1;
     padding: 20px;
-    /*overflow-y: auto;*/
-    margin-left: 0px; /* Compensação para quando a sidebar está parcialmente oculta */
+    margin-left: 0px;
     transition: margin-left 0.3s ease;
+    height: 100%;
+    overflow: hidden; 
 }
+
+
 
 .content h1 {
     margin-bottom: 20px;
@@ -118,35 +84,35 @@ body {
 
 .content p {
     font-size: 18px;
-    color: #7f8c8d;
+    color: #43b043;
+    height: auto;
 }
 
-/* Header Styles */
-/*.header-container {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 20px;
-    background-color: #f8f8f8;
-    position: fixed;
-    top: 0;
-    width: 100%;
-  
-}*/
 
-/*.header-container {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 20px;
-    background-color: #f8f8f8;
-    width: calc(100% - 150px);
-    position: fixed;
+
+.table-container {
+    max-height: 95%; 
+    overflow-y: auto; 
+}
+
+/* Estilo para a tabela com rolagem vertical */
+#compras-table, #clientes-table, #parcelas-table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+
+#compras-table thead, #clientes-table thead, #parcelas-table thead {
+    position: sticky;
     top: 0;
-    left: 150px; 
-    z-index: 999;
-    transition: left 0.3s ease, width 0.3s ease; 
-}*/
+    background-color: #2B2B2B; 
+    color: white;
+    z-index: 1;
+}
+
+
+
+
 
 /* Header ajustado para acompanhar a sidebar */
 .header-container {
@@ -166,16 +132,20 @@ body {
 
 
 #searchField,
-#searchClienteField,
+#searchClienteField {
+    padding: 10px;
+    font-size: 16px;
+    flex-grow: 1;
+    margin-right: 20px;
+    width: 400px;
+}
+
 #searchDataField {
     padding: 10px;
     font-size: 16px;
     flex-grow: 1;
     margin-right: 20px;
-}
-
-#searchDataField {
-    max-width: 200px;
+    width: 150px;
 }
 
 /* Hamburger Menu Styles */
@@ -196,6 +166,7 @@ body {
     background-color: white;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     border-radius: 4px;
+    height: 100%;
 }
 
 .menu-content a {
@@ -224,20 +195,11 @@ body {
     color: #ffffff;
 }
 
-/* Main Content Styles */
-/*main {
-    padding: 20px;
-    flex-grow: 1;
-    overflow-y: auto;
-    max-height: calc(100vh - 80px);
-    margin-top: 80px; 
-    height: calc(100vh - 80px); 
-}*/
+
 
 main {
     margin-top: 80px; /* Espaço para o header fixo */
     flex-grow: 1;
-    /*overflow-y: auto;*/
     height: calc(100vh - 80px);
 }
 
@@ -255,16 +217,6 @@ th, td {
 }
 
 
-
-/* Footer Styles */
-footer {
-    text-align: center;
-    padding: 10px;
-    background-color: #2B2B2B;
-    position: fixed;
-    width: 100%;
-    bottom: 0;
-}
 
 /* Modal Styles */
 .modal {
@@ -402,7 +354,7 @@ button.cancel:hover {
     position: fixed;
     top: 0;
     left: 0;
-    height: 100vh;
+    height: 100%;
     width: 150px;
     z-index: 1001;
 }
@@ -410,19 +362,6 @@ button.cancel:hover {
 
 
 
-/*.sidebar.hidden {
-    transform: translateX(-80%);
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 150px; 
-    height: 100vh; 
-    transition: transform 0.3s ease;
-}*/
-
-/*.container:hover .sidebar.hidden {
-    transform: translateX(0);
-}*/
 
 
 /* Estilo do toggle */
@@ -448,3 +387,22 @@ button.cancel:hover {
 .image-config:hover {
     transform: scale(1.05); /* Aumenta a imagem levemente ao passar o mouse */
 }
+
+#submenu {
+    margin-left: 20px;
+    display: block; /* Ocultar o submenu por padrão */
+  }
+  
+  /*#menu li:hover > #submenu {
+    display: block; /* Exibir o submenu ao passar o mouse sobre CLIENTES */
+ /* }*/
+  
+ /* Centraliza o conteúdo da search-container */
+.search-container {
+    display: flex;
+    justify-content: center; /* Centraliza horizontalmente */
+    align-items: center; /* Centraliza verticalmente */
+    gap: 10px; /* Espaçamento entre o campo de busca e o botão */
+    margin: 0 auto; /* Centraliza a div dentro do contêiner pai */
+}
+

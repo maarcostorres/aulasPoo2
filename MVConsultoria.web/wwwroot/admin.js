@@ -14,6 +14,10 @@ document.addEventListener("DOMContentLoaded", function () {
     });
 });
 
+
+
+
+
 function logout() {
     console.log('Tentando fazer logout...');
     localStorage.removeItem('token');

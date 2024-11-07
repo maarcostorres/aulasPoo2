@@ -1,0 +1,167 @@
+/* Reset básico */
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+/* Importando a fonte Ubuntu */
+@import url('https://fonts.googleapis.com/css2?family=Ubuntu:ital,wght@0,300;0,400;0,500;0,700;1,300;1,400;1,500;1,700&display=swap');
+
+body {
+    font-family: 'Ubuntu', sans-serif;
+    background-color: #f4f4f4;
+    color: #333;
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.container {
+    width: 90%;
+    max-width: 800px;
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+header {
+    background-color: #2B2B2B;
+    padding: 15px;
+    color: white;
+    text-align: center;
+    border-radius: 8px;
+    position: relative;
+}
+
+.logout-button {
+    position: absolute;
+    top: 15px;
+    right: 15px;
+    background-color: #FF5C5C;
+    border: none;
+    color: white;
+    padding: 8px 12px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.logout-button:hover {
+    background-color: #FF1C1C;
+}
+
+.login-container header {
+    background-color: #2B2B2B;
+}
+
+.login-area {
+    margin-top: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.login-area input {
+    padding: 10px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+}
+
+.login-area button {
+    padding: 10px;
+    border: none;
+    background-color: #567EF5;
+    color: white;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.login-area button:hover {
+    background-color: #567EF5;
+}
+
+.section {
+    background-color: rgba(128, 128, 128, 0.05);
+    border: 2px solid rgba(128, 128, 128, 0.2);
+    padding: 10px;
+    border-radius: 12px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+    margin-bottom: 20px;
+}
+
+.section-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.section-header h4 {
+    margin: 0;
+}
+
+.toggle-section {
+    background: none;
+    border: none;
+    font-size: 20px;
+    cursor: pointer;
+}
+
+.section-content {
+    margin-top: 10px;
+}
+
+ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+ul li {
+    background-color: rgba(128, 128, 128, 0.05);
+    padding: 10px;
+    margin-bottom: 5px;
+    border-radius: 5px;
+    border: 1px solid rgba(128, 128, 128, 0.1);
+}
+
+canvas {
+    display: block;
+    margin: 0 auto;
+    max-width: 100%;
+    height: auto;
+}
+
+/* Responsividade */
+@media (max-width: 768px) {
+    .container {
+        padding: 15px;
+    }
+
+    header {
+        padding: 10px;
+    }
+
+    .login-area {
+        gap: 8px;
+    }
+
+    .login-area input, .login-area button {
+        width: 100%;
+    }
+
+    .logout-button {
+        top: 10px;
+        right: 10px;
+        padding: 6px 10px;
+    }
+
+    .section-header h4 {
+        font-size: 16px;
+    }
+
+    .toggle-section {
+        font-size: 18px;
+    }
+}

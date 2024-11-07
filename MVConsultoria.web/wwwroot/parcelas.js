@@ -146,6 +146,8 @@ document.getElementById('limparFiltrosBtn').addEventListener('click', limparFilt
 
 document.getElementById('alterarParcela').addEventListener('click', function() {
     // Verificar se há uma linha selecionada
+
+    //deve-se alterar aqui
     const selectedRow = document.querySelector('.selected-row');
     if (!selectedRow) {
         alert('Selecione uma parcela para alterar.');
@@ -206,7 +208,7 @@ document.getElementById('saveParcelaBtn').onclick = function(event) {
 };
 
 // Chama a função ao carregar a página
-window.onload = carregarParcelas;
+//window.onload = carregarParcelas;
 
 
 
@@ -324,6 +326,7 @@ async function processarBaixaParcelas() {
     carregarParcelas();
     // Fecha o modal
     document.getElementById('modalBaixaParcelas').style.display = 'none';
+   
 }
 
 // Função para pagar uma parcela individualmente
@@ -339,12 +342,16 @@ async function pagarParcela(idParcela, valorPago) {
             }
         });
 
-        if (!response.ok) {
+        if (response.ok) {
+            // Captura a mensagem de confirmação do backend
+            const successMessage = await response.text();
+            alert(successMessage); // Exibe a mensagem de sucesso para o usuário
+            console.log(`Parcela ${idParcela} paga com sucesso: ${successMessage}`);
+        } else {
+            // Captura a mensagem de erro do backend
             const errorText = await response.text();
             console.error(`Erro ao pagar parcela ${idParcela}:`, errorText);
             alert(`Erro ao pagar parcela ${idParcela}: ${errorText}`);
-        } else {
-            console.log(`Parcela ${idParcela} paga com sucesso!`);
         }
     } catch (error) {
         console.error('Erro ao pagar parcela:', error);
@@ -360,6 +367,22 @@ document.getElementById('baixarParcelasSelecionadas').addEventListener('click', 
 // Adiciona o evento de clique para o botão "Confirmar Pagamento" no modal
 document.getElementById('confirmarPagamentoBtn').addEventListener('click', function() {
     processarBaixaParcelas();  // Processa o pagamento das parcelas selecionadas
+});
+
+document.addEventListener("DOMContentLoaded", function () {
+    const sidebar = document.querySelector(".sidebar");
+    const hamburgerMenu = document.getElementById("hamburgerMenu");
+
+    // Clique no menu hamburger para mostrar ou esconder sidebar
+    hamburgerMenu.addEventListener("click", function () {
+        sidebar.classList.toggle("hidden");
+    });
+
+    // Função de logout
+    document.getElementById('logoutLink').addEventListener('click', function(event) {
+        event.preventDefault();
+        logout();
+    });
 });
 
 

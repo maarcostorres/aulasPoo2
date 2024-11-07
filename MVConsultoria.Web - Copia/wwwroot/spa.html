@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Área do Cliente - Consulta Cliente</title>
+    <link rel="stylesheet" href="spa.css" />
+  </head>
+  <body>
+    <div id="app" class="container">
+      <header>
+        <h2>Área do Cliente</h2>
+        <button onclick="logout()" class="logout-button">Sair</button>
+      </header>
+
+      <section id="client-info" class="content">
+        <h3>Olá, <span id="client-name">Carregando...</span></h3>
+
+        <!-- Informações Pessoais -->
+        <div class="section" id="informacoes-pessoais-container">
+          <div class="section-header">
+            <h4>Informações Pessoais</h4>
+            <button
+              class="toggle-section"
+              onclick="toggleSection('informacoes-pessoais-container')"
+            >
+              ⬇
+            </button>
+          </div>
+          <div class="section-content">
+            <p>Nome: <span id="info-nome"></span></p>
+            <p>CPF: <span id="info-cpf"></span></p>
+            <p>Endereço: <span id="info-endereco"></span></p>
+            <p>Telefone: <span id="info-telefone"></span></p>
+            <p>Dia de Vencimento: <span id="info-vencimento"></span></p>
+          </div>
+        </div>
+
+        <!-- Limite de Crédito -->
+        <div class="section" id="limite-container">
+          <div class="section-header">
+            <h4>Limite de Crédito</h4>
+            <button
+              class="toggle-section"
+              onclick="toggleSection('limite-container')"
+            >
+              ⬇
+            </button>
+          </div>
+          <div class="section-content">
+            <canvas id="limiteChart"></canvas>
+          </div>
+        </div>
+
+        <!-- Histórico de Compras -->
+        <div class="section" id="historico-compras-container">
+          <div class="section-header">
+            <h4>Histórico de Compras</h4>
+            <button
+              class="toggle-section"
+              onclick="toggleSection('historico-compras-container')"
+            >
+              ⬇
+            </button>
+          </div>
+          <div class="section-content">
+            <ul id="historico-compras"></ul>
+          </div>
+        </div>
+
+        <!-- Parcelas a Vencer -->
+        <div class="section" id="proximas-parcelas-container">
+          <div class="section-header">
+            <h4>Parcelas a Vencer</h4>
+            <button
+              class="toggle-section"
+              onclick="toggleSection('proximas-parcelas-container')"
+            >
+              ⬇
+            </button>
+          </div>
+          <div class="section-content">
+            <ul id="proximas-parcelas"></ul>
+          </div>
+        </div>
+
+        <!-- Parcelas Vencidas -->
+        <div class="section" id="parcelas-vencidas-container">
+          <div class="section-header">
+            <h4>Parcelas Vencidas</h4>
+            <button
+              class="toggle-section"
+              onclick="toggleSection('parcelas-vencidas-container')"
+            >
+              ⬇
+            </button>
+          </div>
+          <div class="section-content">
+            <ul id="parcelas-vencidas"></ul>
+          </div>
+        </div>
+
+        <!-- Parcelas Pagas -->
+        <div class="section" id="parcelas-pagas-container">
+          <div class="section-header">
+            <h4>Parcelas Pagas</h4>
+            <button
+              class="toggle-section"
+              onclick="toggleSection('parcelas-pagas-container')"
+            >
+              ⬇
+            </button>
+          </div>
+          <div class="section-content">
+            <ul id="parcelas-pagas"></ul>
+          </div>
+        </div>
+
+        <!-- Próximo Vencimento e Fatura -->
+        <div class="section" id="proximo-vencimento-container">
+          <div class="section-header">
+            <h4>Próxima Fatura</h4>
+            <button
+              class="toggle-section"
+              onclick="toggleSection('proximo-vencimento-container')"
+            >
+              ⬇
+            </button>
+          </div>
+          <div class="section-content">
+            <p id="proximo-vencimento"></p>
+            <p id="valor-proxima-fatura"></p>
+          </div>
+        </div>
+      </section>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="spa.js"></script>
+  </body>
+</html>

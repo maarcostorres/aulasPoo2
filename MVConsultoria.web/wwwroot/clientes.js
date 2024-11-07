@@ -356,5 +356,8 @@ document.addEventListener('DOMContentLoaded', function () {
     }
 });
 
+
+
+
 // Chama a função ao carregar a página
 window.onload = carregarClientes;
