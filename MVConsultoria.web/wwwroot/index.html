@@ -1,23 +1,48 @@
 <!DOCTYPE html>
-<html lang="pt-BR">
+<html lang="en">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Login - Consulta Cliente</title>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css"
+    />
     <link rel="stylesheet" href="index.css" />
+    <title>Login</title>
   </head>
+
   <body>
-    <div class="container login-container">
-      <header>
-        <h2>Login</h2>
-      </header>
-      <div class="login-area">
-        <input type="text" id="usuario" placeholder="Usuário (CPF)" required />
-        <input type="password" id="senha" placeholder="Senha" required />
-        <button onclick="login()">Entrar</button>
+    <div class="container" id="container">
+      <div class="form-container sign-in">
+        <div class="login-area">
+          <h1>Entrar</h1>
+
+          <input type="text" id="usuario" placeholder="CPF" required />
+          <input type="password" id="senha" placeholder="Senha" required />
+
+          <button id="button-login" onclick="login()">Entrar</button>
+
+          <div class="whatsapp-container">
+            <p>Problemas com o login?</p>
+
+            <a href="https://wa.me/5527999665881" target="_blank">
+              <button class="button-whats">
+                Entre em contato pelo WhatsApp
+              </button>
+            </a>
+          </div>
+        </div>
+      </div>
+      <div class="toggle-container">
+        <div class="toggle">
+          <div class="toggle-panel toggle-right">
+            <img class="logo" src="imgs/MV CONSULT IMAGE.jpg" />
+          </div>
+        </div>
       </div>
     </div>
 
+    <!--========== Chamando o arquivo JS ==========-->
     <script src="index.js"></script>
   </body>
 </html>

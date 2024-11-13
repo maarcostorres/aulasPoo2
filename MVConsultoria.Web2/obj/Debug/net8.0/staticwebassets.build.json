@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "gSgnUzw7LxJUJzK9tle3xPbmWj5rvgHcsRP4NG9WUNA=",
+  "Hash": "yV+XqL0h/OnppmJ2w+WIrE9lrq++gPv0dV9Jyq4iAkQ=",
   "Source": "MVConsultoria.Web",
   "BasePath": "_content/MVConsultoria.Web",
   "Mode": "Default",
@@ -300,25 +300,6 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\menu.html"
-    },
-    {
-      "Identity": "C:\\Users\\Belshoff\\projects\\aulaspoo2\\mvconsultoria.web\\wwwroot\\novocss.css",
-      "SourceId": "MVConsultoria.Web",
-      "SourceType": "Discovered",
-      "ContentRoot": "C:\\Users\\Belshoff\\projects\\aulaspoo2\\mvconsultoria.web\\wwwroot\\",
-      "BasePath": "_content/MVConsultoria.Web",
-      "RelativePath": "novocss.css",
-      "AssetKind": "All",
-      "AssetMode": "All",
-      "AssetRole": "Primary",
-      "AssetMergeBehavior": "PreferTarget",
-      "AssetMergeSource": "",
-      "RelatedAsset": "",
-      "AssetTraitName": "",
-      "AssetTraitValue": "",
-      "CopyToOutputDirectory": "Never",
-      "CopyToPublishDirectory": "PreserveNewest",
-      "OriginalItemSpec": "wwwroot\\novocss.css"
     },
     {
       "Identity": "C:\\Users\\Belshoff\\projects\\aulaspoo2\\mvconsultoria.web\\wwwroot\\parcelas.html",

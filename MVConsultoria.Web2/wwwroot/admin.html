@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Painel de Administração</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <!-- Botão do menu hamburger para abrir a sidebar -->
+    <div class="hamburger" id="hamburgerMenu">
+      <span>&#9776;</span>
+      <!-- ícone de três linhas -->
+    </div>
+
+    <div class="container">
+      <div class="sidebar">
+        <!-- Adicionamos a classe 'hidden' -->
+        <h2>Menu</h2>
+        <ul id="menu">
+          <li><a href="admin.html">HOME</a></li>
+          <li><a href="clientes.html">CLIENTES</a></li>
+          <li><a href="compras.html">COMPRAS</a></li>
+          <li><a href="parcelas.html">PARCELAS</a></li>
+          <li><a href="#">USUARIOS</a></li>
+          <li><a href="#" id="logoutLink">SAIR</a></li>
+        </ul>
+      </div>
+
+      <div class="content">
+        <h1>Bem-vindo ao Painel de Administração</h1>
+        <p>Selecione uma opção no menu para gerenciar.</p>
+        <img
+          src="imgs/MV CONSULT IMAGE.jpg"
+          alt="Imagem exemplo"
+          class="image"
+        />
+      </div>
+    </div>
+
+    <script src="admin.js"></script>
+  </body>
+</html>

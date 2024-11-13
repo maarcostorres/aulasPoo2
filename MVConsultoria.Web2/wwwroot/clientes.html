@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Lista de Clientes</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <!-- Botão do menu hamburger para abrir a sidebar -->
+    <div class="hamburger" id="hamburgerMenu">
+      <span>&#9776;</span>
+      <!-- ícone de três linhas -->
+    </div>
+
+    <div class="container">
+      <!-- Sidebar fixa ou oculta -->
+
+      <div class="sidebar">
+        <!-- Adicionada a classe 'hidden' para ocultar inicialmente -->
+        <h2>Menu</h2>
+
+        <ul id="menu">
+          <li><a href="admin.html">HOME</a></li>
+          <li>
+            <a href="clientes.html">CLIENTES</a>
+            <ul id="submenu">
+              <li><a href="#" id="novoCliente">Novo</a></li>
+              <li><a href="#" id="alterarCliente">Alterar</a></li>
+            </ul>
+          </li>
+          <li><a href="compras.html">COMPRAS</a></li>
+          <li><a href="parcelas.html">PARCELAS</a></li>
+          <li><a href="#">USUÁRIOS</a></li>
+          <li><a href="#" id="logoutLink">SAIR</a></li>
+        </ul>
+      </div>
+
+      <div class="content">
+        <header class="header-container">
+          <!-- Campo de busca -->
+          <div class="search-container">
+            <input
+              type="text"
+              id="searchField"
+              placeholder="Buscar cliente por nome, CPF ou e-mail"
+            />
+            <!-- Botão para limpar os filtros -->
+            <button id="limparFiltrosBtn">Limpar Filtros</button>
+          </div>
+        </header>
+
+        <main>
+          <div class="table-container">
+            <table id="clientes-table">
+              <thead>
+                <tr>
+                  <th>ID</th>
+                  <th>Nome</th>
+                  <th>CPF</th>
+                  <th>Email</th>
+                  <th>Telefone</th>
+                  <th>Limite de Crédito</th>
+                  <th>Limite Disponível</th>
+                  <th>Ações</th>
+                </tr>
+              </thead>
+              <tbody>
+                <!-- Os clientes serão inseridos aqui -->
+              </tbody>
+            </table>
+          </div>
+        </main>
+      </div>
+      <!-- Fechamento da div.content -->
+    </div>
+    <!-- Fechamento da div.container -->
+
+    <!-- Modal para cadastrar novo cliente -->
+    <div id="createClientModal" class="modal">
+      <div class="modal-content">
+        <span class="close-create">&times;</span>
+        <h2>Cadastrar Novo Cliente</h2>
+        <form id="createClientForm">
+          <label for="createNome">Nome:</label>
+          <input type="text" id="createNome" name="createNome" required /><br />
+
+          <label for="createCpf">CPF:</label>
+          <input type="text" id="createCpf" name="createCpf" required /><br />
+
+          <label for="createEmail">Email:</label>
+          <input
+            type="email"
+            id="createEmail"
+            name="createEmail"
+            required
+          /><br />
+
+          <label for="createSenha">Senha:</label>
+          <input
+            type="password"
+            id="createSenha"
+            name="createSenha"
+            required
+          /><br />
+
+          <label for="createEndereco">Endereço:</label>
+          <input
+            type="text"
+            id="createEndereco"
+            name="createEndereco"
+            required
+          /><br />
+
+          <label for="createTelefone">Telefone:</label>
+          <input
+            type="text"
+            id="createTelefone"
+            name="createTelefone"
+            required
+          /><br />
+
+          <label for="createDiaDePagamento">Data de Vencimento:</label>
+          <input
+            type="date"
+            id="createDiaDePagamento"
+            name="createDiaDePagamento"
+            required
+          /><br />
+
+          <label for="createLimiteDeCredito">Limite de Crédito:</label>
+          <input
+            type="number"
+            id="createLimiteDeCredito"
+            name="createLimiteDeCredito"
+            required
+          /><br />
+
+          <button type="button" id="saveNewClientBtn">Salvar</button>
+          <button type="button" id="cancelNewClientBtn">Cancelar</button>
+        </form>
+      </div>
+    </div>
+
+    <!-- Modal para editar cliente -->
+    <div id="editModal" class="modal">
+      <div class="modal-content">
+        <span class="close">&times;</span>
+        <h2>Editar Cliente</h2>
+        <form id="editClientForm">
+          <label for="editNome">Nome:</label>
+          <input type="text" id="editNome" name="editNome" required /><br />
+
+          <label for="editCpf">CPF:</label>
+          <input type="text" id="editCpf" name="editCpf" required /><br />
+
+          <label for="editEmail">Email:</label>
+          <input type="email" id="editEmail" name="editEmail" required /><br />
+
+          <label for="editEndereco">Endereço:</label>
+          <input
+            type="text"
+            id="editEndereco"
+            name="editEndereco"
+            required
+          /><br />
+
+          <label for="editTelefone">Telefone:</label>
+          <input
+            type="text"
+            id="editTelefone"
+            name="editTelefone"
+            required
+          /><br />
+
+          <label for="editDiaDePagamento">Data de Vencimento:</label>
+          <input
+            type="date"
+            id="editDiaDePagamento"
+            name="editDiaDePagamento"
+            required
+          /><br />
+
+          <label for="editSenha">Senha:</label>
+          <input
+            type="password"
+            id="editSenha"
+            name="editSenha"
+            required
+          /><br />
+
+          <label for="editLimiteDeCredito">Limite de Crédito:</label>
+          <input
+            type="number"
+            id="editLimiteDeCredito"
+            name="editLimiteDeCredito"
+            required
+          /><br />
+
+          <button type="button" id="saveClientBtn">Salvar</button>
+          <button type="button" id="cancelEditClientBtn">Cancelar</button>
+        </form>
+      </div>
+    </div>
+
+    <script src="clientes.js"></script>
+  </body>
+</html>

@@ -61,10 +61,6 @@
       "PackagePath": "staticwebassets\\menu.html"
     },
     {
-      "Id": "C:\\Users\\Belshoff\\projects\\aulaspoo2\\mvconsultoria.web\\wwwroot\\novocss.css",
-      "PackagePath": "staticwebassets\\novocss.css"
-    },
-    {
       "Id": "C:\\Users\\Belshoff\\projects\\aulaspoo2\\mvconsultoria.web\\wwwroot\\parcelas.html",
       "PackagePath": "staticwebassets\\parcelas.html"
     },

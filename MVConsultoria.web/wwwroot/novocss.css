@@ -49,7 +49,7 @@ body{
 }
 
 .container button{
-    background-color: #567EF5;
+    background-color: #eee;
     color: #2c2c2c;
     font-size: 12px;
     padding: 10px 45px;
@@ -63,8 +63,7 @@ body{
 }
 
 
-
-.login-area{
+.container form{
     background-color: #fff;
     display: flex;
     align-items: center;
@@ -72,15 +71,6 @@ body{
     flex-direction: column;
     padding: 0 40px;
     height: 100%;
-}
-
-.button-login{
-    background-color: #19cc5b;
-}
-
-
-.button-whats{
-    background-color: #19cc5b;
 }
 
 .container input{
