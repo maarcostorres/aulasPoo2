@@ -227,24 +227,28 @@ th, td {
     top: 0;
     width: 100%;
     height: 100%;
-    background-color: rgba(0, 0, 0, 0.4);
+    background-color: rgba(0, 0, 0, 0.7);
     padding-top: 60px;
+    ;
 }
 
 .modal-content {
-    background-color: #343434;
+    background: rgba(52, 52, 52, 0.9); /* Fundo semi-transparente para efeito elegante */
     color: #f8f8f8;
     margin: 5% auto;
     padding: 20px;
-    border: 1px solid #888;
-    width: 50%;
-    border-radius: 10px;
+    border-radius: 12px;
+    width: 20%;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3); /* Sombra suave para profundidade */
+    border: 1px solid rgba(255, 255, 255, 0.3); /* Borda translúcida */
+    backdrop-filter: blur(10px); /* Efeito de desfoque no fundo do modal */
+    -webkit-backdrop-filter: blur(10px); /* Compatibilidade com Safari */
 }
 
 .close, .close-create {
-    color: #aaa;
+    color: #f8f8f8;
     float: right;
-    font-size: 28px;
+    font-size: 24px;
     font-weight: bold;
     cursor: pointer;
 }
@@ -253,6 +257,33 @@ th, td {
 .close-create:hover, .close-create:focus {
     color: black;
 }
+
+input[type="text"],
+input[type="email"],
+input[type="password"],
+input[type="date"],
+input[type="number"] {
+    border-width: 1px;
+    border-color: rgba(128, 128, 128, 0.5);
+    padding: 10px;
+    margin: 10px 0;
+    width: 100%;
+    border-radius: 5px;
+    background-color: #fff;
+    box-sizing: border-box; /* Garante que padding não altere a largura total */
+    border-style: solid;
+    outline: none;
+}
+
+input[type="text"]:focus,
+input[type="email"]:focus,
+input[type="password"]:focus,
+input[type="date"]:focus,
+input[type="number"]:focus {
+    border-color: rgba(128, 128, 128, 0.8); /* Borda mais evidente ao focar */
+    box-shadow: 0 0 5px rgba(128, 128, 128, 0.3); /* Leve sombra ao focar */
+}
+
 
 /* Button Styles */
 button {
@@ -270,40 +301,34 @@ button:hover {
 }
 
 button.cancel {
-    background-color: #567EF5;
-    color: white;
+    background-color: #f44336;
 }
 
 button.cancel:hover {
-    background-color: #567EF5;
-    color: white;
+    background-color: #d32f2f;
 }
 
 #saveNewCompraBtn, #saveEditCompraBtn {
-    background-color: #567EF5;
-    color: white;
+    background-color: #4caf50;
     margin-right: 10px;
 }
 
 #saveNewCompraBtn:hover, #saveEditCompraBtn:hover {
-    background-color: #567EF5;
-    color: white;
+    background-color: #45a049;
 }
 
 #cancelNewCompraBtn, #cancelEditCompraBtn {
-    background-color: #567EF5;
-    color: white;
+    background-color: #f44336;
 }
 
 #cancelNewCompraBtn:hover, #cancelEditCompraBtn:hover {
-    background-color: #567EF5;
-    color: white;
+    background-color: #d32f2f;
 }
 
 /* Dropdown Styles */
 #clienteDropdown {
     position: absolute;
-    background-color: rgb(51, 51, 51);
+    background-color: white;
     border: 1px solid #ccc;
     width: 100%;
     max-height: 150px;
